@@ -35,8 +35,12 @@ namespace Wallet.Api.Net.Utility
                 if (value is null)
                     continue;
 
-                if (value.GetType().IsClass && value.GetType() != typeof(string))
+                Type type = value.GetType();
+
+                if (type.IsClass && type != typeof(string))
                     MapProperties(value, dictionary);
+                else if (type == typeof(bool))
+                    dictionary[name] = value.ToString()!.ToLower();
                 else
                     dictionary[name] = value.ToString()!;
             }
