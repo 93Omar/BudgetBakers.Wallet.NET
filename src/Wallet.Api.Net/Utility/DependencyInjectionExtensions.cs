@@ -16,13 +16,27 @@ namespace Wallet.Api.Net.Utility
         public static void AddWalletClient<T>(this IServiceCollection services, Action<HttpClient> configureClient)
             where T : class
         {
+            RegisterServices(services);
+
+            services.AddHttpClient<T>(configureClient)
+                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>();
+        }
+
+        public static void AddWalletClient<T>(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
+            where T : class
+        {
+            RegisterServices(services);
+
+            services.AddHttpClient<T>(configureClient)
+                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>();
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
             services.AddTransient<BearerTokenDelegatingHandler>();
 
             services.AddScoped<IMapper<GetAccountsRequest, GetAccountsRequestDto>, GetAccountsRequestMapper>();
             services.AddScoped<IMapper<GetAccountsResponseDto, GetAccountsResponse>, GetAccountsResponseMapper>();
-
-            services.AddHttpClient<T>(configureClient)
-                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>();
         }
     }
 }
