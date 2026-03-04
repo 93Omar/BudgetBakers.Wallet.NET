@@ -8,13 +8,13 @@ using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services
 {
-    public class AccountService
+    public class AccountClient
     {
         private readonly HttpClient _httpClient;
         private readonly IMapper<GetAccountsRequest, GetAccountsRequestDto> _getAccountsRequestMapper;
         private readonly IMapper<GetAccountsResponseDto, GetAccountsResponse> _getAccountsResponseMapper;
 
-        public AccountService(HttpClient httpClient, IMapper<GetAccountsRequest, GetAccountsRequestDto> getAccountsRequestMapper,
+        public AccountClient(HttpClient httpClient, IMapper<GetAccountsRequest, GetAccountsRequestDto> getAccountsRequestMapper,
             IMapper<GetAccountsResponseDto, GetAccountsResponse> getAccountsResponseMapper)
         {
             _httpClient = httpClient;
@@ -24,7 +24,7 @@ namespace Wallet.Api.Net.Services
 
         public async Task<GetAccountsResponse?> GetAsync(GetAccountsRequest request, CancellationToken ct = default)
         {
-            string methodName = "/api/accounts";
+            string methodName = "/wallet/v1/api/accounts";
 
             GetAccountsRequestDto? requestDto = _getAccountsRequestMapper.Map(request);
             string? queryString = requestDto.ToQueryString();

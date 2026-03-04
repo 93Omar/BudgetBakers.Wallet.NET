@@ -2,5 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
+  <Project Path="src/examples/ConsoleApp/ConsoleApp.csproj" Id="17d1d5da-8a4b-478d-891e-a72bc83199d3" />
+  <Project Path="src/Wallet.Api.Net.Tests/Wallet.Api.Net.Tests.csproj" Id="12486176-8208-4ced-bd8f-2be5e50ca10a" />
   <Project Path="src/Wallet.Api.Net/Wallet.Api.Net.csproj" />
 </Solution>

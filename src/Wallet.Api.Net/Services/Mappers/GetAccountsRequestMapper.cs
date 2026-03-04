@@ -21,7 +21,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 Id = source.Ids.Any() ? string.Join(",", source.Ids) : null,
                 Name = source.Name?.ToString(),
                 BankAccountNumber = source.BankAccountNumber?.ToString(),
-                AccountType = source.AccountType.ToString(),
+                AccountType = source.AccountType?.ToString(),
                 CurrencyCode = source.CurrencyCode,
                 CreatedAt = source.CreatedAt?.ToString(),
                 UpdatedAt = source.UpdatedAt?.ToString()
