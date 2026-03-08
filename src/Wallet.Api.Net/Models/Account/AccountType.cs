@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wallet.Api.Net.Models
+namespace Wallet.Api.Net.Models.Account
 {
     public enum AccountType
     {

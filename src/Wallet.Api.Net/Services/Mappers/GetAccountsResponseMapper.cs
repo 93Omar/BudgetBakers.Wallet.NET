@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Wallet.Api.Net.Dtos.Account;
+using Wallet.Api.Net.Dtos;
+using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Account;
 
 namespace Wallet.Api.Net.Services.Mappers
@@ -17,10 +20,101 @@ namespace Wallet.Api.Net.Services.Mappers
             {
                 Limit = source.Limit,
                 Offset = source.Offset,
-                NextOffset = source.NextOffset
+                NextOffset = source.NextOffset,
+                Accounts = source.Accounts?.Select(MapAccount).ToList() ?? new List<Account>(),
+                AgentHints = source.AgentHints?.Select(MapAgentHint).ToList() ?? new List<AgentHint>()
             };
 
             return response;
+        }
+
+        private static Account MapAccount(AccountDto? dto)
+        {
+            if (dto is null)
+                return new Account();
+
+            var account = new Account
+            {
+                AccountType = dto.AccountType is null ? null : Enum.Parse<AccountType>(dto.AccountType),
+                Archived = dto.Archived,
+                BankAccountNumber = dto.BankAccountNumber,
+                Color = dto.Color,
+                CreatedAt = ParseDateTime(dto.CreatedAt),
+                ExcludeFromStats = dto.ExcludeFromStats,
+                Name = dto.Name,
+                InitialBalance = MapBalance(dto.InitialBalance),
+                InitialBaseBalance = MapBalance(dto.InitialBaseBalance),
+                RecordStats = MapRecordStats(dto.RecordStats),
+                UpdatedAt = ParseDateTime(dto.UpdatedAt)
+            };
+
+            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var guid))
+                account.Id = guid;
+
+            return account;
+        }
+
+        private static Balance? MapBalance(BalanceDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new Balance
+            {
+                CurrencyCode = dto.CurrencyCode,
+                Value = dto.Value
+            };
+        }
+
+        private static RecordStats? MapRecordStats(RecordStatsDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new RecordStats
+            {
+                CreatedAt = MapDateRange(dto.CreatedAt),
+                RecordCount = dto.RecordCount,
+                RecordDate = MapDateRange(dto.RecordDate)
+            };
+        }
+
+        private static DateRange? MapDateRange(DateRangeDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new DateRange
+            {
+                Max = ParseDateTime(dto.Max),
+                Min = ParseDateTime(dto.Min)
+            };
+        }
+
+        private static AgentHint MapAgentHint(AgentHintDto? dto)
+        {
+            if (dto is null)
+                return new AgentHint();
+
+            return new AgentHint
+            {
+                Action = dto.Action is null ? null : new AgentAction { Url = dto.Action.Url },
+                Data = dto.Data,
+                Severity = dto.Severity,
+                Text = dto.Text,
+                Type = dto.Type
+            };
+        }
+
+        private static DateTime? ParseDateTime(string? s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return null;
+
+            if (DateTime.TryParse(s, out var dt))
+                return dt;
+
+            return null;
         }
     }
 }
