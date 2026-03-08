@@ -6,6 +6,7 @@ using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Account;
+using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -22,7 +23,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
                 Accounts = source.Accounts?.Select(MapAccount).ToList() ?? new List<Account>(),
-                AgentHints = source.AgentHints?.Select(MapAgentHint).ToList() ?? new List<AgentHint>()
+                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<AgentHint>()
             };
 
             return response;
@@ -39,13 +40,13 @@ namespace Wallet.Api.Net.Services.Mappers
                 Archived = dto.Archived,
                 BankAccountNumber = dto.BankAccountNumber,
                 Color = dto.Color,
-                CreatedAt = ParseDateTime(dto.CreatedAt),
+                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 ExcludeFromStats = dto.ExcludeFromStats,
                 Name = dto.Name,
                 InitialBalance = MapBalance(dto.InitialBalance),
                 InitialBaseBalance = MapBalance(dto.InitialBaseBalance),
                 RecordStats = MapRecordStats(dto.RecordStats),
-                UpdatedAt = ParseDateTime(dto.UpdatedAt)
+                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
 
             if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var guid))
@@ -86,35 +87,11 @@ namespace Wallet.Api.Net.Services.Mappers
 
             return new DateRange
             {
-                Max = ParseDateTime(dto.Max),
-                Min = ParseDateTime(dto.Min)
+                Max = MapperHelpers.ParseDateTime(dto.Max),
+                Min = MapperHelpers.ParseDateTime(dto.Min)
             };
         }
 
-        private static AgentHint MapAgentHint(AgentHintDto? dto)
-        {
-            if (dto is null)
-                return new AgentHint();
-
-            return new AgentHint
-            {
-                Action = dto.Action is null ? null : new AgentAction { Url = dto.Action.Url },
-                Data = dto.Data,
-                Severity = dto.Severity,
-                Text = dto.Text,
-                Type = dto.Type
-            };
-        }
-
-        private static DateTime? ParseDateTime(string? s)
-        {
-            if (string.IsNullOrWhiteSpace(s))
-                return null;
-
-            if (DateTime.TryParse(s, out var dt))
-                return dt;
-
-            return null;
-        }
+        
     }
 }

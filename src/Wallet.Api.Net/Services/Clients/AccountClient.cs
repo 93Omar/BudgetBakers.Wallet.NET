@@ -6,7 +6,7 @@ using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Models.Account;
 using Wallet.Api.Net.Utility;
 
-namespace Wallet.Api.Net.Services
+namespace Wallet.Api.Net.Services.Clients
 {
     public class AccountClient
     {

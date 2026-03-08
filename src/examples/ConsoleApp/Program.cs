@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using Wallet.Api.Net.Models.Account;
 using Wallet.Api.Net.Services;
+using Wallet.Api.Net.Services.Clients;
 using Wallet.Api.Net.Utility;
 
 namespace ConsoleApp

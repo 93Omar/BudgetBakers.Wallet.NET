@@ -1,0 +1,127 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Wallet.Api.Net.Dtos.Record;
+using Wallet.Api.Net.Models.Record;
+using Wallet.Api.Net.Utility;
+
+namespace Wallet.Api.Net.Services.Mappers
+{
+    public class GetRecordsResponseMapper : IMapper<GetRecordsResponseDto, GetRecordsResponse>
+    {
+        public GetRecordsResponse? Map(GetRecordsResponseDto? source)
+        {
+            if (source is null)
+                return null;
+
+            GetRecordsResponse response = new GetRecordsResponse()
+            {
+                Limit = source.Limit,
+                Offset = source.Offset,
+                NextOffset = source.NextOffset,
+                RecordDateRange = source.RecordDateRange?.ToList() ?? new List<string>(),
+                Records = source.Records?.Select(MapRecord).ToList() ?? new List<Record>(),
+                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<Models.Account.AgentHint>()
+            };
+
+            return response;
+        }
+
+        private static Record MapRecord(RecordDto? dto)
+        {
+            if (dto is null)
+                return new Record();
+
+            var record = new Record
+            {
+                AccountId = dto.AccountId,
+                Amount = MapBalance(dto.Amount),
+                BaseAmount = MapBalance(dto.BaseAmount),
+                Category = dto.Category is null ? null : new Wallet.Api.Net.Models.Category.Category
+                {
+                    Id = ParseGuid(dto.Category.Id),
+                    Name = dto.Category.Name,
+                    Color = dto.Category.Color,
+                    EnvelopeId = dto.Category.EnvelopeId
+                },
+                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
+                Note = dto.Note,
+                Payee = dto.Payee,
+                Payer = dto.Payer,
+                PaymentType = dto.PaymentType,
+                Photos = dto.Photos?.Select(MapPhoto).ToList() ?? new List<RecordPhoto>(),
+                Place = dto.Place is null ? null : new RecordPlace
+                {
+                    Address = dto.Place.Address,
+                    Id = dto.Place.Id,
+                    Latitude = dto.Place.Latitude,
+                    Longitude = dto.Place.Longitude,
+                    Name = dto.Place.Name,
+                    PlaceTypes = dto.Place.PlaceTypes?.ToList() ?? new List<int>()
+                },
+                RecordDate = MapperHelpers.ParseDateTime(dto.RecordDate),
+                RecordState = dto.RecordState,
+                RecordType = dto.RecordType,
+                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
+            };
+
+            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
+                record.Id = id;
+
+            if (dto.Labels != null && dto.Labels.Any())
+                record.Labels = dto.Labels.Select(l =>
+                {
+                    var lab = new Wallet.Api.Net.Models.Label.Label
+                    {
+                        Archived = l.Archived,
+                        Color = l.Color,
+                        Name = l.Name,
+                        CreatedAt = MapperHelpers.ParseDateTime(l.CreatedAt),
+                        UpdatedAt = MapperHelpers.ParseDateTime(l.UpdatedAt)
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(l.Id) && Guid.TryParse(l.Id, out var lid))
+                        lab.Id = lid;
+
+                    return lab;
+                }).ToList();
+
+            return record;
+        }
+
+        private static Wallet.Api.Net.Models.Balance? MapBalance(Wallet.Api.Net.Dtos.BalanceDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new Wallet.Api.Net.Models.Balance
+            {
+                CurrencyCode = dto.CurrencyCode,
+                Value = dto.Value
+            };
+        }
+
+        private static RecordPhoto MapPhoto(PhotoDto? dto)
+        {
+            if (dto is null)
+                return new RecordPhoto();
+
+            return new RecordPhoto
+            {
+                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
+                TemporaryUrl = dto.TemporaryUrl
+            };
+        }
+
+        private static Guid? ParseGuid(string? s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return null;
+
+            if (Guid.TryParse(s, out var g))
+                return g;
+
+            return null;
+        }
+    }
+}
