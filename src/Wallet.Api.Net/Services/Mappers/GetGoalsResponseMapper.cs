@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wallet.Api.Net.Dtos.Goal;
+using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Goal;
 using Wallet.Api.Net.Utility;
 
@@ -19,17 +20,23 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
-                Goals = source.Goals?.Select(MapGoal).ToList() ?? new List<Goal>(),
-                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<Models.Account.AgentHint>()
+                Goals = source.Goals
+                            .Select(MapGoal)
+                            .OfType<Goal>()
+                            .ToList(),
+                AgentHints = source.AgentHints
+                            .Select(MapperHelpers.MapAgentHint)
+                            .OfType<AgentHint>()
+                            .ToList()
             };
 
             return response;
         }
 
-        private static Goal MapGoal(GoalDto? dto)
+        private static Goal? MapGoal(GoalDto? dto)
         {
             if (dto is null)
-                return new Goal();
+                return null;
 
             var goal = new Goal
             {

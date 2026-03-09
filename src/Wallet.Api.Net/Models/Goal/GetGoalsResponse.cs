@@ -8,6 +8,6 @@ namespace Wallet.Api.Net.Models.Goal
     public class GetGoalsResponse : PaginatedResponse
     {
         public IList<Goal> Goals { get; set; } = Array.Empty<Goal>();
-        public IList<Models.Account.AgentHint> AgentHints { get; set; } = Array.Empty<Models.Account.AgentHint>();
+        public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
     }
 }

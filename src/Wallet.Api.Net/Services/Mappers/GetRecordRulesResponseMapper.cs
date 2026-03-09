@@ -6,6 +6,7 @@ using Wallet.Api.Net.Models.RecordRule;
 using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Models.Category;
 using Wallet.Api.Net.Utility;
+using Wallet.Api.Net.Models;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -21,17 +22,23 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
-                RecordRules = source.RecordRules?.Select(MapRecordRule).ToList() ?? new List<RecordRule>(),
-                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<Models.Account.AgentHint>()
+                RecordRules = source.RecordRules
+                                .Select(MapRecordRule)
+                                .OfType<RecordRule>()
+                                .ToList(),
+                AgentHints = source.AgentHints
+                                .Select(MapperHelpers.MapAgentHint)
+                                .OfType<AgentHint>()
+                                .ToList()
             };
 
             return response;
         }
 
-        private static RecordRule MapRecordRule(RecordRuleDto? dto)
+        private static RecordRule? MapRecordRule(RecordRuleDto? dto)
         {
             if (dto is null)
-                return new RecordRule();
+                return null;
 
             var rule = new RecordRule
             {
@@ -43,10 +50,13 @@ namespace Wallet.Api.Net.Services.Mappers
                 },
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 Name = dto.Name,
-                ToAccountId = ParseGuid(dto.ToAccountId),
-                FromAccountId = ParseGuid(dto.FromAccountId),
-                Keywords = dto.Keywords?.ToList() ?? new List<string>(),
-                Labels = dto.Labels?.Select(MapLabel).ToList() ?? new List<Label>(),
+                ToAccountId = MapperHelpers.ParseGuid(dto.ToAccountId),
+                FromAccountId = MapperHelpers.ParseGuid(dto.FromAccountId),
+                Keywords = dto.Keywords.ToList(),
+                Labels = dto.Labels
+                            .Select(MapperHelpers.MapLabel)
+                            .OfType<Label>()
+                            .ToList(),
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
 
@@ -54,37 +64,6 @@ namespace Wallet.Api.Net.Services.Mappers
                 rule.Id = id;
 
             return rule;
-        }
-
-        private static Label MapLabel(Wallet.Api.Net.Dtos.Label.LabelDto? dto)
-        {
-            if (dto is null)
-                return new Label();
-
-            var label = new Label
-            {
-                Archived = dto.Archived,
-                Color = dto.Color,
-                Name = dto.Name,
-                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
-                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
-            };
-
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
-                label.Id = id;
-
-            return label;
-        }
-
-        private static Guid? ParseGuid(string? s)
-        {
-            if (string.IsNullOrWhiteSpace(s))
-                return null;
-
-            if (Guid.TryParse(s, out var g))
-                return g;
-
-            return null;
         }
     }
 }

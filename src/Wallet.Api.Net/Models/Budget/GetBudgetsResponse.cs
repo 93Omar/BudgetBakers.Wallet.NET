@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Wallet.Api.Net.Models.Pagination;
-using Wallet.Api.Net.Models.Account;
 
 namespace Wallet.Api.Net.Models.Budget
 {

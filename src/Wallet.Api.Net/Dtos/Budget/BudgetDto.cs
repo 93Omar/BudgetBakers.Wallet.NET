@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Wallet.Api.Net.Dtos.Label;
 
 namespace Wallet.Api.Net.Dtos.Budget
 {

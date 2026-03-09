@@ -1,4 +1,4 @@
-namespace Wallet.Api.Net.Models.Account
+namespace Wallet.Api.Net.Models
 {
     public class AgentAction
     {

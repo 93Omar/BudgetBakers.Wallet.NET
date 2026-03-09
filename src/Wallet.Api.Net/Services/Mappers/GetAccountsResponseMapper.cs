@@ -22,17 +22,23 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
-                Accounts = source.Accounts?.Select(MapAccount).ToList() ?? new List<Account>(),
-                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<AgentHint>()
+                Accounts = source.Accounts
+                            .Select(MapAccount)
+                            .OfType<Account>()
+                            .ToList(),
+                AgentHints = source.AgentHints
+                            .Select(MapperHelpers.MapAgentHint)
+                            .OfType<AgentHint>()
+                            .ToList()
             };
 
             return response;
         }
 
-        private static Account MapAccount(AccountDto? dto)
+        private static Account? MapAccount(AccountDto? dto)
         {
             if (dto is null)
-                return new Account();
+                return null;
 
             var account = new Account
             {
@@ -43,9 +49,9 @@ namespace Wallet.Api.Net.Services.Mappers
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 ExcludeFromStats = dto.ExcludeFromStats,
                 Name = dto.Name,
-                InitialBalance = MapBalance(dto.InitialBalance),
-                InitialBaseBalance = MapBalance(dto.InitialBaseBalance),
-                RecordStats = MapRecordStats(dto.RecordStats),
+                InitialBalance = MapperHelpers.MapBalance(dto.InitialBalance),
+                InitialBaseBalance = MapperHelpers.MapBalance(dto.InitialBaseBalance),
+                RecordStats = MapperHelpers.MapRecordStats(dto.RecordStats),
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
 
@@ -53,45 +59,6 @@ namespace Wallet.Api.Net.Services.Mappers
                 account.Id = guid;
 
             return account;
-        }
-
-        private static Balance? MapBalance(BalanceDto? dto)
-        {
-            if (dto is null)
-                return null;
-
-            return new Balance
-            {
-                CurrencyCode = dto.CurrencyCode,
-                Value = dto.Value
-            };
-        }
-
-        private static RecordStats? MapRecordStats(RecordStatsDto? dto)
-        {
-            if (dto is null)
-                return null;
-
-            return new RecordStats
-            {
-                CreatedAt = MapDateRange(dto.CreatedAt),
-                RecordCount = dto.RecordCount,
-                RecordDate = MapDateRange(dto.RecordDate)
-            };
-        }
-
-        private static DateRange? MapDateRange(DateRangeDto? dto)
-        {
-            if (dto is null)
-                return null;
-
-            return new DateRange
-            {
-                Max = MapperHelpers.ParseDateTime(dto.Max),
-                Min = MapperHelpers.ParseDateTime(dto.Min)
-            };
-        }
-
-        
+        }      
     }
 }

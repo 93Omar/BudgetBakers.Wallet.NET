@@ -15,7 +15,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
-                Id = source.Ids != null && source.Ids.Count > 0 ? string.Join(",", source.Ids) : null,
+                Id = source.Ids.Any() ? string.Join(",", source.Ids) : null,
                 Name = source.Name,
                 CurrencyCode = source.CurrencyCode,
                 CreatedAt = source.CreatedAt?.ToString(),

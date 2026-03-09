@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wallet.Api.Net.Dtos.Label;
+using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Utility;
 
@@ -19,31 +20,17 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
-                Labels = source.Labels?.Select(MapLabel).ToList() ?? new List<Label>(),
-                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<Models.Account.AgentHint>()
+                Labels = source.Labels
+                            .Select(MapperHelpers.MapLabel)
+                            .OfType<Label>()
+                            .ToList(),
+                AgentHints = source.AgentHints
+                            .Select(MapperHelpers.MapAgentHint)
+                            .OfType<AgentHint>()
+                            .ToList()
             };
 
             return response;
-        }
-
-        private static Label MapLabel(LabelDto? dto)
-        {
-            if (dto is null)
-                return new Label();
-
-            var label = new Label
-            {
-                Archived = dto.Archived,
-                Color = dto.Color,
-                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
-                Name = dto.Name,
-                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
-            };
-
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
-                label.Id = id;
-
-            return label;
-        }
+        }      
     }
 }

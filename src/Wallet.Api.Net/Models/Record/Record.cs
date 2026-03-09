@@ -8,8 +8,8 @@ namespace Wallet.Api.Net.Models.Record
     public class Record
     {
         public string? AccountId { get; set; }
-        public Wallet.Api.Net.Models.Balance? Amount { get; set; }
-        public Wallet.Api.Net.Models.Balance? BaseAmount { get; set; }
+        public Balance? Amount { get; set; }
+        public Balance? BaseAmount { get; set; }
         public Wallet.Api.Net.Models.Category.Category? Category { get; set; }
         public DateTime? CreatedAt { get; set; }
         public Guid? Id { get; set; }

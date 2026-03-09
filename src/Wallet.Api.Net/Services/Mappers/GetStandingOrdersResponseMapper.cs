@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wallet.Api.Net.Dtos.StandingOrder;
+using Wallet.Api.Net.Models;
+using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Models.StandingOrder;
 using Wallet.Api.Net.Utility;
 
@@ -19,23 +21,29 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
-                StandingOrders = source.StandingOrders?.Select(MapStandingOrder).ToList() ?? new List<StandingOrder>(),
-                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<Models.Account.AgentHint>()
+                StandingOrders = source.StandingOrders
+                                    .Select(MapStandingOrder)
+                                    .OfType<StandingOrder>()
+                                    .ToList(),
+                AgentHints = source.AgentHints
+                                    .Select(MapperHelpers.MapAgentHint)
+                                    .OfType<AgentHint>()
+                                    .ToList()
             };
 
             return response;
         }
 
-        private static StandingOrder MapStandingOrder(StandingOrderDto? dto)
+        private static StandingOrder? MapStandingOrder(StandingOrderDto? dto)
         {
             if (dto is null)
-                return new StandingOrder();
+                return null;
 
             var so = new StandingOrder
             {
                 AccountId = dto.AccountId,
                 Amount = dto.Amount,
-                CategoryId = ParseGuid(dto.CategoryId),
+                CategoryId = MapperHelpers.ParseGuid(dto.CategoryId),
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 CurrencyCode = dto.CurrencyCode,
                 GenerateFromDate = dto.GenerateFromDate,
@@ -48,42 +56,16 @@ namespace Wallet.Api.Net.Services.Mappers
                 RecurrenceRule = dto.RecurrenceRule,
                 Type = dto.Type,
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt),
-                Labels = dto.Labels?.Select(MapLabel).ToList() ?? new List<Wallet.Api.Net.Models.Label.Label>()
+                Labels = dto.Labels
+                            .Select(MapperHelpers.MapLabel)
+                            .OfType<Label>()
+                            .ToList()
             };
 
             if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
                 so.Id = id;
 
             return so;
-        }
-
-        private static Wallet.Api.Net.Models.Label.Label MapLabel(Wallet.Api.Net.Dtos.Label.LabelDto? dto)
-        {
-            if (dto is null)
-                return new Wallet.Api.Net.Models.Label.Label();
-
-            var label = new Wallet.Api.Net.Models.Label.Label
-            {
-                Archived = dto.Archived,
-                Color = dto.Color,
-                Name = dto.Name
-            };
-
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
-                label.Id = id;
-
-            return label;
-        }
-
-        private static Guid? ParseGuid(string? s)
-        {
-            if (string.IsNullOrWhiteSpace(s))
-                return null;
-
-            if (Guid.TryParse(s, out var g))
-                return g;
-
-            return null;
-        }
+        }       
     }
 }

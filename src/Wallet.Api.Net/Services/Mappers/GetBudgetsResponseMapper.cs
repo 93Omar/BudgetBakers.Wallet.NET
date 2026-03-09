@@ -4,8 +4,9 @@ using System.Linq;
 using Wallet.Api.Net.Dtos.Budget;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Models.Budget;
-using Wallet.Api.Net.Models.Account;
+using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Utility;
+using Wallet.Api.Net.Models;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -21,17 +22,23 @@ namespace Wallet.Api.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 NextOffset = source.NextOffset,
-                Budgets = source.Budgets?.Select(MapBudget).ToList() ?? new List<Budget>(),
-                AgentHints = source.AgentHints?.Select(MapperHelpers.MapAgentHint).ToList() ?? new List<AgentHint>()
+                Budgets = source.Budgets
+                                .Select(MapBudget)
+                                .OfType<Budget>()
+                                .ToList(),
+                AgentHints = source.AgentHints
+                                .Select(h => MapperHelpers.MapAgentHint(h))
+                                .OfType<AgentHint>()
+                                .ToList()
             };
 
             return response;
         }
 
-        private static Budget MapBudget(BudgetDto? dto)
+        private static Budget? MapBudget(BudgetDto? dto)
         {
             if (dto is null)
-                return new Budget();
+                return null;
 
             var budget = new Budget
             {
@@ -43,7 +50,10 @@ namespace Wallet.Api.Net.Services.Mappers
                 StartDate = dto.StartDate,
                 Type = dto.Type,
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt),
-                Labels = dto.Labels?.Select(MapLabel).ToList() ?? new List<Label>()
+                Labels = dto.Labels
+                            .Select(MapperHelpers.MapLabel)
+                            .OfType<Label>()
+                            .ToList()
             };
 
             if (dto.AccountIds != null && dto.AccountIds.Any())
@@ -74,25 +84,6 @@ namespace Wallet.Api.Net.Services.Mappers
                 budget.Id = id;
 
             return budget;
-        }
-
-        private static Label MapLabel(Dtos.Budget.LabelDto? dto)
-        {
-            if (dto is null)
-                return new Label();
-
-            var label = new Label
-            {
-                Archived = dto.Archived,
-                Color = dto.Color,
-                Name = dto.Name
-            };
-
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
-                label.Id = id;
-
-            return label;
-        }
-        
+        }  
     }
 }
