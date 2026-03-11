@@ -4,7 +4,7 @@ using Wallet.Api.Net.Dtos.Label;
 
 namespace Wallet.Api.Net.Dtos.Budget
 {
-    public class BudgetDto
+    internal class BudgetDto
     {
         [JsonProperty("accountIds")]
         public IList<string> AccountIds { get; set; } = Array.Empty<string>();
@@ -43,3 +43,4 @@ namespace Wallet.Api.Net.Dtos.Budget
         public string? UpdatedAt { get; set; }
     }
 }
+

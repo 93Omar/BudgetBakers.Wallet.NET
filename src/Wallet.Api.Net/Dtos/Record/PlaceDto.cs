@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Wallet.Api.Net.Dtos.Record
 {
-    public class PlaceDto
+    internal class PlaceDto
     {
         [JsonProperty("address")]
         public string? Address { get; set; }
@@ -24,3 +24,4 @@ namespace Wallet.Api.Net.Dtos.Record
         public IList<int> PlaceTypes { get; set; } = System.Array.Empty<int>();
     }
 }
+

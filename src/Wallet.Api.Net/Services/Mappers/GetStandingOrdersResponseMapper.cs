@@ -9,7 +9,7 @@ using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetStandingOrdersResponseMapper : IMapper<GetStandingOrdersResponseDto, GetStandingOrdersResponse>
+    internal class GetStandingOrdersResponseMapper : IMapper<GetStandingOrdersResponseDto, GetStandingOrdersResponse>
     {
         public GetStandingOrdersResponse? Map(GetStandingOrdersResponseDto? source)
         {
@@ -69,3 +69,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }       
     }
 }
+

@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Record
 {
-    public class PhotoDto
+    internal class PhotoDto
     {
         [JsonProperty("createdAt")]
         public string? CreatedAt { get; set; }
@@ -11,3 +11,4 @@ namespace Wallet.Api.Net.Dtos.Record
         public string? TemporaryUrl { get; set; }
     }
 }
+

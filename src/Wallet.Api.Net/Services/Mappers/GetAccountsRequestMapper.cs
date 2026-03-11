@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Models.Account;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetAccountsRequestMapper : IMapper<GetAccountsRequest, GetAccountsRequestDto>
+    internal class GetAccountsRequestMapper : IMapper<GetAccountsRequest, GetAccountsRequestDto>
     {
         public GetAccountsRequestDto? Map(GetAccountsRequest? source)
         {

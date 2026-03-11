@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos
 {
-    public class BalanceDto
+    internal class BalanceDto
     {
         [JsonProperty("currencyCode")]
         public string? CurrencyCode { get; set; }
@@ -11,3 +11,4 @@ namespace Wallet.Api.Net.Dtos
         public decimal Value { get; set; }
     }
 }
+

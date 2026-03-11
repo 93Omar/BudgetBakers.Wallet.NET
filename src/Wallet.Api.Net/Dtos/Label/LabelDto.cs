@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Label
 {
-    public class LabelDto
+    internal class LabelDto
     {
         [JsonProperty("archived")]
         public bool Archived { get; set; }
@@ -23,3 +23,4 @@ namespace Wallet.Api.Net.Dtos.Label
         public string? UpdatedAt { get; set; }
     }
 }
+

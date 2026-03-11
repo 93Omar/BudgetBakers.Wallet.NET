@@ -10,7 +10,7 @@ using Wallet.Api.Net.Models;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetBudgetsResponseMapper : IMapper<GetBudgetsResponseDto, GetBudgetsResponse>
+    internal class GetBudgetsResponseMapper : IMapper<GetBudgetsResponseDto, GetBudgetsResponse>
     {
         public GetBudgetsResponse? Map(GetBudgetsResponseDto? source)
         {
@@ -87,3 +87,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }  
     }
 }
+

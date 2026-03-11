@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Wallet.Api.Net.Dtos.StandingOrder
 {
-    public class StandingOrderDto
+    internal class StandingOrderDto
     {
         [JsonProperty("accountId")]
         public string? AccountId { get; set; }
@@ -57,3 +57,4 @@ namespace Wallet.Api.Net.Dtos.StandingOrder
         public string? UpdatedAt { get; set; }
     }
 }
+

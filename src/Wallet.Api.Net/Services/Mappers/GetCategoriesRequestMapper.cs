@@ -3,7 +3,7 @@ using Wallet.Api.Net.Models.Category;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetCategoriesRequestMapper : IMapper<GetCategoriesRequest, GetCategoriesRequestDto>
+    internal class GetCategoriesRequestMapper : IMapper<GetCategoriesRequest, GetCategoriesRequestDto>
     {
         public GetCategoriesRequestDto? Map(GetCategoriesRequest? source)
         {
@@ -25,3 +25,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

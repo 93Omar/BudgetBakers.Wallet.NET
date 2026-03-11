@@ -3,7 +3,7 @@ using Wallet.Api.Net.Models.RecordRule;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetRecordRulesRequestMapper : IMapper<GetRecordRulesRequest, GetRecordRulesRequestDto>
+    internal class GetRecordRulesRequestMapper : IMapper<GetRecordRulesRequest, GetRecordRulesRequestDto>
     {
         public GetRecordRulesRequestDto? Map(GetRecordRulesRequest? source)
         {
@@ -25,3 +25,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

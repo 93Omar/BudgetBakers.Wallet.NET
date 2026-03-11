@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Account
 {
-    public class AgentHintDto
+    internal class AgentHintDto
     {
         [JsonProperty("action")]
         public AgentActionDto? Action { get; set; }
@@ -20,3 +20,4 @@ namespace Wallet.Api.Net.Dtos.Account
         public string? Type { get; set; }
     }
 }
+

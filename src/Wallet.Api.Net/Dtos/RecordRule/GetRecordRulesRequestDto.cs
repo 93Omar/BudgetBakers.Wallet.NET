@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.RecordRule
 {
-    public class GetRecordRulesRequestDto
+    internal class GetRecordRulesRequestDto
     {
         [JsonProperty("limit")]
         public required int Limit { get; set; }
@@ -29,3 +29,4 @@ namespace Wallet.Api.Net.Dtos.RecordRule
         public string? UpdatedAt { get; set; }
     }
 }
+

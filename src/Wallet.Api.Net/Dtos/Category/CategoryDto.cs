@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 namespace Wallet.Api.Net.Dtos.Category
 {
-    public class CategoryDto
+    internal class CategoryDto
     {
         [JsonProperty("archived")]
         public bool Archived { get; set; }
@@ -43,3 +43,4 @@ namespace Wallet.Api.Net.Dtos.Category
         public string? UpdatedAt { get; set; }
     }
 }
+

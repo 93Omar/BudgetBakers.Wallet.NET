@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Wallet.Api.Net.Dtos.Account
 {
-    public class GetAccountsRequestDto
+    internal class GetAccountsRequestDto
     {
         [JsonProperty("limit")]
         public required int Limit { get; set; }

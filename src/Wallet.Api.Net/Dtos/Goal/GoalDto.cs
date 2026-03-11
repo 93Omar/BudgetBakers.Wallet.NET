@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Goal
 {
-    public class GoalDto
+    internal class GoalDto
     {
         [JsonProperty("color")]
         public string? Color { get; set; }
@@ -41,3 +41,4 @@ namespace Wallet.Api.Net.Dtos.Goal
         public string? UpdatedAt { get; set; }
     }
 }
+

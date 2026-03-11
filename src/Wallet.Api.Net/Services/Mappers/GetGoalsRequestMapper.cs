@@ -3,7 +3,7 @@ using Wallet.Api.Net.Models.Goal;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetGoalsRequestMapper : IMapper<GetGoalsRequest, GetGoalsRequestDto>
+    internal class GetGoalsRequestMapper : IMapper<GetGoalsRequest, GetGoalsRequestDto>
     {
         public GetGoalsRequestDto? Map(GetGoalsRequest? source)
         {
@@ -26,3 +26,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

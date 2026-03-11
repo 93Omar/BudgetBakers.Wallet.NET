@@ -46,7 +46,19 @@ namespace ConsoleApp
                 Offset = 0
             };
 
-            GetAccountsResponse? response = await accountClient.GetAsync(getAccountsRequest);
+            var result = await accountClient.GetAsync(getAccountsRequest);
+            if (result.IsSuccess)
+            {
+                GetAccountsResponse response = result.Value;
+                logger.LogInformation("Accounts loaded successfully.");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    logger.LogError("Error loading accounts: {ErrorMessage}", error.Message);
+                }
+            }
 
             await host.StopAsync();
         }

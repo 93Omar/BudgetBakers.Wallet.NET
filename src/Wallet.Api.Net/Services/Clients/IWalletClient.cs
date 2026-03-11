@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wallet.Api.Net.Utility
+namespace Wallet.Api.Net.Services.Clients
 {
-    internal class RangeFilterExtensions
+    public interface IWalletClient
     {
     }
 }

@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Wallet.Api.Net.Dtos
 {
-    public class PaginatedResponseDto
+    internal class PaginatedResponseDto
     {
         [JsonProperty("limit")]
         public int Limit { get; set; }
@@ -17,3 +17,4 @@ namespace Wallet.Api.Net.Dtos
         public int NextOffset { get; set; }
     }
 }
+

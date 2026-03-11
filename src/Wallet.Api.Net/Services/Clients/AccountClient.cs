@@ -1,40 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Json;
-using System.Text;
+﻿using FluentResults;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Models.Account;
-using Wallet.Api.Net.Utility;
+using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Services.Clients
 {
-    public class AccountClient
+    public class AccountClient : IWalletClient
     {
         private readonly HttpClient _httpClient;
-        private readonly IMapper<GetAccountsRequest, GetAccountsRequestDto> _getAccountsRequestMapper;
-        private readonly IMapper<GetAccountsResponseDto, GetAccountsResponse> _getAccountsResponseMapper;
+        private readonly IMapper<GetAccountsRequest, GetAccountsRequestDto> _getAccountsRequestMapper = new GetAccountsRequestMapper();
+        private readonly IMapper<GetAccountsResponseDto, GetAccountsResponse> _getAccountsResponseMapper = new GetAccountsResponseMapper();
 
-        public AccountClient(HttpClient httpClient, IMapper<GetAccountsRequest, GetAccountsRequestDto> getAccountsRequestMapper,
-            IMapper<GetAccountsResponseDto, GetAccountsResponse> getAccountsResponseMapper)
+        public AccountClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _getAccountsRequestMapper = getAccountsRequestMapper;
-            _getAccountsResponseMapper = getAccountsResponseMapper;
         }
 
-        public async Task<GetAccountsResponse?> GetAsync(GetAccountsRequest request, CancellationToken ct = default)
-        {
-            string methodName = "/wallet/v1/api/accounts";
-
-            GetAccountsRequestDto? requestDto = _getAccountsRequestMapper.Map(request);
-            string? queryString = requestDto.ToQueryString();
-
-            string methodAndParams = $"{methodName}?{queryString}";
-
-            GetAccountsResponseDto? responseDto = await _httpClient.GetFromJsonAsync<GetAccountsResponseDto>(methodAndParams, ct);
-            GetAccountsResponse? response = _getAccountsResponseMapper.Map(responseDto);
-
-            return response;
-        }
+        public Task<Result<GetAccountsResponse>> GetAsync(GetAccountsRequest request, CancellationToken ct = default)
+            => WalletApiGetExecutor.ExecuteAsync<GetAccountsRequest, GetAccountsRequestDto, GetAccountsResponseDto, GetAccountsResponse>(
+                _httpClient,
+                "/wallet/v1/api/accounts",
+                request,
+                _getAccountsRequestMapper,
+                _getAccountsResponseMapper,
+                ct);
     }
 }

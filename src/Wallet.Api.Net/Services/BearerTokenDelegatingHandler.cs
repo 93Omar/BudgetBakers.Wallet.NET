@@ -2,7 +2,7 @@
 
 namespace Wallet.Api.Net.Services
 {
-    public class BearerTokenDelegatingHandler : DelegatingHandler
+    internal class BearerTokenDelegatingHandler : DelegatingHandler
     {
         private readonly IAccessTokenProvider _tokenProvider;
 

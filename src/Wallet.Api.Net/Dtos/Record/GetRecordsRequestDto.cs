@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Record
 {
-    public class GetRecordsRequestDto
+    internal class GetRecordsRequestDto
     {
         [JsonProperty("accountId")]
         public string? AccountId { get; set; }
@@ -47,3 +47,4 @@ namespace Wallet.Api.Net.Dtos.Record
         public string? SortBy { get; set; }
     }
 }
+

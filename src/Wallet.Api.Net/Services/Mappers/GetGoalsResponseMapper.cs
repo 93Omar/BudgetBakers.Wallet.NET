@@ -8,7 +8,7 @@ using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetGoalsResponseMapper : IMapper<GetGoalsResponseDto, GetGoalsResponse>
+    internal class GetGoalsResponseMapper : IMapper<GetGoalsResponseDto, GetGoalsResponse>
     {
         public GetGoalsResponse? Map(GetGoalsResponseDto? source)
         {
@@ -60,3 +60,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

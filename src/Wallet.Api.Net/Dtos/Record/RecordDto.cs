@@ -6,7 +6,7 @@ using Wallet.Api.Net.Dtos.Label;
 
 namespace Wallet.Api.Net.Dtos.Record
 {
-    public class RecordDto
+    internal class RecordDto
     {
         [JsonProperty("accountId")]
         public string? AccountId { get; set; }
@@ -60,3 +60,4 @@ namespace Wallet.Api.Net.Dtos.Record
         public string? UpdatedAt { get; set; }
     }
 }
+

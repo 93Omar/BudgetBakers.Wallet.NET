@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Budget
 {
-    public class GetBudgetsRequestDto
+    internal class GetBudgetsRequestDto
     {
         [JsonProperty("limit")]
         public required int Limit { get; set; }
@@ -32,3 +32,4 @@ namespace Wallet.Api.Net.Dtos.Budget
         public string? UpdatedAt { get; set; }
     }
 }
+

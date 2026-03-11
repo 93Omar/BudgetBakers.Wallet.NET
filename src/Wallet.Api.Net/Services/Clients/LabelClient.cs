@@ -1,40 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Json;
-using System.Text;
+﻿using FluentResults;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Models.Label;
-using Wallet.Api.Net.Utility;
+using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Services.Clients
 {
-    public class LabelClient
+    public class LabelClient : IWalletClient
     {
         private readonly HttpClient _httpClient;
-        private readonly IMapper<GetLabelsRequest, GetLabelsRequestDto> _getLabelsRequestMapper;
-        private readonly IMapper<GetLabelsResponseDto, GetLabelsResponse> _getLabelsResponseMapper;
+        private readonly IMapper<GetLabelsRequest, GetLabelsRequestDto> _getLabelsRequestMapper = new GetLabelsRequestMapper();
+        private readonly IMapper<GetLabelsResponseDto, GetLabelsResponse> _getLabelsResponseMapper = new GetLabelsResponseMapper();
 
-        public LabelClient(HttpClient httpClient, IMapper<GetLabelsRequest, GetLabelsRequestDto> getLabelsRequestMapper,
-            IMapper<GetLabelsResponseDto, GetLabelsResponse> getLabelsResponseMapper)
+        public LabelClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _getLabelsRequestMapper = getLabelsRequestMapper;
-            _getLabelsResponseMapper = getLabelsResponseMapper;
         }
 
-        public async Task<GetLabelsResponse?> GetAsync(GetLabelsRequest request, CancellationToken ct = default)
-        {
-            string methodName = "/wallet/v1/api/labels";
-
-            GetLabelsRequestDto? requestDto = _getLabelsRequestMapper.Map(request);
-            string? queryString = requestDto.ToQueryString();
-
-            string methodAndParams = $"{methodName}?{queryString}";
-
-            GetLabelsResponseDto? responseDto = await _httpClient.GetFromJsonAsync<GetLabelsResponseDto>(methodAndParams, ct);
-            GetLabelsResponse? response = _getLabelsResponseMapper.Map(responseDto);
-
-            return response;
-        }
+        public Task<Result<GetLabelsResponse>> GetAsync(GetLabelsRequest request, CancellationToken ct = default)
+            => WalletApiGetExecutor.ExecuteAsync<GetLabelsRequest, GetLabelsRequestDto, GetLabelsResponseDto, GetLabelsResponse>(
+                _httpClient,
+                "/wallet/v1/api/labels",
+                request,
+                _getLabelsRequestMapper,
+                _getLabelsResponseMapper,
+                ct);
     }
 }

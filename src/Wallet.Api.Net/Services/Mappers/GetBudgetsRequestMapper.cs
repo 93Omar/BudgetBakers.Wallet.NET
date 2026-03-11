@@ -6,7 +6,7 @@ using Wallet.Api.Net.Models.Budget;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetBudgetsRequestMapper : IMapper<GetBudgetsRequest, GetBudgetsRequestDto>
+    internal class GetBudgetsRequestMapper : IMapper<GetBudgetsRequest, GetBudgetsRequestDto>
     {
         public GetBudgetsRequestDto? Map(GetBudgetsRequest? source)
         {
@@ -29,3 +29,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

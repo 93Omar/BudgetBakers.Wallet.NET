@@ -9,7 +9,7 @@ using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetRecordsResponseMapper : IMapper<GetRecordsResponseDto, GetRecordsResponse>
+    internal class GetRecordsResponseMapper : IMapper<GetRecordsResponseDto, GetRecordsResponse>
     {
         public GetRecordsResponse? Map(GetRecordsResponseDto? source)
         {
@@ -81,3 +81,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

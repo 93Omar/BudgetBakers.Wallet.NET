@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Dtos.Account;
 
 namespace Wallet.Api.Net.Dtos.Budget
 {
-    public class GetBudgetsResponseDto : PaginatedResponseDto
+    internal class GetBudgetsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
         public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
@@ -14,3 +14,4 @@ namespace Wallet.Api.Net.Dtos.Budget
         public IList<BudgetDto> Budgets { get; set; } = Array.Empty<BudgetDto>();
     }
 }
+

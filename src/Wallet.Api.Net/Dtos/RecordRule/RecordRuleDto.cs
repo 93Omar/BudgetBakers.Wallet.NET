@@ -5,7 +5,7 @@ using Wallet.Api.Net.Dtos.Label;
 
 namespace Wallet.Api.Net.Dtos.RecordRule
 {
-    public class RecordRuleDto
+    internal class RecordRuleDto
     {
         [JsonProperty("category")]
         public CategoryDto? Category { get; set; }
@@ -35,3 +35,4 @@ namespace Wallet.Api.Net.Dtos.RecordRule
         public string? UpdatedAt { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetAccountsResponseMapper : IMapper<GetAccountsResponseDto, GetAccountsResponse>
+    internal class GetAccountsResponseMapper : IMapper<GetAccountsResponseDto, GetAccountsResponse>
     {
         public GetAccountsResponse? Map(GetAccountsResponseDto? source)
         {
@@ -62,3 +62,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }      
     }
 }
+

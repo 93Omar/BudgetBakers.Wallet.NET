@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.StandingOrder
 {
-    public class GetStandingOrdersRequestDto
+    internal class GetStandingOrdersRequestDto
     {
         [JsonProperty("limit")]
         public required int Limit { get; set; }
@@ -32,3 +32,4 @@ namespace Wallet.Api.Net.Dtos.StandingOrder
         public string? UpdatedAt { get; set; }
     }
 }
+

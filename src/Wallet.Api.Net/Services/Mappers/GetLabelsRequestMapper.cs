@@ -3,7 +3,7 @@ using Wallet.Api.Net.Models.Label;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetLabelsRequestMapper : IMapper<GetLabelsRequest, GetLabelsRequestDto>
+    internal class GetLabelsRequestMapper : IMapper<GetLabelsRequest, GetLabelsRequestDto>
     {
         public GetLabelsRequestDto? Map(GetLabelsRequest? source)
         {
@@ -25,3 +25,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

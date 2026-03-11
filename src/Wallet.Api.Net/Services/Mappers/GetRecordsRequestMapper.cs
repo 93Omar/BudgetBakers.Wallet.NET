@@ -3,7 +3,7 @@ using Wallet.Api.Net.Models.Record;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetRecordsRequestMapper : IMapper<GetRecordsRequest, GetRecordsRequestDto>
+    internal class GetRecordsRequestMapper : IMapper<GetRecordsRequest, GetRecordsRequestDto>
     {
         public GetRecordsRequestDto? Map(GetRecordsRequest? source)
         {
@@ -31,3 +31,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

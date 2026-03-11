@@ -3,7 +3,7 @@ using Wallet.Api.Net.Models.StandingOrder;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetStandingOrdersRequestMapper : IMapper<GetStandingOrdersRequest, GetStandingOrdersRequestDto>
+    internal class GetStandingOrdersRequestMapper : IMapper<GetStandingOrdersRequest, GetStandingOrdersRequestDto>
     {
         public GetStandingOrdersRequestDto? Map(GetStandingOrdersRequest? source)
         {
@@ -26,3 +26,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

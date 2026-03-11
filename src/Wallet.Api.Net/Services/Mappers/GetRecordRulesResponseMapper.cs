@@ -10,7 +10,7 @@ using Wallet.Api.Net.Models;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetRecordRulesResponseMapper : IMapper<GetRecordRulesResponseDto, GetRecordRulesResponse>
+    internal class GetRecordRulesResponseMapper : IMapper<GetRecordRulesResponseDto, GetRecordRulesResponse>
     {
         public GetRecordRulesResponse? Map(GetRecordRulesResponseDto? source)
         {
@@ -67,3 +67,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

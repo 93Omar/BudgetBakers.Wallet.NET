@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos
 {
-    public class DateRangeDto
+    internal class DateRangeDto
     {
         [JsonProperty("max")]
         public string? Max { get; set; }
@@ -11,3 +11,4 @@ namespace Wallet.Api.Net.Dtos
         public string? Min { get; set; }
     }
 }
+

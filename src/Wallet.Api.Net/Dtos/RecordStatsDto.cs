@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos
 {
-    public class RecordStatsDto
+    internal class RecordStatsDto
     {
         [JsonProperty("createdAt")]
         public DateRangeDto? CreatedAt { get; set; }
@@ -14,3 +14,4 @@ namespace Wallet.Api.Net.Dtos
         public DateRangeDto? RecordDate { get; set; }
     }
 }
+

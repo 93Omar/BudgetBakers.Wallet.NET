@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Wallet.Api.Net.Dtos.Account
 {
-    public class AccountDto
+    internal class AccountDto
     {
         [JsonProperty("accountType")]
         public string? AccountType { get; set; }

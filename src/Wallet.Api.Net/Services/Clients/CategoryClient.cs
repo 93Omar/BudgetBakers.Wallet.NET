@@ -2,39 +2,31 @@
 using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Text;
+using FluentResults;
 using Wallet.Api.Net.Dtos.Category;
 using Wallet.Api.Net.Models.Category;
-using Wallet.Api.Net.Utility;
+using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Services.Clients
 {
-    public class CategoryClient
+    public class CategoryClient : IWalletClient
     {
         private readonly HttpClient _httpClient;
-        private readonly IMapper<GetCategoriesRequest, GetCategoriesRequestDto> _getCategoriesRequestMapper;
-        private readonly IMapper<GetCategoriesResponseDto, GetCategoriesResponse> _getCategoriesResponseMapper;
+        private readonly IMapper<GetCategoriesRequest, GetCategoriesRequestDto> _getCategoriesRequestMapper = new GetCategoriesRequestMapper();
+        private readonly IMapper<GetCategoriesResponseDto, GetCategoriesResponse> _getCategoriesResponseMapper = new GetCategoriesResponseMapper();
 
-        public CategoryClient(HttpClient httpClient, IMapper<GetCategoriesRequest, GetCategoriesRequestDto> getCategoriesRequestMapper,
-            IMapper<GetCategoriesResponseDto, GetCategoriesResponse> getCategoriesResponseMapper)
+        public CategoryClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _getCategoriesRequestMapper = getCategoriesRequestMapper;
-            _getCategoriesResponseMapper = getCategoriesResponseMapper;
         }
 
-        public async Task<GetCategoriesResponse?> GetAsync(GetCategoriesRequest request, CancellationToken ct = default)
-        {
-            string methodName = "/wallet/v1/api/categories";
-
-            GetCategoriesRequestDto? requestDto = _getCategoriesRequestMapper.Map(request);
-            string? queryString = requestDto.ToQueryString();
-
-            string methodAndParams = $"{methodName}?{queryString}";
-
-            GetCategoriesResponseDto? responseDto = await _httpClient.GetFromJsonAsync<GetCategoriesResponseDto>(methodAndParams, ct);
-            GetCategoriesResponse? response = _getCategoriesResponseMapper.Map(responseDto);
-
-            return response;
-        }
+        public Task<Result<GetCategoriesResponse>> GetAsync(GetCategoriesRequest request, CancellationToken ct = default)
+            => WalletApiGetExecutor.ExecuteAsync<GetCategoriesRequest, GetCategoriesRequestDto, GetCategoriesResponseDto, GetCategoriesResponse>(
+                _httpClient,
+                "/wallet/v1/api/categories",
+                request,
+                _getCategoriesRequestMapper,
+                _getCategoriesResponseMapper,
+                ct);
     }
 }

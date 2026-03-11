@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Wallet.Api.Net.Dtos.Record;
 using Wallet.Api.Net.Models;
@@ -8,7 +8,7 @@ using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
-    public class GetRecordsByIdResponseMapper : IMapper<GetRecordsByIdResponseDto, GetRecordsByIdResponse>
+    internal class GetRecordsByIdResponseMapper : IMapper<GetRecordsByIdResponseDto, GetRecordsByIdResponse>
     {
         public GetRecordsByIdResponse? Map(GetRecordsByIdResponseDto? source)
         {
@@ -77,3 +77,4 @@ namespace Wallet.Api.Net.Services.Mappers
         }
     }
 }
+

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Wallet.Api.Net.Dtos.Account
 {
-    public class GetAccountsResponseDto : PaginatedResponseDto
+    internal class GetAccountsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("accounts")]
         public IList<AccountDto> Accounts { get; set; } = Array.Empty<AccountDto>();
