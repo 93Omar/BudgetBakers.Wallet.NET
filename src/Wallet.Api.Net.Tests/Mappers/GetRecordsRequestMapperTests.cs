@@ -2,7 +2,7 @@ using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Record;
 using Wallet.Api.Net.Services.Mappers;
 
-namespace Wallet.Api.Net.Tests
+namespace Wallet.Api.Net.Tests.Mappers
 {
     public class GetRecordsRequestMapperTests
     {

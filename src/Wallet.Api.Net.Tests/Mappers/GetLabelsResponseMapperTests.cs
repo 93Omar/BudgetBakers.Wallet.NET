@@ -2,7 +2,7 @@ using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Services.Mappers;
 
-namespace Wallet.Api.Net.Tests
+namespace Wallet.Api.Net.Tests.Mappers
 {
     public class GetLabelsResponseMapperTests
     {

@@ -31,6 +31,12 @@ bld/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# Code coverage reports
+coverage/
+coverage_report/
+*.coverage
+*.coveragexml
+
 # NUNIT
 *.VisualState.xml
 TestResult.xml

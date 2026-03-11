@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -6,7 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CoverletOutputFormat>opencover</CoverletOutputFormat>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>$(MSBuildProjectDirectory)\coverage\</CoverletOutput>
+    <RunSettingsFilePath>$(MSBuildProjectDirectory)\coverage.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +25,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit3TestAdapter" Version="6.1.0" />
+    <PackageReference Include="ReportGenerator" Version="5.4.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -36,5 +44,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="PrepareCoverageReport" BeforeTargets="Test;VSTest">
+    <ItemGroup>
+      <OldCoverageReports Include="$(MSBuildProjectDirectory)\TestResults\**\coverage.cobertura.xml" />
+    </ItemGroup>
+    <Delete Files="@(OldCoverageReports)" ContinueOnError="true" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\coverage_report" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="GenerateCoverageReport" AfterTargets="Test;VSTest">
+    <ItemGroup>
+      <CoverageReports Include="$(MSBuildProjectDirectory)\TestResults\**\coverage.cobertura.xml" />
+    </ItemGroup>
+    <ReportGenerator ReportFiles="@(CoverageReports)" TargetDirectory="$(MSBuildProjectDirectory)\coverage_report" ReportTypes="Html" Condition="'@(CoverageReports)' != ''" />
+  </Target>
 
 </Project>
