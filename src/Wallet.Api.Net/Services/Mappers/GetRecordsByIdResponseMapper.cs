@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Wallet.Api.Net.Dtos.Category;
+using System.Linq;
 using Wallet.Api.Net.Dtos.Record;
-using Wallet.Api.Net.Models.Category;
+using Wallet.Api.Net.Models;
+using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Models.Record;
+using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -12,7 +12,68 @@ namespace Wallet.Api.Net.Services.Mappers
     {
         public GetRecordsByIdResponse? Map(GetRecordsByIdResponseDto? source)
         {
-            throw new NotImplementedException();
+            if (source is null)
+                return null;
+
+            GetRecordsByIdResponse response = new GetRecordsByIdResponse
+            {
+                Count = source.Count,
+                Records = source.Records
+                            .Select(MapRecord)
+                            .OfType<Record>()
+                            .ToList(),
+                AgentHints = source.AgentHints
+                            .Select(MapperHelpers.MapAgentHint)
+                            .OfType<AgentHint>()
+                            .ToList()
+            };
+
+            return response;
+        }
+
+        private static Record? MapRecord(RecordDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            Record record = new Record
+            {
+                AccountId = dto.AccountId,
+                Amount = MapperHelpers.MapBalance(dto.Amount),
+                BaseAmount = MapperHelpers.MapBalance(dto.BaseAmount),
+                Category = dto.Category is null ? null : new Wallet.Api.Net.Models.Category.Category
+                {
+                    Id = MapperHelpers.ParseGuid(dto.Category.Id),
+                    Name = dto.Category.Name,
+                    Color = dto.Category.Color,
+                    EnvelopeId = dto.Category.EnvelopeId
+                },
+                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
+                Note = dto.Note,
+                Payee = dto.Payee,
+                Payer = dto.Payer,
+                PaymentType = dto.PaymentType,
+                Photos = dto.Photos
+                            .Select(MapperHelpers.MapRecordPhoto)
+                            .OfType<RecordPhoto>()
+                            .ToList(),
+                Place = MapperHelpers.MapPlace(dto.Place),
+                RecordDate = MapperHelpers.ParseDateTime(dto.RecordDate),
+                RecordState = dto.RecordState,
+                RecordType = dto.RecordType,
+                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
+            };
+
+            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out Guid id))
+                record.Id = id;
+
+            if (dto.Labels != null && dto.Labels.Any())
+                record.Labels = dto.Labels
+                                .Select(MapperHelpers.MapLabel)
+                                .OfType<Label>()
+                                .ToList();
+
+            return record;
         }
     }
 }

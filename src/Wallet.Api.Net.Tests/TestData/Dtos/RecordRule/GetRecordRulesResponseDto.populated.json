@@ -1,0 +1,27 @@
+{
+  "limit": 10,
+  "offset": 0,
+  "nextOffset": 10,
+  "agentHints": [
+    {
+      "text": "hint"
+    }
+  ],
+  "recordRules": [
+    {
+      "id": "rule-1",
+      "name": "Groceries rule",
+      "keywords": ["market"],
+      "category": {
+        "id": "cat-1",
+        "name": "Food"
+      },
+      "labels": [
+        {
+          "id": "lab-1",
+          "name": "food"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "limit": 10,
+  "offset": 0,
+  "nextOffset": 10,
+  "agentHints": [
+    {
+      "text": "hint"
+    }
+  ],
+  "goals": [
+    {
+      "id": "goal-1",
+      "name": "Trip",
+      "targetAmount": "2500",
+      "state": "open"
+    }
+  ]
+}

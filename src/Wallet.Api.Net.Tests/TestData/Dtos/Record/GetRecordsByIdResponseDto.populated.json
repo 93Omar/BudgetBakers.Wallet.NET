@@ -1,0 +1,15 @@
+{
+  "count": 1,
+  "agentHints": [
+    {
+      "text": "hint"
+    }
+  ],
+  "records": [
+    {
+      "id": "rec-1",
+      "accountId": "acc-1",
+      "recordType": "expense"
+    }
+  ]
+}

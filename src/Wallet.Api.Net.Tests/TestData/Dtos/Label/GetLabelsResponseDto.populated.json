@@ -1,0 +1,17 @@
+{
+  "limit": 10,
+  "offset": 0,
+  "nextOffset": 10,
+  "agentHints": [
+    {
+      "text": "hint"
+    }
+  ],
+  "labels": [
+    {
+      "id": "lab-1",
+      "name": "home",
+      "color": "#CCCCCC"
+    }
+  ]
+}

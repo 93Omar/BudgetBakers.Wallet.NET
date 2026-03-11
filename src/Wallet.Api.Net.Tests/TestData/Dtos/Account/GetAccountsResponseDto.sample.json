@@ -1,0 +1,50 @@
+{
+  "limit": 10,
+  "offset": 0,
+  "nextOffset": 10,
+  "accounts": [
+    {
+      "accountType": "checking",
+      "archived": false,
+      "bankAccountNumber": "IT60X0542811101000000123456",
+      "color": "#22AAFF",
+      "createdAt": "2026-03-10 08:30:00",
+      "excludeFromStats": false,
+      "id": "6dbce709-f6da-46fd-96a9-3ea715ec496f",
+      "initialBalance": {
+        "currencyCode": "EUR",
+        "value": 1500.25
+      },
+      "initialBaseBalance": {
+        "currencyCode": "EUR",
+        "value": 1500.25
+      },
+      "name": "Main Account",
+      "recordStats": {
+        "createdAt": {
+          "max": "2026-03-10 08:30:00",
+          "min": "2026-01-01 00:00:00"
+        },
+        "recordCount": 12,
+        "recordDate": {
+          "max": "2026-03-10 00:00:00",
+          "min": "2026-01-01 00:00:00"
+        }
+      },
+      "updatedAt": "2026-03-11 09:45:00"
+    }
+  ],
+  "agentHints": [
+    {
+      "action": {
+        "url": "https://example.com/hint"
+      },
+      "data": {
+        "source": "sample"
+      },
+      "severity": "info",
+      "text": "Hint text",
+      "type": "suggestion"
+    }
+  ]
+}

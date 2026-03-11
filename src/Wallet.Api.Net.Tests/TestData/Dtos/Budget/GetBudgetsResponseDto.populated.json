@@ -1,0 +1,24 @@
+{
+  "limit": 10,
+  "offset": 0,
+  "nextOffset": 10,
+  "agentHints": [
+    {
+      "text": "hint"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "bgt-1",
+      "name": "Monthly Food",
+      "amount": "300",
+      "currencyCode": "EUR",
+      "labels": [
+        {
+          "id": "lab-1",
+          "name": "food"
+        }
+      ]
+    }
+  ]
+}

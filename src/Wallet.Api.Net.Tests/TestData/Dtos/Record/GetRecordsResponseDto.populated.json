@@ -1,0 +1,22 @@
+{
+  "limit": 10,
+  "offset": 0,
+  "nextOffset": 10,
+  "agentHints": [
+    {
+      "text": "hint"
+    }
+  ],
+  "recordDateRange": ["2026-01-01", "2026-01-31"],
+  "records": [
+    {
+      "id": "rec-1",
+      "accountId": "acc-1",
+      "amount": {
+        "currencyCode": "EUR",
+        "value": 10.5
+      },
+      "recordType": "expense"
+    }
+  ]
+}
