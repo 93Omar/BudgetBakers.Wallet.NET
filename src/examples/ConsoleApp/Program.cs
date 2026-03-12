@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Services;
+﻿using ConsoleApp.Configuration;
+using ConsoleApp.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +26,8 @@ namespace ConsoleApp
                 {
                     services.AddLogging(config => config.AddConsole());
 
+                    services.Configure<WalletOptions>(context.Configuration.GetSection(WalletOptions.SectionName));
+
                     services.AddSingleton<IAccessTokenProvider, UserSecretsAccessTokenProvider>();
 
                     services.AddWalletClient<AccountClient>(client =>
@@ -47,6 +50,7 @@ namespace ConsoleApp
             };
 
             var result = await accountClient.GetAsync(getAccountsRequest);
+
             if (result.IsSuccess)
             {
                 GetAccountsResponse response = result.Value;

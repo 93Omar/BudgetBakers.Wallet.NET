@@ -1,4 +1,5 @@
-using Microsoft.Extensions.Configuration;
+using ConsoleApp.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,22 +9,19 @@ namespace ConsoleApp.Services
 {
     public class UserSecretsAccessTokenProvider : IAccessTokenProvider
     {
-        private readonly IConfiguration _configuration;
-        private const string ConfigKey = "Wallet:AccessToken";
+        private readonly WalletOptions _walletOptions;
 
-        public UserSecretsAccessTokenProvider(IConfiguration configuration)
+        public UserSecretsAccessTokenProvider(IOptions<WalletOptions> walletOptions)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _walletOptions = walletOptions?.Value ?? throw new ArgumentNullException(nameof(walletOptions));
         }
 
         public Task<string> GetAccessTokenAsync(CancellationToken ct = default)
         {
-            string? token = _configuration[ConfigKey];
+            if (string.IsNullOrWhiteSpace(_walletOptions.AccessToken))
+                throw new InvalidOperationException($"Access token not found in configuration section '{WalletOptions.SectionName}' (property: '{nameof(WalletOptions.AccessToken)}').");
 
-            if (string.IsNullOrWhiteSpace(token))
-                throw new InvalidOperationException($"Access token not found in configuration (key: '{ConfigKey}').");
-
-            return Task.FromResult(token);
+            return Task.FromResult(_walletOptions.AccessToken);
         }
     }
 }
