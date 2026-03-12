@@ -74,5 +74,34 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mapped.Labels, Has.Count.EqualTo(1));
             }
         }
+
+        [Test]
+        public void Map_WhenRecordRulesContainNullAndInvalidId_FiltersNullAndLeavesIdNull()
+        {
+            var mapper = new GetRecordRulesResponseMapper();
+            var source = new GetRecordRulesResponseDto
+            {
+                RecordRules = new List<RecordRuleDto>
+                {
+                    null!,
+                    new RecordRuleDto
+                    {
+                        Id = "invalid-guid",
+                        Keywords = new List<string>(),
+                        Labels = new List<LabelDto>()
+                    }
+                },
+                AgentHints = new List<Wallet.Api.Net.Dtos.Account.AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.RecordRules, Has.Count.EqualTo(1));
+                Assert.That(result.RecordRules[0].Id, Is.Null);
+            }
+        }
     }
 }

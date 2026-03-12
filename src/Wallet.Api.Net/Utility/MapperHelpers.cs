@@ -76,7 +76,7 @@ namespace Wallet.Api.Net.Utility
                 UpdatedAt = ParseDateTime(dto.UpdatedAt)
             };
 
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
+            if (ParseGuid(dto.Id) is Guid id)
                 label.Id = id;
 
             return label;

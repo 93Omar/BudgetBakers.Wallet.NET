@@ -75,5 +75,36 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mapped.RecordType, Is.EqualTo(source.Records[0].RecordType));
             }
         }
+
+        [Test]
+        public void Map_WhenRecordsContainNullInvalidIdAndNullLabels_HandlesBranches()
+        {
+            var mapper = new GetRecordsByIdResponseMapper();
+            var source = new GetRecordsByIdResponseDto
+            {
+                Count = 1,
+                Records = new List<RecordDto>
+                {
+                    null!,
+                    new RecordDto
+                    {
+                        Id = "invalid-guid",
+                        Labels = null!,
+                        Photos = new List<PhotoDto>()
+                    }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.Records, Has.Count.EqualTo(1));
+                Assert.That(result.Records[0].Id, Is.Null);
+                Assert.That(result.Records[0].Labels, Is.Empty);
+            }
+        }
     }
 }

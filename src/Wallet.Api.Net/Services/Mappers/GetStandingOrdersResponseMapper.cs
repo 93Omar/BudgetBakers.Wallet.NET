@@ -62,7 +62,7 @@ namespace Wallet.Api.Net.Services.Mappers
                             .ToList()
             };
 
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
+            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
                 so.Id = id;
 
             return so;

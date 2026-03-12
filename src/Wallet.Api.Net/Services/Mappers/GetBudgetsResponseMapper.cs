@@ -80,7 +80,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 budget.CategoryIds = guids;
             }
 
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
+            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
                 budget.Id = id;
 
             return budget;

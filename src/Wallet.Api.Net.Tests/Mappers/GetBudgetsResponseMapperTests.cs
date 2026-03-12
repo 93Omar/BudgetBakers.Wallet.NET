@@ -79,5 +79,90 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(result.AgentHints[0].Text, Is.EqualTo(source.AgentHints[0].Text));
             }
         }
+
+        [Test]
+        public void Map_WhenBudgetsContainNullAndInvalidValues_HandlesBranches()
+        {
+            var mapper = new GetBudgetsResponseMapper();
+            var source = new GetBudgetsResponseDto
+            {
+                Budgets = new List<BudgetDto>
+                {
+                    null!,
+                    new BudgetDto
+                    {
+                        Id = "invalid-guid",
+                        AccountIds = new List<string>(),
+                        CategoryIds = new List<string> { "not-a-guid" },
+                        Labels = new List<LabelDto>()
+                    }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.Budgets, Has.Count.EqualTo(1));
+                Assert.That(result.Budgets[0].Id, Is.Null);
+                Assert.That(result.Budgets[0].AccountIds, Is.Empty);
+                Assert.That(result.Budgets[0].CategoryIds, Is.Empty);
+            }
+        }
+
+        [Test]
+        public void Map_WhenAccountIdsIsNullAndCategoryIdsIsEmpty_DoesNotPopulateGuidLists()
+        {
+            var mapper = new GetBudgetsResponseMapper();
+            var source = new GetBudgetsResponseDto
+            {
+                Budgets = new List<BudgetDto>
+                {
+                    new BudgetDto
+                    {
+                        AccountIds = null!,
+                        CategoryIds = new List<string>(),
+                        Labels = new List<LabelDto>()
+                    }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.Budgets, Has.Count.EqualTo(1));
+                Assert.That(result.Budgets[0].AccountIds, Is.Empty);
+                Assert.That(result.Budgets[0].CategoryIds, Is.Empty);
+            }
+        }
+
+        [Test]
+        public void Map_WhenCategoryIdsIsNull_DoesNotPopulateCategoryGuidList()
+        {
+            var mapper = new GetBudgetsResponseMapper();
+            var source = new GetBudgetsResponseDto
+            {
+                Budgets = new List<BudgetDto>
+                {
+                    new BudgetDto
+                    {
+                        AccountIds = new List<string>(),
+                        CategoryIds = null!,
+                        Labels = new List<LabelDto>()
+                    }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result!.Budgets[0].CategoryIds, Is.Empty);
+        }
     }
 }

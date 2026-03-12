@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+using Wallet.Api.Net.Tests.TestInfrastructure;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Tests.Utility
@@ -75,6 +76,19 @@ namespace Wallet.Api.Net.Tests.Utility
             }
         }
 
+        [Test]
+        public void ToQueryString_WhenPropertyToStringReturnsNull_ReturnsEmptyQueryString()
+        {
+            var dto = new QueryStringNullValueDto
+            {
+                Custom = new NullToStringValue()
+            };
+
+            string? result = dto.ToQueryString();
+
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+
         private sealed class SampleDto
         {
             public string? Name { get; set; }
@@ -101,6 +115,19 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             public string? Value { get; set; }
             public bool Active { get; set; }
+        }
+
+        private sealed class QueryStringNullValueDto
+        {
+            public NullToStringValue? Custom { get; set; }
+        }
+
+        private sealed class NullToStringValue
+        {
+            public override string ToString()
+            {
+                return null!;
+            }
         }
     }
 }

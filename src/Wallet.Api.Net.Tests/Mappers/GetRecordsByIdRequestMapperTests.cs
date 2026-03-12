@@ -34,5 +34,25 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(result.Id, Is.EqualTo("1,2"));
             }
         }
+
+        [Test]
+        public void Map_WhenIdsIsEmpty_MapsIdAsNull()
+        {
+            var mapper = new GetRecordsByIdRequestMapper();
+            var source = new GetRecordsByIdRequest
+            {
+                AgentHints = false,
+                Ids = new List<string>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.AgentHints, Is.False);
+                Assert.That(result.Id, Is.Null);
+            }
+        }
     }
 }

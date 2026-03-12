@@ -54,7 +54,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
 
-            if (!string.IsNullOrWhiteSpace(dto.Id) && Guid.TryParse(dto.Id, out var id))
+            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
                 category.Id = id;
 
             return category;

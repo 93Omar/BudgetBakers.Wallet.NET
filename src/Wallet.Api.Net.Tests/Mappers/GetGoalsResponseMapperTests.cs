@@ -64,5 +64,29 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mapped.TargetAmount, Is.EqualTo(source.Goals[0].TargetAmount));
             }
         }
+
+        [Test]
+        public void Map_WhenGoalsContainNullAndInvalidId_FiltersNullAndLeavesIdNull()
+        {
+            var mapper = new GetGoalsResponseMapper();
+            var source = new GetGoalsResponseDto
+            {
+                Goals = new List<GoalDto>
+                {
+                    null!,
+                    new GoalDto { Id = "invalid-guid", Name = "No Guid" }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.Goals, Has.Count.EqualTo(1));
+                Assert.That(result.Goals[0].Id, Is.Null);
+            }
+        }
     }
 }

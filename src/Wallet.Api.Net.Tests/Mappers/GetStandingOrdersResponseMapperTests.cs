@@ -73,5 +73,33 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mapped.Labels, Has.Count.EqualTo(1));
             }
         }
+
+        [Test]
+        public void Map_WhenStandingOrdersContainNullAndInvalidId_FiltersNullAndLeavesIdNull()
+        {
+            var mapper = new GetStandingOrdersResponseMapper();
+            var source = new GetStandingOrdersResponseDto
+            {
+                StandingOrders = new List<StandingOrderDto>
+                {
+                    null!,
+                    new StandingOrderDto
+                    {
+                        Id = "invalid-guid",
+                        Labels = new List<LabelDto>()
+                    }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.StandingOrders, Has.Count.EqualTo(1));
+                Assert.That(result.StandingOrders[0].Id, Is.Null);
+            }
+        }
     }
 }

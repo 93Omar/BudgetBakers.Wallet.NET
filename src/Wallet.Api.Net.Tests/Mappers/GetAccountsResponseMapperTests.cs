@@ -116,5 +116,35 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mappedHint.Type, Is.EqualTo(sourceHint.Type));
             }
         }
+
+        [Test]
+        public void Map_WhenAccountsContainNullAndInvalidId_FiltersNullAndLeavesIdNull()
+        {
+            var mapper = new GetAccountsResponseMapper();
+            var source = new GetAccountsResponseDto
+            {
+                Accounts = new List<AccountDto>
+                {
+                    null!,
+                    new AccountDto
+                    {
+                        Id = "invalid-guid",
+                        AccountType = null,
+                        Name = "No Guid"
+                    }
+                },
+                AgentHints = new List<AgentHintDto>()
+            };
+
+            var result = mapper.Map(source);
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.Accounts, Has.Count.EqualTo(1));
+                Assert.That(result.Accounts[0].Id, Is.Null);
+                Assert.That(result.Accounts[0].AccountType, Is.Null);
+            }
+        }
     }
 }
