@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Configuration;
 using ConsoleApp.Services;
+using FluentResults;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,7 +38,7 @@ namespace ConsoleApp
                 })
                 .Build();
 
-            var logger = host.Services.GetRequiredService<ILogger<Program>>();
+            ILogger<Program> logger = host.Services.GetRequiredService<ILogger<Program>>();
 
             logger.LogInformation("Starting application...");
 
@@ -49,7 +50,7 @@ namespace ConsoleApp
                 Offset = 0
             };
 
-            var result = await accountClient.GetAsync(getAccountsRequest);
+            Result<GetAccountsResponse> result = await accountClient.GetAsync(getAccountsRequest);
 
             if (result.IsSuccess)
             {
@@ -58,7 +59,7 @@ namespace ConsoleApp
             }
             else
             {
-                foreach (var error in result.Errors)
+                foreach (IError error in result.Errors)
                 {
                     logger.LogError("Error loading accounts: {ErrorMessage}", error.Message);
                 }

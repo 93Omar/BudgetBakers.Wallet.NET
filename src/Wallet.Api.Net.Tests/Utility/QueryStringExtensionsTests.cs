@@ -12,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             SampleDto? dto = null;
 
-            var result = dto.ToQueryString();
+            string? result = dto.ToQueryString();
 
             Assert.That(result, Is.Null);
         }
@@ -27,7 +27,7 @@ namespace Wallet.Api.Net.Tests.Utility
                 Count = 10
             };
 
-            var result = dto.ToQueryString();
+            string? result = dto.ToQueryString();
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())
@@ -47,7 +47,7 @@ namespace Wallet.Api.Net.Tests.Utility
                 FromNewtonsoft = "value-2"
             };
 
-            var result = dto.ToQueryString();
+            string? result = dto.ToQueryString();
 
             Assert.That(result, Is.EqualTo("system_text=value-1&newtonsoft=value-2"));
         }
@@ -65,7 +65,7 @@ namespace Wallet.Api.Net.Tests.Utility
                 }
             };
 
-            var result = dto.ToQueryString();
+            string? result = dto.ToQueryString();
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

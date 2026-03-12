@@ -56,24 +56,26 @@ namespace Wallet.Api.Net.Services.Mappers
                             .ToList()
             };
 
-            if (dto.AccountIds != null && dto.AccountIds.Any())
+            if (dto.AccountIds.Any())
             {
                 var guids = new List<Guid>();
+
                 foreach (var s in dto.AccountIds)
                 {
-                    if (Guid.TryParse(s, out var g))
+                    if (MapperHelpers.ParseGuid(s) is Guid g)
                         guids.Add(g);
                 }
 
                 budget.AccountIds = guids;
             }
 
-            if (dto.CategoryIds != null && dto.CategoryIds.Any())
+            if (dto.CategoryIds.Any())
             {
                 var guids = new List<Guid>();
+
                 foreach (var s in dto.CategoryIds)
                 {
-                    if (Guid.TryParse(s, out var g))
+                    if (MapperHelpers.ParseGuid(s) is Guid g)
                         guids.Add(g);
                 }
 
@@ -84,7 +86,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 budget.Id = id;
 
             return budget;
-        }  
+        }
     }
 }
 

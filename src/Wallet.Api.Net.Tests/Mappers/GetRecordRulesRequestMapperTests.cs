@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Dtos.RecordRule;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.RecordRule;
 using Wallet.Api.Net.Services.Mappers;
@@ -11,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetRecordRulesRequestMapper();
 
-            var result = mapper.Map(null);
+            GetRecordRulesRequestDto? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -31,7 +32,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 2) }
             };
 
-            var result = mapper.Map(source);
+            GetRecordRulesRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

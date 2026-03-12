@@ -3,6 +3,7 @@ using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Category;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Dtos.Record;
+using Wallet.Api.Net.Models.Record;
 using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Tests.Mappers
@@ -14,7 +15,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetRecordsResponseMapper();
 
-            var result = mapper.Map(null);
+            GetRecordsResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -58,13 +59,13 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto> { new() { Text = "hint" } }
             };
 
-            var result = mapper.Map(source);
+            GetRecordsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
-            var mapped = result!.Records[0];
+            Record mapped = result!.Records[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result.Limit, Is.EqualTo(source.Limit));
+                Assert.That(result!.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.NextOffset, Is.EqualTo(source.NextOffset));
                 Assert.That(result.RecordDateRange, Is.EqualTo(source.RecordDateRange));
@@ -101,7 +102,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetRecordsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

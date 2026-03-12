@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Dtos.Record;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Record;
 using Wallet.Api.Net.Services.Mappers;
@@ -11,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetRecordsRequestMapper();
 
-            var result = mapper.Map(null);
+            GetRecordsRequestDto? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -37,7 +38,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 SortBy = "recordDate.desc"
             };
 
-            var result = mapper.Map(source);
+            GetRecordsRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

@@ -1,5 +1,6 @@
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Category;
+using Wallet.Api.Net.Models.Category;
 using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Tests.Mappers
@@ -11,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetCategoriesResponseMapper();
 
-            var result = mapper.Map(null);
+            GetCategoriesResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -48,13 +49,13 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto> { new() { Text = "hint" } }
             };
 
-            var result = mapper.Map(source);
+            GetCategoriesResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
-            var mapped = result!.Categories[0];
+            Category mapped = result!.Categories[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result.Limit, Is.EqualTo(source.Limit));
+                Assert.That(result!.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.NextOffset, Is.EqualTo(source.NextOffset));
                 Assert.That(result.Categories, Has.Count.EqualTo(1));
@@ -81,7 +82,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetCategoriesResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

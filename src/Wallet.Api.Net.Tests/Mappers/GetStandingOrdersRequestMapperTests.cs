@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Dtos.StandingOrder;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.StandingOrder;
 using Wallet.Api.Net.Services.Mappers;
@@ -11,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetStandingOrdersRequestMapper();
 
-            var result = mapper.Map(null);
+            GetStandingOrdersRequestDto? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -32,7 +33,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 1, 31) }
             };
 
-            var result = mapper.Map(source);
+            GetStandingOrdersRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

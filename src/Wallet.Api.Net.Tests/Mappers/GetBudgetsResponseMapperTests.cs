@@ -1,6 +1,7 @@
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Budget;
 using Wallet.Api.Net.Dtos.Label;
+using Wallet.Api.Net.Models.Budget;
 using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Tests.Mappers
@@ -12,7 +13,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetBudgetsResponseMapper();
 
-            var result = mapper.Map(null);
+            GetBudgetsResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -57,13 +58,13 @@ namespace Wallet.Api.Net.Tests.Mappers
                 }
             };
 
-            var result = mapper.Map(source);
+            GetBudgetsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
-            var mappedBudget = result!.Budgets[0];
+            Budget mappedBudget = result!.Budgets[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result.Limit, Is.EqualTo(source.Limit));
+                Assert.That(result!.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.NextOffset, Is.EqualTo(source.NextOffset));
                 Assert.That(result.Budgets, Has.Count.EqualTo(1));
@@ -100,7 +101,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetBudgetsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())
@@ -113,7 +114,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         }
 
         [Test]
-        public void Map_WhenAccountIdsIsNullAndCategoryIdsIsEmpty_DoesNotPopulateGuidLists()
+        public void Map_WhenAccountIdsAndCategoryIdsAreEmpty_DoesNotPopulateGuidLists()
         {
             var mapper = new GetBudgetsResponseMapper();
             var source = new GetBudgetsResponseDto
@@ -122,7 +123,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 {
                     new BudgetDto
                     {
-                        AccountIds = null!,
+                        AccountIds = new List<string>(),
                         CategoryIds = new List<string>(),
                         Labels = new List<LabelDto>()
                     }
@@ -130,7 +131,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetBudgetsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())
@@ -142,7 +143,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         }
 
         [Test]
-        public void Map_WhenCategoryIdsIsNull_DoesNotPopulateCategoryGuidList()
+        public void Map_WhenCategoryIdsIsEmpty_DoesNotPopulateCategoryGuidList()
         {
             var mapper = new GetBudgetsResponseMapper();
             var source = new GetBudgetsResponseDto
@@ -152,14 +153,14 @@ namespace Wallet.Api.Net.Tests.Mappers
                     new BudgetDto
                     {
                         AccountIds = new List<string>(),
-                        CategoryIds = null!,
+                        CategoryIds = new List<string>(),
                         Labels = new List<LabelDto>()
                     }
                 },
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetBudgetsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result!.Budgets[0].CategoryIds, Is.Empty);

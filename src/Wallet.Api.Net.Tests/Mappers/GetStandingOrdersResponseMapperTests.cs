@@ -1,6 +1,7 @@
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Dtos.StandingOrder;
+using Wallet.Api.Net.Models.StandingOrder;
 using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Tests.Mappers
@@ -12,7 +13,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetStandingOrdersResponseMapper();
 
-            var result = mapper.Map(null);
+            GetStandingOrdersResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -55,13 +56,13 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto> { new() { Text = "hint" } }
             };
 
-            var result = mapper.Map(source);
+            GetStandingOrdersResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
-            var mapped = result!.StandingOrders[0];
+            StandingOrder mapped = result!.StandingOrders[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result.Limit, Is.EqualTo(source.Limit));
+                Assert.That(result!.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.NextOffset, Is.EqualTo(source.NextOffset));
                 Assert.That(result.StandingOrders, Has.Count.EqualTo(1));
@@ -92,7 +93,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetStandingOrdersResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

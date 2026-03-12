@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Dtos.Record;
 using Wallet.Api.Net.Models.Record;
 using Wallet.Api.Net.Services.Mappers;
 
@@ -10,7 +11,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetRecordsByIdRequestMapper();
 
-            var result = mapper.Map(null);
+            GetRecordsByIdRequestDto? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -25,7 +26,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Ids = new List<string> { "1", "2" }
             };
 
-            var result = mapper.Map(source);
+            GetRecordsByIdRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())
@@ -45,7 +46,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Ids = new List<string>()
             };
 
-            var result = mapper.Map(source);
+            GetRecordsByIdRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

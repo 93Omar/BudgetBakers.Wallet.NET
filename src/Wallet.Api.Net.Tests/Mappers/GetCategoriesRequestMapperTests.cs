@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Dtos.Category;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Category;
 using Wallet.Api.Net.Services.Mappers;
@@ -11,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetCategoriesRequestMapper();
 
-            var result = mapper.Map(null);
+            GetCategoriesRequestDto? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -31,7 +32,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 2, 1) }
             };
 
-            var result = mapper.Map(source);
+            GetCategoriesRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

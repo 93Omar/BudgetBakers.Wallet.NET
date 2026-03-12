@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Dtos.Budget;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Budget;
 using Wallet.Api.Net.Services.Mappers;
@@ -11,7 +12,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetBudgetsRequestMapper();
 
-            var result = mapper.Map(null);
+            GetBudgetsRequestDto? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -32,7 +33,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) }
             };
 
-            var result = mapper.Map(source);
+            GetBudgetsRequestDto? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

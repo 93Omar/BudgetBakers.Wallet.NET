@@ -1,6 +1,7 @@
 using Wallet.Api.Net.Dtos.Category;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Dtos.RecordRule;
+using Wallet.Api.Net.Models.RecordRule;
 using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Tests.Mappers
@@ -12,7 +13,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetRecordRulesResponseMapper();
 
-            var result = mapper.Map(null);
+            GetRecordRulesResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -54,13 +55,13 @@ namespace Wallet.Api.Net.Tests.Mappers
                 }
             };
 
-            var result = mapper.Map(source);
+            GetRecordRulesResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
-            var mapped = result!.RecordRules[0];
+            RecordRule mapped = result!.RecordRules[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result.Limit, Is.EqualTo(source.Limit));
+                Assert.That(result!.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.NextOffset, Is.EqualTo(source.NextOffset));
                 Assert.That(result.RecordRules, Has.Count.EqualTo(1));
@@ -94,7 +95,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<Wallet.Api.Net.Dtos.Account.AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetRecordRulesResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

@@ -3,6 +3,7 @@ using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Category;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Dtos.Record;
+using Wallet.Api.Net.Models.Record;
 using Wallet.Api.Net.Services.Mappers;
 
 namespace Wallet.Api.Net.Tests.Mappers
@@ -14,7 +15,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetRecordsByIdResponseMapper();
 
-            var result = mapper.Map(null);
+            GetRecordsByIdResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -55,13 +56,13 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto> { new() { Text = "hint" } }
             };
 
-            var result = mapper.Map(source);
+            GetRecordsByIdResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
-            var mapped = result!.Records[0];
+            Record mapped = result!.Records[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result.Count, Is.EqualTo(source.Count));
+                Assert.That(result!.Count, Is.EqualTo(source.Count));
                 Assert.That(result.Records, Has.Count.EqualTo(1));
                 Assert.That(result.AgentHints, Has.Count.EqualTo(1));
                 Assert.That(mapped.Id, Is.EqualTo(recordId));
@@ -96,7 +97,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetRecordsByIdResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())

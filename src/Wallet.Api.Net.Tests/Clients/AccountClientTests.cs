@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using FluentResults;
 using Wallet.Api.Net.Constants;
 using Wallet.Api.Net.Models.Account;
 using Wallet.Api.Net.Services.Clients;
@@ -27,7 +28,7 @@ namespace Wallet.Api.Net.Tests.Clients
                 })));
             
             var request = new GetAccountsRequest { Limit = 25, Offset = 10 };
-            var result = await client.GetAsync(request);
+            Result<GetAccountsResponse> result = await client.GetAsync(request);
 
             using (Assert.EnterMultipleScope())
             {
@@ -42,7 +43,7 @@ namespace Wallet.Api.Net.Tests.Clients
             var client = new AccountClient(ClientTestHelpers.CreateHttpClient((_, _) =>
                 throw new InvalidOperationException("HTTP should not be called for null request")));
 
-            var result = await client.GetAsync(null!);
+            Result<GetAccountsResponse> result = await client.GetAsync(null!);
 
             using (Assert.EnterMultipleScope())
             {
@@ -62,7 +63,7 @@ namespace Wallet.Api.Net.Tests.Clients
                     Content = new StringContent("{\"error\":\"generic\"}", Encoding.UTF8, "application/json")
                 })));
             
-            var result = await client.GetAsync(new GetAccountsRequest { Limit = 1, Offset = 0 });
+            Result<GetAccountsResponse> result = await client.GetAsync(new GetAccountsRequest { Limit = 1, Offset = 0 });
 
             using (Assert.EnterMultipleScope())
             {
@@ -81,7 +82,7 @@ namespace Wallet.Api.Net.Tests.Clients
                     Content = ClientTestHelpers.CreateJsonContent("null")
                 })));
             
-            var result = await client.GetAsync(new GetAccountsRequest { Limit = 1, Offset = 0 });
+            Result<GetAccountsResponse> result = await client.GetAsync(new GetAccountsRequest { Limit = 1, Offset = 0 });
 
             using (Assert.EnterMultipleScope())
             {

@@ -2,6 +2,9 @@ using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Dtos.Record;
+using Wallet.Api.Net.Models;
+using Wallet.Api.Net.Models.Label;
+using Wallet.Api.Net.Models.Record;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Tests.Utility
@@ -60,7 +63,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             AgentHintDto? dto = null;
 
-            var result = MapperHelpers.MapAgentHint(dto);
+            AgentHint? result = MapperHelpers.MapAgentHint(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -68,7 +71,7 @@ namespace Wallet.Api.Net.Tests.Utility
         [Test]
         public void MapAgentHint_WhenActionIsNull_MapsWithoutAction()
         {
-            var result = MapperHelpers.MapAgentHint(new AgentHintDto
+            AgentHint? result = MapperHelpers.MapAgentHint(new AgentHintDto
             {
                 Action = null,
                 Data = "data",
@@ -88,7 +91,7 @@ namespace Wallet.Api.Net.Tests.Utility
         [Test]
         public void MapAgentHint_WhenActionIsPresent_MapsAction()
         {
-            var result = MapperHelpers.MapAgentHint(new AgentHintDto
+            AgentHint? result = MapperHelpers.MapAgentHint(new AgentHintDto
             {
                 Action = new AgentActionDto { Url = "https://example.test" }
             });
@@ -101,7 +104,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             BalanceDto? dto = null;
 
-            var result = MapperHelpers.MapBalance(dto);
+            Balance? result = MapperHelpers.MapBalance(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -109,7 +112,7 @@ namespace Wallet.Api.Net.Tests.Utility
         [Test]
         public void MapBalance_WhenDtoIsValid_MapsValues()
         {
-            var result = MapperHelpers.MapBalance(new BalanceDto
+            Balance? result = MapperHelpers.MapBalance(new BalanceDto
             {
                 CurrencyCode = "EUR",
                 Value = 10.5m
@@ -128,7 +131,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             Guid id = Guid.NewGuid();
 
-            var result = MapperHelpers.MapLabel(new LabelDto
+            Label? result = MapperHelpers.MapLabel(new LabelDto
             {
                 Id = id.ToString(),
                 Name = "label"
@@ -140,7 +143,7 @@ namespace Wallet.Api.Net.Tests.Utility
         [Test]
         public void MapLabel_WhenIdIsInvalid_DoesNotSetId()
         {
-            var result = MapperHelpers.MapLabel(new LabelDto
+            Label? result = MapperHelpers.MapLabel(new LabelDto
             {
                 Id = "invalid-guid",
                 Name = "label"
@@ -154,7 +157,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             LabelDto? dto = null;
 
-            var result = MapperHelpers.MapLabel(dto);
+            Label? result = MapperHelpers.MapLabel(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -164,7 +167,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             PhotoDto? dto = null;
 
-            var result = MapperHelpers.MapRecordPhoto(dto);
+            RecordPhoto? result = MapperHelpers.MapRecordPhoto(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -174,7 +177,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             PlaceDto? dto = null;
 
-            var result = MapperHelpers.MapPlace(dto);
+            RecordPlace? result = MapperHelpers.MapPlace(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -188,7 +191,7 @@ namespace Wallet.Api.Net.Tests.Utility
                 PlaceTypes = null!
             };
 
-            var result = MapperHelpers.MapPlace(dto);
+            RecordPlace? result = MapperHelpers.MapPlace(dto);
 
             using (Assert.EnterMultipleScope())
             {
@@ -203,7 +206,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             DateRangeDto? dto = null;
 
-            var result = MapperHelpers.MapDateRange(dto);
+            DateRange? result = MapperHelpers.MapDateRange(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -213,7 +216,7 @@ namespace Wallet.Api.Net.Tests.Utility
         {
             RecordStatsDto? dto = null;
 
-            var result = MapperHelpers.MapRecordStats(dto);
+            RecordStats? result = MapperHelpers.MapRecordStats(dto);
 
             Assert.That(result, Is.Null);
         }
@@ -228,7 +231,7 @@ namespace Wallet.Api.Net.Tests.Utility
                 RecordDate = new DateRangeDto { Min = "2026-02-01", Max = "2026-02-28" }
             };
 
-            var result = MapperHelpers.MapRecordStats(dto);
+            RecordStats? result = MapperHelpers.MapRecordStats(dto);
 
             using (Assert.EnterMultipleScope())
             {

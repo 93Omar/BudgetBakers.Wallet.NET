@@ -1,5 +1,6 @@
 using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Dtos.Account;
+using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Account;
 using Wallet.Api.Net.Services.Mappers;
 
@@ -12,7 +13,7 @@ namespace Wallet.Api.Net.Tests.Mappers
         {
             var mapper = new GetAccountsResponseMapper();
 
-            var result = mapper.Map(null);
+            GetAccountsResponse? result = mapper.Map(null);
 
             Assert.That(result, Is.Null);
         }
@@ -67,9 +68,12 @@ namespace Wallet.Api.Net.Tests.Mappers
                 }
             };
 
-            var result = mapper.Map(source);
+            GetAccountsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
+            Account mappedAccount = result!.Accounts[0];
+            AccountDto sourceAccount = source.Accounts[0];
+
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(result!.Limit, Is.EqualTo(source.Limit));
@@ -78,9 +82,6 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(result.Accounts, Has.Count.EqualTo(1));
                 Assert.That(result.AgentHints, Has.Count.EqualTo(1));
             }
-
-            var mappedAccount = result!.Accounts[0];
-            var sourceAccount = source.Accounts[0];
 
             using (Assert.EnterMultipleScope())
             {
@@ -104,8 +105,8 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mappedAccount.UpdatedAt, Is.EqualTo(DateTime.Parse(sourceAccount.UpdatedAt!)));
             }
 
-            var mappedHint = result.AgentHints[0];
-            var sourceHint = source.AgentHints[0];
+            AgentHint mappedHint = result.AgentHints[0];
+            AgentHintDto sourceHint = source.AgentHints[0];
 
             using (Assert.EnterMultipleScope())
             {
@@ -136,7 +137,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = new List<AgentHintDto>()
             };
 
-            var result = mapper.Map(source);
+            GetAccountsResponse? result = mapper.Map(source);
 
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())
