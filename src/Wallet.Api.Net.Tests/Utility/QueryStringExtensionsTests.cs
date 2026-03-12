@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
-using Wallet.Api.Net.Tests.TestInfrastructure;
+using Wallet.Api.Net.Tests.Infrastructure;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Tests.Utility

@@ -1,6 +1,6 @@
 using System.Net;
 using Wallet.Api.Net.Services;
-using Wallet.Api.Net.Tests.TestInfrastructure;
+using Wallet.Api.Net.Tests.Infrastructure;
 
 namespace Wallet.Api.Net.Tests.Services
 {

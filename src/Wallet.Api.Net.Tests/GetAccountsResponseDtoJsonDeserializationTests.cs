@@ -12,7 +12,7 @@ namespace Wallet.Api.Net.Tests
 {
     public class ResponseDtosJsonDeserializationTests
     {
-        private const string ResponseDtosTestDataRoot = "TestData/Dtos";
+        private const string ResponseDtosTestDataRoot = "Data/Dtos";
 
         private static IEnumerable<TestCaseData> ResponseDtoJsonCases()
         {

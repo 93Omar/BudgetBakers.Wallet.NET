@@ -20,5 +20,10 @@ namespace Wallet.Api.Net.Constants
             internal const string ReasonPhrase = "ReasonPhrase";
             internal const string ResponseBody = "ResponseBody";
         }
+
+        internal static class Separator
+        {
+            internal const string Ids = ",";
+        }
     }
 }

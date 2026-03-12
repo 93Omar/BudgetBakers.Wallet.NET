@@ -1,3 +1,4 @@
+using Wallet.Api.Net.Constants;
 using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos.Label;
@@ -240,6 +241,30 @@ namespace Wallet.Api.Net.Tests.Utility
                 Assert.That(result.CreatedAt, Is.Not.Null);
                 Assert.That(result.RecordDate, Is.Not.Null);
             }
+        }
+
+        [Test]
+        public void JoinIds_WhenInputIsNull_ReturnsNull()
+        {
+            string? result = MapperHelpers.JoinIds(null);
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void JoinIds_WhenInputIsEmpty_ReturnsNull()
+        {
+            string? result = MapperHelpers.JoinIds([]);
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void JoinIds_WhenInputContainsValues_UsesApiSeparator()
+        {
+            string? result = MapperHelpers.JoinIds(["id-1", "id-2"]);
+
+            Assert.That(result, Is.EqualTo($"id-1{ApiConstant.Separator.Ids}id-2"));
         }
     }
 }

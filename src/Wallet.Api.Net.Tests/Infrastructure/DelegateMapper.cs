@@ -1,6 +1,6 @@
 using Wallet.Api.Net.Services;
 
-namespace Wallet.Api.Net.Tests.TestInfrastructure
+namespace Wallet.Api.Net.Tests.Infrastructure
 {
     internal sealed class DelegateMapper<TSource, TDestination> : IMapper<TSource, TDestination>
     {

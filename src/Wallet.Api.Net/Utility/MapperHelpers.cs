@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wallet.Api.Net.Constants;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Dtos.Label;
@@ -60,6 +61,16 @@ namespace Wallet.Api.Net.Utility
                 return g;
 
             return null;
+        }
+
+        public static string? JoinIds(IEnumerable<string>? ids)
+        {
+            if (ids is null)
+                return null;
+
+            return ids.Any()
+                ? string.Join(ApiConstant.Separator.Ids, ids)
+                : null;
         }
 
         public static Label? MapLabel(LabelDto? dto)

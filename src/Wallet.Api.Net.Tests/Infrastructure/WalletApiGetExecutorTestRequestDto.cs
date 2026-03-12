@@ -1,4 +1,4 @@
-namespace Wallet.Api.Net.Tests.TestInfrastructure
+namespace Wallet.Api.Net.Tests.Infrastructure
 {
     internal sealed class WalletApiGetExecutorTestRequestDto
     {

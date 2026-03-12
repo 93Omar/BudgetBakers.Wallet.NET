@@ -1,5 +1,6 @@
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Models.Label;
+using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -10,18 +11,18 @@ namespace Wallet.Api.Net.Services.Mappers
             if (source is null)
                 return null;
 
-            GetLabelsRequestDto dto = new GetLabelsRequestDto
+            GetLabelsRequestDto requestDto = new GetLabelsRequestDto()
             {
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
-                Id = source.Ids.Any() ? string.Join(",", source.Ids) : null,
+                Id = MapperHelpers.JoinIds(source.Ids),
                 Name = source.Name?.ToString(),
                 CreatedAt = source.CreatedAt?.ToString(),
                 UpdatedAt = source.UpdatedAt?.ToString()
             };
 
-            return dto;
+            return requestDto;
         }
     }
 }

@@ -1,6 +1,6 @@
 using System.Net.Http.Headers;
 using System.Text;
-using Wallet.Api.Net.Tests.TestInfrastructure;
+using Wallet.Api.Net.Tests.Infrastructure;
 
 namespace Wallet.Api.Net.Tests.Clients
 {

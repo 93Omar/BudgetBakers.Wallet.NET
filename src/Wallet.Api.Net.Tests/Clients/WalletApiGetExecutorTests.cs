@@ -3,7 +3,7 @@ using System.Text;
 using FluentResults;
 using Wallet.Api.Net.Constants;
 using Wallet.Api.Net.Services.Clients;
-using Wallet.Api.Net.Tests.TestInfrastructure;
+using Wallet.Api.Net.Tests.Infrastructure;
 
 namespace Wallet.Api.Net.Tests.Clients
 {
