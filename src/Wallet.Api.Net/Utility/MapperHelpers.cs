@@ -39,12 +39,12 @@ namespace Wallet.Api.Net.Utility
             return null;
         }
 
-        public static Wallet.Api.Net.Models.Balance? MapBalance(BalanceDto? dto)
+        public static Balance? MapBalance(BalanceDto? dto)
         {
             if (dto is null)
                 return null;
 
-            return new Wallet.Api.Net.Models.Balance
+            return new Balance
             {
                 CurrencyCode = dto.CurrencyCode,
                 Value = dto.Value
@@ -62,12 +62,12 @@ namespace Wallet.Api.Net.Utility
             return null;
         }
 
-        public static Wallet.Api.Net.Models.Label.Label? MapLabel(Wallet.Api.Net.Dtos.Label.LabelDto? dto)
+        public static Label? MapLabel(LabelDto? dto)
         {
             if (dto is null)
                 return null;
 
-            var label = new Wallet.Api.Net.Models.Label.Label
+            var label = new Label
             {
                 Archived = dto.Archived,
                 Color = dto.Color,
