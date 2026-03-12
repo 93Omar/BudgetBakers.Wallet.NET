@@ -44,7 +44,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                         EndDate = "2026-12-31",
                         Labels = new List<LabelDto>
                         {
-                            new() { Id = Guid.NewGuid().ToString(), Name = "Essenziale", Color = "#FFFFFF", Archived = false, CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" }
+                            new() { Id = Guid.NewGuid().ToString(), Name = "Essential", Color = "#FFFFFF", Archived = false, CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" }
                         },
                         Name = "Budget annuale",
                         StartDate = "2026-01-01",

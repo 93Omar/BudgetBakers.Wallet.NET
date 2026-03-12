@@ -30,7 +30,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 AgentHints = true,
                 CategoryId = "cat-1",
                 LabelId = "lab-1",
-                Note = new TextFilter { Prefix = TextPrefix.Contains, Value = "spesa" },
+                Note = new TextFilter { Prefix = TextPrefix.Contains, Value = "expense" },
                 Payee = new TextFilter { Prefix = TextPrefix.Equals, Value = "market" },
                 Amount = "120",
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },

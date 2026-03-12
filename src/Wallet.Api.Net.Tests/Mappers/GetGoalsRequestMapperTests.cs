@@ -27,8 +27,8 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Offset = 0,
                 AgentHints = true,
                 Ids = new List<string> { "g1", "g2" },
-                Name = new TextFilter { Prefix = TextPrefix.Contains, Value = "Casa" },
-                Note = new TextFilter { Prefix = TextPrefix.ContainsIgnoreCase, Value = "Mutuo" },
+                Name = new TextFilter { Prefix = TextPrefix.Contains, Value = "House" },
+                Note = new TextFilter { Prefix = TextPrefix.ContainsIgnoreCase, Value = "Mortgage" },
                 CreatedAt = new DateFilter { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) }
             };

@@ -35,7 +35,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                         Archived = true,
                         Color = "#FFFFFF",
                         CreatedAt = "2026-01-01 00:00:00",
-                        Name = "Casa",
+                        Name = "Home",
                         UpdatedAt = "2026-01-02 00:00:00"
                     }
                 },

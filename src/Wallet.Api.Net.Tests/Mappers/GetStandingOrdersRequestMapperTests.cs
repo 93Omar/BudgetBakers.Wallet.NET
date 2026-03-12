@@ -27,7 +27,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Offset = 1,
                 AgentHints = true,
                 Ids = new List<string> { "so1", "so2" },
-                Name = "Affitto",
+                Name = "Rent",
                 CurrencyCode = "EUR",
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 1, 31) }

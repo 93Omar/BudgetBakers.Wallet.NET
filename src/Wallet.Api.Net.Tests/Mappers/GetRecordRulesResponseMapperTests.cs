@@ -36,7 +36,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                     new()
                     {
                         Id = ruleId.ToString(),
-                        Name = "Regola test",
+                        Name = "Test rule",
                         FromAccountId = fromId.ToString(),
                         ToAccountId = toId.ToString(),
                         CreatedAt = "2026-01-01 00:00:00",
