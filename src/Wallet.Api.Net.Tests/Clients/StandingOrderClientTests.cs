@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using Wallet.Api.Net.Constants;
 using Wallet.Api.Net.Models.StandingOrder;
 using Wallet.Api.Net.Services.Clients;
 
@@ -66,7 +67,7 @@ namespace Wallet.Api.Net.Tests.Clients
             {
                 Assert.That(result.IsFailed, Is.True);
                 Assert.That(result.Errors, Is.Not.Empty);
-                Assert.That(result.Errors[0].Metadata["StatusCode"], Is.EqualTo((int)statusCode));
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.StatusCode], Is.EqualTo((int)statusCode));
             }
         }
 

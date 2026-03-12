@@ -1,15 +1,12 @@
 using System.Net.Http.Json;
 using FluentResults;
+using Wallet.Api.Net.Constants;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Clients
 {
     internal static class WalletApiGetExecutor
     {
-        private const string NullRequestMessage = "Request cannot be null.";
-        private const string ApiNonSuccessMessage = "Wallet API returned a non-success status code.";
-        private const string EmptyResponseBodyMessage = "Wallet API returned an empty response body.";
-
         public static async Task<Result<TResponse>> ExecuteAsync<TRequest, TRequestDto, TResponseDto, TResponse>(
             HttpClient httpClient,
             string endpoint,
@@ -23,7 +20,7 @@ namespace Wallet.Api.Net.Services.Clients
             where TResponse : class
         {
             if (request is null)
-                return Result.Fail<TResponse>(new Error(NullRequestMessage).WithMetadata("Endpoint", endpoint));
+                return Result.Fail<TResponse>(new Error(ApiConstant.Message.NullRequest).WithMetadata(ApiConstant.Metadata.Endpoint, endpoint));
 
             TRequestDto? requestDto = requestMapper.Map(request);
 
@@ -44,7 +41,7 @@ namespace Wallet.Api.Net.Services.Clients
             TResponseDto? responseDto = await responseMessage.Content.ReadFromJsonAsync<TResponseDto>(cancellationToken: ct);
 
             if (responseDto is null)
-                return Result.Fail<TResponse>(new Error(EmptyResponseBodyMessage).WithMetadata("Endpoint", endpoint));
+                return Result.Fail<TResponse>(new Error(ApiConstant.Message.EmptyResponseBody).WithMetadata(ApiConstant.Metadata.Endpoint, endpoint));
 
             TResponse? response = responseMapper.Map(responseDto);
 
@@ -56,21 +53,21 @@ namespace Wallet.Api.Net.Services.Clients
 
         private static Error CreateRequestMappingError<TRequestDto>(string endpoint)
             => new Error($"Unable to map request to {typeof(TRequestDto).Name}.")
-                .WithMetadata("Endpoint", endpoint);
+                .WithMetadata(ApiConstant.Metadata.Endpoint, endpoint);
 
         private static Error CreateResponseMappingError<TResponseDto>(string endpoint)
             => new Error($"Unable to map response DTO ({typeof(TResponseDto).Name}) to domain response.")
-                .WithMetadata("Endpoint", endpoint);
+                .WithMetadata(ApiConstant.Metadata.Endpoint, endpoint);
 
         private static Error CreateApiError(string endpoint, HttpResponseMessage responseMessage, string? errorBody)
         {
-            Error apiError = new Error(ApiNonSuccessMessage)
-                .WithMetadata("Endpoint", endpoint)
-                .WithMetadata("StatusCode", (int)responseMessage.StatusCode)
-                .WithMetadata("ReasonPhrase", responseMessage.ReasonPhrase ?? string.Empty);
+            Error apiError = new Error(ApiConstant.Message.ApiNonSuccess)
+                .WithMetadata(ApiConstant.Metadata.Endpoint, endpoint)
+                .WithMetadata(ApiConstant.Metadata.StatusCode, (int)responseMessage.StatusCode)
+                .WithMetadata(ApiConstant.Metadata.ReasonPhrase, responseMessage.ReasonPhrase ?? string.Empty);
 
             if (!string.IsNullOrWhiteSpace(errorBody))
-                apiError.WithMetadata("ResponseBody", errorBody);
+                apiError.WithMetadata(ApiConstant.Metadata.ResponseBody, errorBody);
 
             return apiError;
         }
