@@ -7,11 +7,11 @@ using Wallet.Api.Net.Services;
 
 namespace ConsoleApp.Services
 {
-    public class UserSecretsAccessTokenProvider : IAccessTokenProvider
+    public class OptionsAccessTokenProvider : IAccessTokenProvider
     {
         private readonly WalletOptions _walletOptions;
 
-        public UserSecretsAccessTokenProvider(IOptions<WalletOptions> walletOptions)
+        public OptionsAccessTokenProvider(IOptions<WalletOptions> walletOptions)
         {
             _walletOptions = walletOptions?.Value ?? throw new ArgumentNullException(nameof(walletOptions));
         }

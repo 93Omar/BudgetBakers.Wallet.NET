@@ -29,7 +29,7 @@ namespace ConsoleApp
 
                     services.Configure<WalletOptions>(context.Configuration.GetSection(WalletOptions.SectionName));
 
-                    services.AddSingleton<IAccessTokenProvider, UserSecretsAccessTokenProvider>();
+                    services.AddSingleton<IAccessTokenProvider, OptionsAccessTokenProvider>();
 
                     services.AddWalletClient<AccountClient>(client =>
                     {
