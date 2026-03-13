@@ -26,6 +26,32 @@ namespace Wallet.Api.Net.Utility
                     .AddHttpMessageHandler<BearerTokenDelegatingHandler>();
         }
 
+        public static void AddWalletClients(this IServiceCollection services, Action<HttpClient> configureClient)
+        {
+            services.AddWalletClient<AccountClient>(configureClient);
+            services.AddWalletClient<RecordClient>(configureClient);
+            services.AddWalletClient<CategoryClient>(configureClient);
+            services.AddWalletClient<LabelClient>(configureClient);
+            services.AddWalletClient<BudgetClient>(configureClient);
+            services.AddWalletClient<GoalClient>(configureClient);
+            services.AddWalletClient<StandingOrderClient>(configureClient);
+            services.AddWalletClient<RecordRuleClient>(configureClient);
+            services.AddWalletClient<StatsClient>(configureClient);
+        }
+
+        public static void AddWalletClients(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
+        {
+            services.AddWalletClient<AccountClient>(configureClient);
+            services.AddWalletClient<RecordClient>(configureClient);
+            services.AddWalletClient<CategoryClient>(configureClient);
+            services.AddWalletClient<LabelClient>(configureClient);
+            services.AddWalletClient<BudgetClient>(configureClient);
+            services.AddWalletClient<GoalClient>(configureClient);
+            services.AddWalletClient<StandingOrderClient>(configureClient);
+            services.AddWalletClient<RecordRuleClient>(configureClient);
+            services.AddWalletClient<StatsClient>(configureClient);
+        }
+
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<BearerTokenDelegatingHandler>();

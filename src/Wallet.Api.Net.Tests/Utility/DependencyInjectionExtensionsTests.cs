@@ -23,6 +23,19 @@ namespace Wallet.Api.Net.Tests.Utility
             public HttpClient HttpClient { get; }
         }
 
+        private static readonly Type[] AllClientTypes =
+        [
+            typeof(AccountClient),
+            typeof(RecordClient),
+            typeof(CategoryClient),
+            typeof(LabelClient),
+            typeof(BudgetClient),
+            typeof(GoalClient),
+            typeof(StandingOrderClient),
+            typeof(RecordRuleClient),
+            typeof(StatsClient)
+        ];
+
         [Test]
         public void AddWalletClient_WithHttpClientConfiguration_RegistersTypedClientAndBearerHandler()
         {
@@ -70,6 +83,47 @@ namespace Wallet.Api.Net.Tests.Utility
                 Assert.That(services.Any(descriptor =>
                     descriptor.ServiceType == typeof(BearerTokenDelegatingHandler)
                     && descriptor.Lifetime == ServiceLifetime.Transient), Is.True);
+            }
+        }
+
+        [Test]
+        public void AddWalletClients_WithHttpClientConfiguration_RegistersAllClients()
+        {
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IAccessTokenProvider>(new NoopAccessTokenProvider());
+
+            services.AddWalletClients(client =>
+            {
+                client.BaseAddress = new Uri("https://wallet.test/");
+            });
+
+            using ServiceProvider provider = services.BuildServiceProvider();
+
+            foreach (System.Type clientType in AllClientTypes)
+            {
+                object? resolved = provider.GetService(clientType);
+                Assert.That(resolved, Is.Not.Null, $"{clientType.Name} was not registered.");
+            }
+        }
+
+        [Test]
+        public void AddWalletClients_WithServiceProviderConfiguration_RegistersAllClients()
+        {
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IAccessTokenProvider>(new NoopAccessTokenProvider());
+            services.AddSingleton(new Uri("https://wallet.test/"));
+
+            services.AddWalletClients((sp, client) =>
+            {
+                client.BaseAddress = sp.GetRequiredService<Uri>();
+            });
+
+            using ServiceProvider provider = services.BuildServiceProvider();
+
+            foreach (System.Type clientType in AllClientTypes)
+            {
+                object? resolved = provider.GetService(clientType);
+                Assert.That(resolved, Is.Not.Null, $"{clientType.Name} was not registered.");
             }
         }
     }
