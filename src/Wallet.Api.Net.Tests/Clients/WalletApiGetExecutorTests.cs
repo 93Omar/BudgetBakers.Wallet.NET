@@ -240,5 +240,37 @@ namespace Wallet.Api.Net.Tests.Clients
                 Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.RateLimitRemaining], Is.EqualTo(487));
             }
         }
+
+        [Test]
+        public async Task ExecuteAsync_WhenApiReturnsNonSuccessAndReasonPhraseIsNull_UsesEmptyReasonPhraseMetadata()
+        {
+            HttpResponseMessage responseMessage = new HttpResponseMessage((HttpStatusCode)499)
+            {
+                Content = new StringContent("{\"error\":\"bad\"}", Encoding.UTF8, "application/json"),
+                ReasonPhrase = null
+            };
+
+            HttpClient client = ClientTestHelpers.CreateHttpClient((_, _) =>
+                Task.FromResult(responseMessage));
+
+            Result<WalletApiGetExecutorTestResponse> result = await WalletApiGetExecutor.ExecuteAsync<
+                WalletApiGetExecutorTestRequest,
+                WalletApiGetExecutorTestRequestDto,
+                WalletApiGetExecutorTestResponseDto,
+                WalletApiGetExecutorTestResponse>(
+                client,
+                "/endpoint",
+                new WalletApiGetExecutorTestRequest(),
+                new DelegateMapper<WalletApiGetExecutorTestRequest, WalletApiGetExecutorTestRequestDto>(_ => new WalletApiGetExecutorTestRequestDto()),
+                new DelegateMapper<WalletApiGetExecutorTestResponseDto, WalletApiGetExecutorTestResponse>(_ => new WalletApiGetExecutorTestResponse()),
+                CancellationToken.None);
+
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result.IsFailed, Is.True);
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.StatusCode], Is.EqualTo(499));
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.ReasonPhrase], Is.EqualTo(string.Empty));
+            }
+        }
     }
 }

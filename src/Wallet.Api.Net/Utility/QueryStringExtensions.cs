@@ -19,7 +19,7 @@ namespace Wallet.Api.Net.Utility
             MapProperties(dto, dictionary);
 
             return string.Join("&", dictionary.Select(kvp =>
-                $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(kvp.Value ?? "")}"));
+                $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(kvp.Value)}"));
         }
 
         private static void MapProperties(object obj, Dictionary<string, string> dictionary)
