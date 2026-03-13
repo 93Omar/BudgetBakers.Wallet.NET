@@ -1,0 +1,15 @@
+{
+  "agentHints": [],
+  "labels": [
+    {
+      "id": "7ff7472c-56d1-446b-96f1-d9528cb4dc66",
+      "archived": false,
+      "color": "#ff6f00",
+      "name": "annuale",
+      "createdAt": "2026-02-23T18:55:30Z",
+      "updatedAt": "2026-03-02T14:24:09Z"
+    }
+  ],
+  "limit": 30,
+  "offset": 0
+}

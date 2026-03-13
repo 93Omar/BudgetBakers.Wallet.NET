@@ -1,0 +1,330 @@
+{
+  "categories": [
+    {
+      "id": "b5e3ef19-4f54-4a3e-bf72-39dbd5c7fa44",
+      "color": "#FFCD01",
+      "name": "Others",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 10011
+    },
+    {
+      "id": "cc933e0e-f34f-4870-8ea4-c41d9a0ece82",
+      "color": "#FFA726",
+      "name": "Mutuo",
+      "createdAt": "2026-03-11T11:30:49Z",
+      "updatedAt": "2026-03-11T12:00:17Z",
+      "cardinality": "want",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 3001
+    },
+    {
+      "id": "3c0d6908-e493-407b-b028-8b79b96ecf94",
+      "color": "#8BC34A",
+      "name": "Unknown",
+      "createdAt": "2026-02-13T10:22:49Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 20003
+    },
+    {
+      "id": "665a45c5-ffce-4a67-8ece-576cf5565732",
+      "color": "#d0d0d0",
+      "name": "Spese Sconosciute",
+      "createdAt": "2026-02-13T10:20:40Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 13001
+    },
+    {
+      "id": "d1b671fc-d63b-4067-9dda-d304a089c425",
+      "color": "#64DD17",
+      "name": "Vita e intrattenimento",
+      "createdAt": "2026-02-23T18:53:11Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "cardinality": "mus",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 6013
+    },
+    {
+      "id": "1dacc956-3190-4727-83b4-bba2e458d08f",
+      "color": "#FFA726",
+      "name": "Gas",
+      "createdAt": "2026-02-13T11:54:34Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "cardinality": "want",
+      "customCategory": true,
+      "customColor": false,
+      "customName": true,
+      "envelopeId": 3002,
+      "iconName": "idea-filled"
+    },
+    {
+      "id": "b8996090-be44-4a43-9e0a-6a067bd8a77e",
+      "color": "#85E029",
+      "name": "Charity, gifts",
+      "createdAt": "2026-03-10T16:04:36Z",
+      "updatedAt": "2026-03-10T17:25:38Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 6010
+    },
+    {
+      "id": "d898e1b7-c674-4b10-8010-55ad87455a53",
+      "color": "#E74C3C",
+      "name": "Bar cafe",
+      "createdAt": "2026-02-23T18:28:24Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 1002
+    },
+    {
+      "id": "a36f1646-34dd-442b-b0e4-8be5a8392b20",
+      "color": "#2258FF",
+      "name": "Internet",
+      "createdAt": "2026-02-23T18:28:25Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 7002
+    },
+    {
+      "id": "63f79081-6fe8-4756-96e4-a1e50984bcca",
+      "color": "#FFA726",
+      "name": "Spese condominiali",
+      "createdAt": "2026-02-13T11:55:44Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "cardinality": "want",
+      "customCategory": true,
+      "customColor": false,
+      "customName": true,
+      "envelopeId": 3003,
+      "iconName": "home-automation-filled"
+    },
+    {
+      "id": "ba350705-5ae4-44b2-8d8f-82e3802c6110",
+      "color": "#FFCD01",
+      "name": "Rental, income",
+      "createdAt": "2026-02-26T09:16:02Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 10003
+    },
+    {
+      "id": "38a818cd-b7c0-461c-b3e0-f7409fdb5304",
+      "color": "#8BC34A",
+      "name": "Transfer, withdraw",
+      "createdAt": "2026-02-13T10:22:49Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 20001
+    },
+    {
+      "id": "d2ed055f-be6c-414b-8981-1c98dc44ddce",
+      "color": "#85E029",
+      "name": "Tv, streaming",
+      "createdAt": "2026-02-23T18:28:29Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 6008
+    },
+    {
+      "id": "6cb82dc7-0ad9-48f8-baf6-88a52415911b",
+      "color": "#F69743",
+      "name": "Maintenance \u0026 repairs",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 3004
+    },
+    {
+      "id": "d17bb9c0-83ee-4227-b122-98f8ff2901a7",
+      "color": "#FFCD01",
+      "name": "Wage, invoices",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 10000
+    },
+    {
+      "id": "fd9e73e8-05de-48fe-982e-3cba1714841e",
+      "color": "#FFA726",
+      "name": "Bollette",
+      "createdAt": "2026-02-13T11:53:17Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "cardinality": "want",
+      "customCategory": false,
+      "customColor": false,
+      "customName": true,
+      "envelopeId": 3002,
+      "iconName": "idea-filled"
+    },
+    {
+      "id": "fd68c560-06fa-4980-a5ae-1849912dd44a",
+      "color": "#34BFF6",
+      "name": "Stationery \u0026 tools",
+      "createdAt": "2026-02-23T18:28:28Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 2008
+    },
+    {
+      "id": "23fd222b-87e1-4764-8205-32d39dc52103",
+      "color": "#8A9BB1",
+      "name": "Long distance",
+      "createdAt": "2026-02-23T18:28:24Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 4002
+    },
+    {
+      "id": "28bd83dd-f82b-4576-b8d2-c0082811f56f",
+      "color": "#4BB5C1",
+      "name": "Fuel",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 5000
+    },
+    {
+      "id": "926a46f5-7154-4032-9770-7cac94bad78c",
+      "color": "#34BFF6",
+      "name": "Gifts \u0026 joy",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 2007
+    },
+    {
+      "id": "a0f4c386-1166-4aee-a01e-36608469e890",
+      "color": "#85E029",
+      "name": "Holidays, trips, hotels",
+      "createdAt": "2026-02-23T18:28:24Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 6009
+    },
+    {
+      "id": "338eee6c-da07-4734-bd73-cfd23dc6cfc7",
+      "color": "#4fC3F7",
+      "name": "Elettronica, accessori",
+      "createdAt": "2026-02-24T14:51:03Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "cardinality": "mus",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 2006
+    },
+    {
+      "id": "0ef99727-d0cd-42bc-8017-2d3b7a15ee1b",
+      "color": "#85E029",
+      "name": "Culture, sport events",
+      "createdAt": "2026-02-23T18:28:24Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 6003
+    },
+    {
+      "id": "590df304-d631-4664-b856-9e29e485fadd",
+      "color": "#4BB5C1",
+      "name": "Parking",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 5001
+    },
+    {
+      "id": "9a86e684-bcef-4981-a73d-cea89e404801",
+      "color": "#FFA726",
+      "name": "Energia elettrica",
+      "createdAt": "2026-02-13T11:53:39Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "cardinality": "want",
+      "customCategory": true,
+      "customColor": false,
+      "customName": true,
+      "envelopeId": 3002,
+      "iconName": "idea-filled"
+    },
+    {
+      "id": "3b01bc13-3a46-4d04-80a6-0bbaac40037c",
+      "color": "#8BC34A",
+      "name": "Shopping list",
+      "createdAt": "2026-02-13T10:22:49Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 20002
+    },
+    {
+      "id": "2f82426e-868e-415c-b4ac-dac037e9572e",
+      "color": "#2258FF",
+      "name": "Software, apps, games",
+      "createdAt": "2026-02-23T18:28:28Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 7003
+    },
+    {
+      "id": "093ad750-3ce9-4bca-aa47-59b399576789",
+      "color": "#34BFF6",
+      "name": "Kids",
+      "createdAt": "2026-02-23T18:28:22Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 2003
+    },
+    {
+      "id": "fa02568d-76ff-4373-b20d-6d095e6a39d8",
+      "color": "#34BFF6",
+      "name": "Drugstore",
+      "createdAt": "2026-02-23T18:28:24Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "enabled": true,
+      "envelopeId": 2011
+    },
+    {
+      "id": "4a92dac3-8633-4256-84c2-1201855ec788",
+      "color": "#8BC34A",
+      "name": "Debt",
+      "createdAt": "2026-02-13T10:22:49Z",
+      "updatedAt": "2026-03-02T14:24:09Z",
+      "customCategory": false,
+      "customColor": false,
+      "customName": false,
+      "envelopeId": 20000
+    }
+  ],
+  "limit": 30,
+  "nextOffset": 30,
+  "offset": 0
+}

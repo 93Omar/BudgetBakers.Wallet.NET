@@ -1,0 +1,755 @@
+{
+  "agentHints": [
+    {
+      "type": "pagination.has_more",
+      "severity": "instruction",
+      "action": {
+        "url": "/wallet/v1/api/records?agentHints=true\u0026limit=30\u0026offset=30\u0026sortBy=-recordDate"
+      },
+      "text": "More records available at next page"
+    },
+    {
+      "type": "param.inferred",
+      "severity": "info",
+      "data": {
+        "parameter": "recordDate",
+        "provided": "",
+        "inferred": "gte.2025-12-13T10:06:13Z, lt.2026-03-14T10:06:13Z",
+        "reason": "defaultRollingRange"
+      },
+      "text": "No recordDate provided. Defaulted to recordDate=[gte.2025-12-13T10:06:13Z, lt.2026-03-14T10:06:13Z] (past 3 month(s) up to now + 24 hours). Range shifts with each request, based on actual time. For a specific range, provide explicit recordDate filters."
+    }
+  ],
+  "limit": 30,
+  "nextOffset": 30,
+  "offset": 0,
+  "recordDateRange": [
+    "gte.2025-12-13T10:06:13Z",
+    "lt.2026-03-14T10:06:13Z"
+  ],
+  "records": [
+    {
+      "id": "ab2c30a5-b31b-4ad2-a229-dbbccd15d902",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 001",
+      "amount": {
+        "value": -13.5
+      },
+      "baseAmount": {
+        "value": -13.5,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-12T00:00:00Z",
+      "category": {
+        "id": "38a818cd-b7c0-461c-b3e0-f7409fdb5304",
+        "color": "#8BC34A",
+        "name": "Transfer, withdraw",
+        "envelopeId": 20001
+      },
+      "recordState": "cleared",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-13T01:14:31Z",
+      "updatedAt": "2026-03-13T02:45:17Z"
+    },
+    {
+      "id": "7f31eb9d-d57c-4a6d-bce4-fc5861dc0eda",
+      "accountId": "efdf4d01-6022-4b29-bcf6-0c15d760ed23",
+      "note": "Masked transaction 002",
+      "amount": {
+        "value": 13.5
+      },
+      "baseAmount": {
+        "value": 13.5,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-12T00:00:00Z",
+      "category": {
+        "id": "38a818cd-b7c0-461c-b3e0-f7409fdb5304",
+        "color": "#8BC34A",
+        "name": "Transfer, withdraw",
+        "envelopeId": 20001
+      },
+      "recordState": "cleared",
+      "recordType": "income",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-13T01:14:31Z",
+      "updatedAt": "2026-03-13T02:45:17Z"
+    },
+    {
+      "id": "945540c1-e973-41c6-a850-700f533bbb77",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 003",
+      "amount": {
+        "value": -9.9
+      },
+      "baseAmount": {
+        "value": -9.9,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-09T00:00:00Z",
+      "category": {
+        "id": "fa02568d-76ff-4373-b20d-6d095e6a39d8",
+        "color": "#34BFF6",
+        "name": "Drugstore",
+        "envelopeId": 2011
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-11T00:22:32Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "7bfb309b-3d63-40b0-b19a-6659521349ff",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 004",
+      "amount": {
+        "value": -3.88
+      },
+      "baseAmount": {
+        "value": -3.88,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-09T00:00:00Z",
+      "category": {
+        "id": "91202916-24db-419c-839e-e2f7159ae60d",
+        "color": "#E74C3C",
+        "name": "Groceries",
+        "envelopeId": 1000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-11T00:22:32Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "15994943-b72c-48c1-b3ce-7f8909fe5e00",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 005",
+      "amount": {
+        "value": -5.52
+      },
+      "baseAmount": {
+        "value": -5.52,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-09T00:00:00Z",
+      "category": {
+        "id": "91202916-24db-419c-839e-e2f7159ae60d",
+        "color": "#E74C3C",
+        "name": "Groceries",
+        "envelopeId": 1000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-11T00:22:32Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "c38cd8b4-cf14-4c16-8a10-e209848206a2",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 006",
+      "amount": {
+        "value": -250
+      },
+      "baseAmount": {
+        "value": -250,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-09T00:00:00Z",
+      "category": {
+        "id": "c6d05f7b-ad51-47eb-a157-8cc8d933829a",
+        "color": "#19BC9C",
+        "name": "Advisory",
+        "envelopeId": 8004
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-11T00:22:30Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "b450f3d9-951f-488c-8bd7-c1536e3c0598",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 007",
+      "amount": {
+        "value": -17.51
+      },
+      "baseAmount": {
+        "value": -17.51,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-09T00:00:00Z",
+      "category": {
+        "id": "91202916-24db-419c-839e-e2f7159ae60d",
+        "color": "#E74C3C",
+        "name": "Groceries",
+        "envelopeId": 1000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-11T00:22:32Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "03c937ca-b527-4e6a-ac6d-1544deb58751",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 008",
+      "amount": {
+        "value": -11
+      },
+      "baseAmount": {
+        "value": -11,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-08T00:00:00Z",
+      "category": {
+        "id": "8bc42070-f998-4575-9bb4-ee46e3c06a85",
+        "color": "#E74C3C",
+        "name": "Restaurants \u0026 fast food",
+        "envelopeId": 1001
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-10T00:22:08Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "3a9e4d86-1c3d-45ac-8b31-f95021de2f4a",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 009",
+      "amount": {
+        "value": -15.67
+      },
+      "baseAmount": {
+        "value": -15.67,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-08T00:00:00Z",
+      "category": {
+        "id": "8bc42070-f998-4575-9bb4-ee46e3c06a85",
+        "color": "#E74C3C",
+        "name": "Restaurants \u0026 fast food",
+        "envelopeId": 1001
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-10T00:22:08Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "ae857f8c-ad4b-4db6-b985-7cc4dedac160",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 010",
+      "amount": {
+        "value": -6.53
+      },
+      "baseAmount": {
+        "value": -6.53,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-08T00:00:00Z",
+      "category": {
+        "id": "91202916-24db-419c-839e-e2f7159ae60d",
+        "color": "#E74C3C",
+        "name": "Groceries",
+        "envelopeId": 1000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-10T00:22:08Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "2600b7d8-a00d-44b3-b82b-2aa4e574854f",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 011",
+      "amount": {
+        "value": -21.57
+      },
+      "baseAmount": {
+        "value": -21.57,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-08T00:00:00Z",
+      "category": {
+        "id": "6f12ae3a-539d-4b31-a10b-d72af29ec444",
+        "color": "#34BFF6",
+        "name": "Home \u0026 garden",
+        "envelopeId": 2004
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-10T00:22:08Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "c99fb296-49c1-4716-90b7-2b4822f15b18",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 012",
+      "amount": {
+        "value": -13.1
+      },
+      "baseAmount": {
+        "value": -13.1,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-06T00:00:00Z",
+      "category": {
+        "id": "f294927e-aae2-4f98-affd-ce2a2dcb4717",
+        "color": "#AA00FF",
+        "name": "Ricarica elettrica",
+        "envelopeId": 5000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-10T00:22:08Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "c5c93f0b-4b66-4717-8583-2dbf9ad3438c",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 013",
+      "amount": {
+        "value": -10.4
+      },
+      "baseAmount": {
+        "value": -10.4,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-06T00:00:00Z",
+      "category": {
+        "id": "b8996090-be44-4a43-9e0a-6a067bd8a77e",
+        "color": "#85E029",
+        "name": "Charity, gifts",
+        "envelopeId": 6010
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-11T00:22:30Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "48af62b9-c782-469f-89cc-941eb69edeba",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 014",
+      "amount": {
+        "value": -15.5
+      },
+      "baseAmount": {
+        "value": -15.5,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-04T00:00:00Z",
+      "category": {
+        "id": "8bc42070-f998-4575-9bb4-ee46e3c06a85",
+        "color": "#E74C3C",
+        "name": "Restaurants \u0026 fast food",
+        "envelopeId": 1001
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-06T00:27:20Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "5de18a02-2656-4256-8168-2c97274d3770",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 015",
+      "amount": {
+        "value": -1.23
+      },
+      "baseAmount": {
+        "value": -1.23,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-04T00:00:00Z",
+      "category": {
+        "id": "590df304-d631-4664-b856-9e29e485fadd",
+        "color": "#4BB5C1",
+        "name": "Parking",
+        "envelopeId": 5001
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-06T00:27:20Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "e98008f6-9c8c-42d9-ad77-62ad8633630b",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 016",
+      "amount": {
+        "value": 58
+      },
+      "baseAmount": {
+        "value": 58,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-04T00:00:00Z",
+      "category": {
+        "id": "a0f4c386-1166-4aee-a01e-36608469e890",
+        "color": "#85E029",
+        "name": "Holidays, trips, hotels",
+        "envelopeId": 6009
+      },
+      "recordState": "reconciled",
+      "recordType": "income",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-05T01:10:57Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "a2284b44-6a41-4197-8b6f-5b6bc5018ab7",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 017",
+      "amount": {
+        "value": -63.99
+      },
+      "baseAmount": {
+        "value": -63.99,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-04T00:00:00Z",
+      "category": {
+        "id": "6f12ae3a-539d-4b31-a10b-d72af29ec444",
+        "color": "#34BFF6",
+        "name": "Home \u0026 garden",
+        "envelopeId": 2004
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-06T00:27:20Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "b66ddf06-7c82-4152-9d63-1c98932de7d4",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 018",
+      "amount": {
+        "value": -104
+      },
+      "baseAmount": {
+        "value": -104,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-03T00:00:00Z",
+      "category": {
+        "id": "63f79081-6fe8-4756-96e4-a1e50984bcca",
+        "color": "#FFA726",
+        "name": "Spese condominiali",
+        "envelopeId": 3003
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-05T01:10:57Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "26a654c8-568a-4be6-a301-8d600a4523ca",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 019",
+      "amount": {
+        "value": 19.99
+      },
+      "baseAmount": {
+        "value": 19.99,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-03T00:00:00Z",
+      "category": {
+        "id": "b5e3ef19-4f54-4a3e-bf72-39dbd5c7fa44",
+        "color": "#FFCD01",
+        "name": "Others",
+        "envelopeId": 10011
+      },
+      "recordState": "reconciled",
+      "recordType": "income",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-07T00:27:06Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "3bb10091-05e1-4ec5-a451-f35facc2ef24",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 020",
+      "amount": {
+        "value": -281.57
+      },
+      "baseAmount": {
+        "value": -281.57,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-02T00:00:00Z",
+      "category": {
+        "id": "cc933e0e-f34f-4870-8ea4-c41d9a0ece82",
+        "color": "#FFA726",
+        "name": "Mutuo",
+        "envelopeId": 3001
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:46Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "fb946c4a-cb0d-479b-8916-2743b54664d9",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 021",
+      "amount": {
+        "value": -30.19
+      },
+      "baseAmount": {
+        "value": -30.19,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-01T00:00:00Z",
+      "category": {
+        "id": "526417f0-bea0-45f2-bfec-8d5d637bb671",
+        "color": "#34BFF6",
+        "name": "Clothes \u0026 shoes",
+        "envelopeId": 2000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "f42643dc-ded5-42d6-8ac7-066211d28957",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 022",
+      "amount": {
+        "value": -9.45
+      },
+      "baseAmount": {
+        "value": -9.45,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-01T00:00:00Z",
+      "category": {
+        "id": "8bc42070-f998-4575-9bb4-ee46e3c06a85",
+        "color": "#E74C3C",
+        "name": "Restaurants \u0026 fast food",
+        "envelopeId": 1001
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "8f8cd0b2-6d3b-4837-9c73-f6f98f95f616",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 023",
+      "amount": {
+        "value": -14.1
+      },
+      "baseAmount": {
+        "value": -14.1,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-01T00:00:00Z",
+      "category": {
+        "id": "fa02568d-76ff-4373-b20d-6d095e6a39d8",
+        "color": "#34BFF6",
+        "name": "Drugstore",
+        "envelopeId": 2011
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "fe307d7f-8c73-439d-9b06-7ba0aed3ca48",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 024",
+      "amount": {
+        "value": -7
+      },
+      "baseAmount": {
+        "value": -7,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-01T00:00:00Z",
+      "category": {
+        "id": "d898e1b7-c674-4b10-8010-55ad87455a53",
+        "color": "#E74C3C",
+        "name": "Bar cafe",
+        "envelopeId": 1002
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "9c088624-4f28-4bb8-8512-69fe038df5b2",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 025",
+      "amount": {
+        "value": -3.45
+      },
+      "baseAmount": {
+        "value": -3.45,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-03-01T00:00:00Z",
+      "category": {
+        "id": "91202916-24db-419c-839e-e2f7159ae60d",
+        "color": "#E74C3C",
+        "name": "Groceries",
+        "envelopeId": 1000
+      },
+      "recordState": "reconciled",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-11T12:00:16Z"
+    },
+    {
+      "id": "14399139-a7f4-4d71-b016-879412b99593",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 026",
+      "amount": {
+        "value": -5
+      },
+      "baseAmount": {
+        "value": -5,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-02-28T00:00:00Z",
+      "category": {
+        "id": "665a45c5-ffce-4a67-8ece-576cf5565732",
+        "color": "#d0d0d0",
+        "name": "Spese Sconosciute",
+        "envelopeId": 13001
+      },
+      "recordState": "cleared",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-03T17:27:39Z"
+    },
+    {
+      "id": "f758df76-9912-4e6f-8eaf-7bc3b7431fba",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Masked transaction 027",
+      "amount": {
+        "value": -1.56
+      },
+      "baseAmount": {
+        "value": -1.56,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-02-28T00:00:00Z",
+      "category": {
+        "id": "526417f0-bea0-45f2-bfec-8d5d637bb671",
+        "color": "#34BFF6",
+        "name": "Clothes \u0026 shoes",
+        "envelopeId": 2000
+      },
+      "recordState": "cleared",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-03T16:34:48Z",
+      "updatedAt": "2026-03-03T17:27:39Z"
+    },
+    {
+      "id": "d5a463a4-9e36-411c-b16a-0f01ef30fcc5",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 028",
+      "amount": {
+        "value": 1923.3,
+        "currencyCode": "EUR"
+      },
+      "baseAmount": {
+        "value": 1923.3,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-02-27T00:00:00Z",
+      "category": {
+        "id": "d17bb9c0-83ee-4227-b122-98f8ff2901a7",
+        "color": "#FFCD01",
+        "name": "Wage, invoices",
+        "envelopeId": 10000
+      },
+      "recordState": "reconciled",
+      "recordType": "income",
+      "paymentType": "transfer",
+      "createdAt": "2026-02-28T03:18:56Z",
+      "updatedAt": "2026-03-02T14:24:11Z"
+    },
+    {
+      "id": "96ea0977-de12-46c1-8bd1-c16b6d795035",
+      "accountId": "40a13466-227b-4580-b9e3-ab2d3ffc4a9a",
+      "note": "Masked transaction 029",
+      "amount": {
+        "value": 55,
+        "currencyCode": "EUR"
+      },
+      "baseAmount": {
+        "value": 55,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-02-26T00:00:00Z",
+      "category": {
+        "id": "a0f4c386-1166-4aee-a01e-36608469e890",
+        "color": "#85E029",
+        "name": "Holidays, trips, hotels",
+        "envelopeId": 6009
+      },
+      "recordState": "reconciled",
+      "recordType": "income",
+      "paymentType": "transfer",
+      "createdAt": "2026-02-27T01:07:07Z",
+      "updatedAt": "2026-03-02T14:24:11Z"
+    },
+    {
+      "id": "188801f5-f091-4b03-a074-fb44a7a8dc97",
+      "accountId": "cdd688c2-87ce-4226-9a86-1808eb11b59c",
+      "note": "Amazon.it - DT.ACQ.: 25/02/26",
+      "amount": {
+        "value": -99.8,
+        "currencyCode": "EUR"
+      },
+      "baseAmount": {
+        "value": -99.8,
+        "currencyCode": "EUR"
+      },
+      "recordDate": "2026-02-26T00:00:00Z",
+      "category": {
+        "id": "926a46f5-7154-4032-9770-7cac94bad78c",
+        "color": "#34BFF6",
+        "name": "Gifts \u0026 joy",
+        "envelopeId": 2007
+      },
+      "recordState": "cleared",
+      "recordType": "expense",
+      "paymentType": "transfer",
+      "createdAt": "2026-03-02T01:15:51Z",
+      "updatedAt": "2026-03-02T14:24:11Z"
+    }
+  ]
+}
