@@ -7,6 +7,7 @@ using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Dtos.Record;
 using Wallet.Api.Net.Dtos.RecordRule;
 using Wallet.Api.Net.Dtos.StandingOrder;
+using Wallet.Api.Net.Dtos.Stats;
 
 namespace Wallet.Api.Net.Tests
 {
@@ -60,6 +61,10 @@ namespace Wallet.Api.Net.Tests
             yield return CreateCase("StandingOrder sample", BuildJsonPath("StandingOrder", "GetStandingOrdersResponseDto.sample.json"), typeof(GetStandingOrdersResponseDto), "StandingOrders", 0);
             yield return CreateCase("StandingOrder populated", BuildJsonPath("StandingOrder", "GetStandingOrdersResponseDto.populated.json"), typeof(GetStandingOrdersResponseDto), "StandingOrders", 1);
             yield return CreateCase("StandingOrder real", BuildJsonPath("StandingOrder", "GetStandingOrdersResponseDto.real.json"), typeof(GetStandingOrdersResponseDto), "StandingOrders", 0);
+
+            yield return CreateCase("Stats empty", BuildJsonPath("Stats", "GetStatsResponseDto.empty.json"), typeof(GetStatsResponseDto), "Usage", 0);
+            yield return CreateCase("Stats sample", BuildJsonPath("Stats", "GetStatsResponseDto.sample.json"), typeof(GetStatsResponseDto), "Usage", 3);
+            yield return CreateCase("Stats real", BuildJsonPath("Stats", "GetStatsResponseDto.real.json"), typeof(GetStatsResponseDto), "Usage", 2);
         }
 
         [TestCaseSource(nameof(ResponseDtoJsonCases))]
