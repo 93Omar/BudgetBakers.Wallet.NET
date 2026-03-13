@@ -204,5 +204,41 @@ namespace Wallet.Api.Net.Tests.Clients
                 Assert.That(result.Value.Value, Is.EqualTo("ok"));
             }
         }
+
+        [Test]
+        public async Task ExecuteAsync_WhenApiReturnsTooManyRequests_AddsRateLimitMetadata()
+        {
+            HttpResponseMessage tooManyRequestsResponse = new HttpResponseMessage(HttpStatusCode.TooManyRequests)
+            {
+                Content = new StringContent("{\"error\":\"too many requests\"}", Encoding.UTF8, "application/json")
+            };
+            tooManyRequestsResponse.Headers.Add(ApiConstant.Header.RetryAfter, "60");
+            tooManyRequestsResponse.Headers.Add(ApiConstant.Header.RateLimitLimit, "500");
+            tooManyRequestsResponse.Headers.Add(ApiConstant.Header.RateLimitRemaining, "487");
+
+            HttpClient client = ClientTestHelpers.CreateHttpClient((_, _) =>
+                Task.FromResult(tooManyRequestsResponse));
+
+            Result<WalletApiGetExecutorTestResponse> result = await WalletApiGetExecutor.ExecuteAsync<
+                WalletApiGetExecutorTestRequest,
+                WalletApiGetExecutorTestRequestDto,
+                WalletApiGetExecutorTestResponseDto,
+                WalletApiGetExecutorTestResponse>(
+                client,
+                "/endpoint",
+                new WalletApiGetExecutorTestRequest(),
+                new DelegateMapper<WalletApiGetExecutorTestRequest, WalletApiGetExecutorTestRequestDto>(_ => new WalletApiGetExecutorTestRequestDto()),
+                new DelegateMapper<WalletApiGetExecutorTestResponseDto, WalletApiGetExecutorTestResponse>(_ => new WalletApiGetExecutorTestResponse()),
+                CancellationToken.None);
+
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result.IsFailed, Is.True);
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.StatusCode], Is.EqualTo((int)HttpStatusCode.TooManyRequests));
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.RetryAfter], Is.EqualTo(60));
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.RateLimitLimit], Is.EqualTo(500));
+                Assert.That(result.Errors[0].Metadata[ApiConstant.Metadata.RateLimitRemaining], Is.EqualTo(487));
+            }
+        }
     }
 }

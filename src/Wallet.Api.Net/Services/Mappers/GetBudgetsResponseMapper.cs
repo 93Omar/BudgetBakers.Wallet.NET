@@ -7,6 +7,7 @@ using Wallet.Api.Net.Models.Budget;
 using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Utility;
 using Wallet.Api.Net.Models;
+using Wallet.Api.Net.Models.Pagination;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -19,9 +20,12 @@ namespace Wallet.Api.Net.Services.Mappers
 
             GetBudgetsResponse response = new GetBudgetsResponse()
             {
-                Limit = source.Limit,
-                Offset = source.Offset,
-                NextOffset = source.NextOffset,
+                Pagination = new PaginationInfo
+                {
+                    Limit = source.Limit,
+                    Offset = source.Offset,
+                    NextOffset = source.NextOffset
+                },
                 Budgets = source.Budgets
                                 .Select(MapBudget)
                                 .OfType<Budget>()

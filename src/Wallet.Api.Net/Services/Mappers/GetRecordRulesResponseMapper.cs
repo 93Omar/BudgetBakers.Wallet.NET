@@ -7,6 +7,7 @@ using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Models.Category;
 using Wallet.Api.Net.Utility;
 using Wallet.Api.Net.Models;
+using Wallet.Api.Net.Models.Pagination;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -19,9 +20,12 @@ namespace Wallet.Api.Net.Services.Mappers
 
             GetRecordRulesResponse response = new GetRecordRulesResponse()
             {
-                Limit = source.Limit,
-                Offset = source.Offset,
-                NextOffset = source.NextOffset,
+                Pagination = new PaginationInfo
+                {
+                    Limit = source.Limit,
+                    Offset = source.Offset,
+                    NextOffset = source.NextOffset
+                },
                 RecordRules = source.RecordRules
                                 .Select(MapRecordRule)
                                 .OfType<RecordRule>()

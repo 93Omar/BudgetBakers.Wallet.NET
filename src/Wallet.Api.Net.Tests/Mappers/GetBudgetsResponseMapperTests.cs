@@ -64,9 +64,9 @@ namespace Wallet.Api.Net.Tests.Mappers
             Budget mappedBudget = result!.Budgets[0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result!.Limit, Is.EqualTo(source.Limit));
-                Assert.That(result.Offset, Is.EqualTo(source.Offset));
-                Assert.That(result.NextOffset, Is.EqualTo(source.NextOffset));
+                Assert.That(result!.Pagination.Limit, Is.EqualTo(source.Limit));
+                Assert.That(result.Pagination.Offset, Is.EqualTo(source.Offset));
+                Assert.That(result.Pagination.NextOffset, Is.EqualTo(source.NextOffset));
                 Assert.That(result.Budgets, Has.Count.EqualTo(1));
                 Assert.That(result.AgentHints, Has.Count.EqualTo(1));
                 Assert.That(mappedBudget.Id, Is.EqualTo(budgetId));

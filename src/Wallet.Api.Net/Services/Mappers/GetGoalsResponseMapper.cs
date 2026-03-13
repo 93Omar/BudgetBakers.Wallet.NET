@@ -4,6 +4,7 @@ using System.Linq;
 using Wallet.Api.Net.Dtos.Goal;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Goal;
+using Wallet.Api.Net.Models.Pagination;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
@@ -17,9 +18,12 @@ namespace Wallet.Api.Net.Services.Mappers
 
             GetGoalsResponse response = new GetGoalsResponse()
             {
-                Limit = source.Limit,
-                Offset = source.Offset,
-                NextOffset = source.NextOffset,
+                Pagination = new PaginationInfo
+                {
+                    Limit = source.Limit,
+                    Offset = source.Offset,
+                    NextOffset = source.NextOffset
+                },
                 Goals = source.Goals
                             .Select(MapGoal)
                             .OfType<Goal>()

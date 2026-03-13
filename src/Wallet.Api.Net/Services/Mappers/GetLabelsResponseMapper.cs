@@ -4,6 +4,7 @@ using System.Linq;
 using Wallet.Api.Net.Dtos.Label;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Label;
+using Wallet.Api.Net.Models.Pagination;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
@@ -17,9 +18,12 @@ namespace Wallet.Api.Net.Services.Mappers
 
             GetLabelsResponse response = new GetLabelsResponse()
             {
-                Limit = source.Limit,
-                Offset = source.Offset,
-                NextOffset = source.NextOffset,
+                Pagination = new PaginationInfo
+                {
+                    Limit = source.Limit,
+                    Offset = source.Offset,
+                    NextOffset = source.NextOffset
+                },
                 Labels = source.Labels
                             .Select(MapperHelpers.MapLabel)
                             .OfType<Label>()

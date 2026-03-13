@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,6 +19,19 @@ namespace Wallet.Api.Net.Constants
             internal const string StatusCode = "StatusCode";
             internal const string ReasonPhrase = "ReasonPhrase";
             internal const string ResponseBody = "ResponseBody";
+            internal const string RateLimitLimit = "RateLimitLimit";
+            internal const string RateLimitRemaining = "RateLimitRemaining";
+            internal const string RetryAfter = "RetryAfter";
+        }
+
+        internal static class Header
+        {
+            internal const string RateLimitLimit = "X-RateLimit-Limit";
+            internal const string RateLimitRemaining = "X-RateLimit-Remaining";
+            internal const string RetryAfter = "Retry-After";
+            internal const string LastDataChangeAt = "X-Last-Data-Change-At";
+            internal const string LastDataChangeRevision = "X-Last-Data-Change-Rev";
+            internal const string SyncInProgress = "X-Sync-In-Progress";
         }
 
         internal static class Separator

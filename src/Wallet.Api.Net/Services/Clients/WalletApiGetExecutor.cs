@@ -48,6 +48,8 @@ namespace Wallet.Api.Net.Services.Clients
             if (response is null)
                 return Result.Fail<TResponse>(CreateResponseMappingError<TResponseDto>(endpoint));
 
+            ResponseHeaderMapper.Apply(responseMessage, response);
+
             return Result.Ok(response);
         }
 
@@ -66,10 +68,27 @@ namespace Wallet.Api.Net.Services.Clients
                 .WithMetadata(ApiConstant.Metadata.StatusCode, (int)responseMessage.StatusCode)
                 .WithMetadata(ApiConstant.Metadata.ReasonPhrase, responseMessage.ReasonPhrase ?? string.Empty);
 
+            AddRateLimitMetadata(apiError, responseMessage);
+
             if (!string.IsNullOrWhiteSpace(errorBody))
                 apiError.WithMetadata(ApiConstant.Metadata.ResponseBody, errorBody);
 
             return apiError;
+        }
+
+        private static void AddRateLimitMetadata(Error apiError, HttpResponseMessage responseMessage)
+        {
+            int? rateLimitLimit = responseMessage.TryGetIntHeaderValue(ApiConstant.Header.RateLimitLimit);
+            if (rateLimitLimit.HasValue)
+                apiError.WithMetadata(ApiConstant.Metadata.RateLimitLimit, rateLimitLimit.Value);
+
+            int? rateLimitRemaining = responseMessage.TryGetIntHeaderValue(ApiConstant.Header.RateLimitRemaining);
+            if (rateLimitRemaining.HasValue)
+                apiError.WithMetadata(ApiConstant.Metadata.RateLimitRemaining, rateLimitRemaining.Value);
+
+            int? retryAfter = responseMessage.TryGetIntHeaderValue(ApiConstant.Header.RetryAfter);
+            if (retryAfter.HasValue)
+                apiError.WithMetadata(ApiConstant.Metadata.RetryAfter, retryAfter.Value);
         }
     }
 }

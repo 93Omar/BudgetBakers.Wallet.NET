@@ -6,6 +6,7 @@ using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Dtos;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Account;
+using Wallet.Api.Net.Models.Pagination;
 using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
@@ -19,9 +20,12 @@ namespace Wallet.Api.Net.Services.Mappers
 
             GetAccountsResponse response = new GetAccountsResponse()
             {
-                Limit = source.Limit,
-                Offset = source.Offset,
-                NextOffset = source.NextOffset,
+                Pagination = new PaginationInfo
+                {
+                    Limit = source.Limit,
+                    Offset = source.Offset,
+                    NextOffset = source.NextOffset
+                },
                 Accounts = source.Accounts
                             .Select(MapAccount)
                             .OfType<Account>()
