@@ -44,7 +44,7 @@ namespace Wallet.Api.Net.Services.Mappers
             if (dto is null)
                 return null;
 
-            var budget = new Budget
+            Budget budget = new Budget
             {
                 Amount = dto.Amount,
                 CurrencyCode = dto.CurrencyCode,
@@ -60,36 +60,32 @@ namespace Wallet.Api.Net.Services.Mappers
                             .ToList()
             };
 
-            if (dto.AccountIds.Any())
-            {
-                var guids = new List<Guid>();
+            budget.AccountIds = MapGuidList(dto.AccountIds);
+            budget.CategoryIds = MapGuidList(dto.CategoryIds);
 
-                foreach (var s in dto.AccountIds)
-                {
-                    if (MapperHelpers.ParseGuid(s) is Guid g)
-                        guids.Add(g);
-                }
-
-                budget.AccountIds = guids;
-            }
-
-            if (dto.CategoryIds.Any())
-            {
-                var guids = new List<Guid>();
-
-                foreach (var s in dto.CategoryIds)
-                {
-                    if (MapperHelpers.ParseGuid(s) is Guid g)
-                        guids.Add(g);
-                }
-
-                budget.CategoryIds = guids;
-            }
-
-            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
-                budget.Id = id;
+            Guid? budgetId = MapperHelpers.ParseGuid(dto.Id);
+            if (budgetId.HasValue)
+                budget.Id = budgetId.Value;
 
             return budget;
+        }
+
+        private static List<Guid> MapGuidList(IList<string> ids)
+        {
+            if (!ids.Any())
+                return [];
+
+            List<Guid> guids = new List<Guid>();
+
+            foreach (string id in ids)
+            {
+                Guid? parsedId = MapperHelpers.ParseGuid(id);
+
+                if (parsedId.HasValue)
+                    guids.Add(parsedId.Value);
+            }
+
+            return guids;
         }
     }
 }

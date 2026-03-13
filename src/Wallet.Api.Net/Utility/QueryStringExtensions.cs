@@ -14,7 +14,7 @@ namespace Wallet.Api.Net.Utility
             if (dto is null)
                 return null;
 
-            var dictionary = new Dictionary<string, string>();
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
             MapProperties(dto, dictionary);
 
@@ -24,26 +24,44 @@ namespace Wallet.Api.Net.Utility
 
         private static void MapProperties(object obj, Dictionary<string, string> dictionary)
         {
-            foreach (PropertyInfo propInfo in obj.GetType().GetProperties())
+            foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties())
             {
-                object? value = propInfo.GetValue(obj);
-
-                string name = propInfo.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name
-                         ?? propInfo.GetCustomAttribute<JsonPropertyAttribute>()?.PropertyName
-                         ?? propInfo.Name;
-
+                object? value = propertyInfo.GetValue(obj);
                 if (value is null)
                     continue;
 
-                Type type = value.GetType();
-
-                if (type.IsClass && type != typeof(string))
+                if (IsNestedObject(value))
+                {
                     MapProperties(value, dictionary);
-                else if (type == typeof(bool))
-                    dictionary[name] = value.ToString()!.ToLower();
-                else
-                    dictionary[name] = value.ToString()!;
+                    continue;
+                }
+
+                string propertyName = GetPropertyName(propertyInfo);
+                string? stringValue = ConvertToStringValue(value);
+                if (stringValue is not null)
+                    dictionary[propertyName] = stringValue;
             }
+        }
+
+        private static string GetPropertyName(PropertyInfo propertyInfo)
+        {
+            return propertyInfo.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name
+                ?? propertyInfo.GetCustomAttribute<JsonPropertyAttribute>()?.PropertyName
+                ?? propertyInfo.Name;
+        }
+
+        private static bool IsNestedObject(object value)
+        {
+            Type type = value.GetType();
+            return type.IsClass && type != typeof(string);
+        }
+
+        private static string? ConvertToStringValue(object value)
+        {
+            if (value is bool boolValue)
+                return boolValue.ToString().ToLower();
+
+            return value.ToString();
         }
     }
 }
