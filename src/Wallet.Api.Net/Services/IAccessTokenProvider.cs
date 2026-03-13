@@ -1,4 +1,4 @@
-﻿namespace Wallet.Api.Net.Services
+namespace Wallet.Api.Net.Services
 {
     public interface IAccessTokenProvider
     {

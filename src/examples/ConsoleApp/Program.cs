@@ -1,4 +1,4 @@
-﻿using ConsoleApp.Configuration;
+using ConsoleApp.Configuration;
 using ConsoleApp.Services;
 using FluentResults;
 using Microsoft.Extensions.Configuration;

@@ -1,4 +1,4 @@
-﻿using FluentResults;
+using FluentResults;
 using Wallet.Api.Net.Dtos.Account;
 using Wallet.Api.Net.Models.Account;
 using Wallet.Api.Net.Services.Mappers;
