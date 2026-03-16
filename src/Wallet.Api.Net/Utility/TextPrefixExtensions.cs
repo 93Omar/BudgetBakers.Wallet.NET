@@ -14,7 +14,7 @@ namespace Wallet.Api.Net.Utility
                 TextPrefix.Equals => "eq",
                 TextPrefix.Contains => "contains",
                 TextPrefix.ContainsIgnoreCase => "contains-i",
-                _ => throw new InvalidOperationException($"Unsupported TextPrefix value: {value}")
+                _ => throw new InvalidOperationException($"Unsupported {nameof(TextPrefix)} value: {value}")
             };
 
             return textPrefix;

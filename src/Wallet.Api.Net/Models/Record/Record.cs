@@ -51,7 +51,7 @@ namespace Wallet.Api.Net.Models.Record
         /// <summary>
         /// Payment method.
         /// </summary>
-        public string? PaymentType { get; set; }
+        public PaymentType? PaymentType { get; set; }
 
         /// <summary>
         /// Photos attached to this record.
@@ -68,12 +68,12 @@ namespace Wallet.Api.Net.Models.Record
         /// <summary>
         /// Transaction state.
         /// </summary>
-        public string? RecordState { get; set; }
+        public RecordState? RecordState { get; set; }
 
         /// <summary>
         /// Transaction type.
         /// </summary>
-        public string? RecordType { get; set; }
+        public RecordType? RecordType { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
     }

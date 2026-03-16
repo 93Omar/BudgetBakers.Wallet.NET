@@ -66,6 +66,6 @@ namespace Wallet.Api.Net.Models.Record
         /// <summary>
         /// Sort results by field.
         /// </summary>
-        public string? SortBy { get; set; }
+        public RecordSortBy? SortBy { get; set; }
     }
 }

@@ -9,11 +9,61 @@ using Wallet.Api.Net.Dtos.Record;
 using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Label;
 using Wallet.Api.Net.Models.Record;
+using Wallet.Api.Net.Models.StandingOrder;
 
 namespace Wallet.Api.Net.Utility
 {
     internal static class MapperHelpers
     {
+        private static readonly Dictionary<string, AgentHintSeverity> _agentHintSeverityMap = new()
+        {
+            ["info"] = AgentHintSeverity.Info,
+            ["warning"] = AgentHintSeverity.Warning,
+            ["instruction"] = AgentHintSeverity.Instruction
+        };
+
+        private static readonly Dictionary<string, AgentHintType> _agentHintTypeMap = new()
+        {
+            ["pagination.has_more"] = AgentHintType.PaginationHasMore,
+            ["result.partial_match"] = AgentHintType.ResultPartialMatch,
+            ["result.empty"] = AgentHintType.ResultEmpty,
+            ["param.inferred"] = AgentHintType.ParamInferred,
+            ["rate_limit.warning"] = AgentHintType.RateLimitWarning,
+            ["data.recency"] = AgentHintType.DataRecency
+        };
+
+        private static readonly Dictionary<string, PaymentType> _paymentTypeMap = new()
+        {
+            ["cash"] = PaymentType.Cash,
+            ["debit_card"] = PaymentType.DebitCard,
+            ["credit_card"] = PaymentType.CreditCard,
+            ["transfer"] = PaymentType.Transfer,
+            ["voucher"] = PaymentType.Voucher,
+            ["mobile_payment"] = PaymentType.MobilePayment,
+            ["web_payment"] = PaymentType.WebPayment
+        };
+
+        private static readonly Dictionary<string, RecordState> _recordStateMap = new()
+        {
+            ["reconciled"] = RecordState.Reconciled,
+            ["cleared"] = RecordState.Cleared,
+            ["uncleared"] = RecordState.Uncleared,
+            ["void"] = RecordState.Void,
+            ["waitForAssign"] = RecordState.WaitForAssign
+        };
+
+        private static readonly Dictionary<string, RecordType> _recordTypeMap = new()
+        {
+            ["income"] = RecordType.Income,
+            ["expense"] = RecordType.Expense
+        };
+
+        private static readonly Dictionary<string, StandingOrderType> _standingOrderTypeMap = new()
+        {
+            ["income"] = StandingOrderType.Income,
+            ["expense"] = StandingOrderType.Expense
+        };
+
         public static AgentHint? MapAgentHint(AgentHintDto? dto)
         {
             if (dto is null)
@@ -23,10 +73,70 @@ namespace Wallet.Api.Net.Utility
             {
                 Action = dto.Action is null ? null : new AgentAction { Url = dto.Action.Url },
                 Data = dto.Data,
-                Severity = dto.Severity,
+                Severity = ParseAgentHintSeverity(dto.Severity),
                 Text = dto.Text,
-                Type = dto.Type
+                Type = ParseAgentHintType(dto.Type)
             };
+        }
+
+        public static AgentHintSeverity ParseAgentHintSeverity(string? value)
+        {
+            if (value is not null && _agentHintSeverityMap.TryGetValue(value, out AgentHintSeverity severity))
+                return severity;
+
+            throw new InvalidOperationException($"Unknown {nameof(AgentHintSeverity)} value: '{value}'");
+        }
+
+        public static AgentHintType ParseAgentHintType(string? value)
+        {
+            if (value is not null && _agentHintTypeMap.TryGetValue(value, out AgentHintType type))
+                return type;
+
+            throw new InvalidOperationException($"Unknown {nameof(AgentHintType)} value: '{value}'");
+        }
+
+        public static PaymentType? ParsePaymentType(string? value)
+        {
+            if (value is null)
+                return null;
+
+            if (_paymentTypeMap.TryGetValue(value, out PaymentType paymentType))
+                return paymentType;
+
+            throw new InvalidOperationException($"Unknown {nameof(PaymentType)} value: '{value}'");
+        }
+
+        public static RecordState? ParseRecordState(string? value)
+        {
+            if (value is null)
+                return null;
+
+            if (_recordStateMap.TryGetValue(value, out RecordState recordState))
+                return recordState;
+
+            throw new InvalidOperationException($"Unknown {nameof(RecordState)} value: '{value}'");
+        }
+
+        public static RecordType? ParseRecordType(string? value)
+        {
+            if (value is null)
+                return null;
+
+            if (_recordTypeMap.TryGetValue(value, out RecordType recordType))
+                return recordType;
+
+            throw new InvalidOperationException($"Unknown {nameof(RecordType)} value: '{value}'");
+        }
+
+        public static StandingOrderType? ParseStandingOrderType(string? value)
+        {
+            if (value is null)
+                return null;
+
+            if (_standingOrderTypeMap.TryGetValue(value, out StandingOrderType standingOrderType))
+                return standingOrderType;
+
+            throw new InvalidOperationException($"Unknown {nameof(StandingOrderType)} value: '{value}'");
         }
 
         public static DateTime? ParseDateTime(string? s)

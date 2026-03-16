@@ -52,15 +52,15 @@ namespace Wallet.Api.Net.Services.Mappers
                 Note = dto.Note,
                 Payee = dto.Payee,
                 Payer = dto.Payer,
-                PaymentType = dto.PaymentType,
+                PaymentType = MapperHelpers.ParsePaymentType(dto.PaymentType),
                 Photos = dto.Photos
                             .Select(MapperHelpers.MapRecordPhoto)
                             .OfType<RecordPhoto>()
                             .ToList(),
                 Place = MapperHelpers.MapPlace(dto.Place),
                 RecordDate = MapperHelpers.ParseDateTime(dto.RecordDate),
-                RecordState = dto.RecordState,
-                RecordType = dto.RecordType,
+                RecordState = MapperHelpers.ParseRecordState(dto.RecordState),
+                RecordType = MapperHelpers.ParseRecordType(dto.RecordType),
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
 

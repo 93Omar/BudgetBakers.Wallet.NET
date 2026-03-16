@@ -36,7 +36,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Amount = "120",
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 3, 1) },
-                SortBy = "recordDate.desc"
+                SortBy = RecordSortBy.RecordDateDescending
             };
 
             GetRecordsRequestDto? result = mapper.Map(source);
@@ -57,7 +57,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(result.Amount, Is.EqualTo(source.Amount));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
                 Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
-                Assert.That(result.SortBy, Is.EqualTo(source.SortBy));
+                Assert.That(result.SortBy, Is.EqualTo("-recordDate"));
             }
         }
     }

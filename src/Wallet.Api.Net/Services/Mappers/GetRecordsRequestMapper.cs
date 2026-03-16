@@ -1,5 +1,7 @@
 using Wallet.Api.Net.Dtos.Record;
+using Wallet.Api.Net.Models;
 using Wallet.Api.Net.Models.Record;
+using Wallet.Api.Net.Utility;
 
 namespace Wallet.Api.Net.Services.Mappers
 {
@@ -25,7 +27,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 Amount = source.Amount,
                 CreatedAt = source.CreatedAt?.ToString(),
                 UpdatedAt = source.UpdatedAt?.ToString(),
-                SortBy = source.SortBy
+                SortBy = source.SortBy?.ToApiString()
             };
 
             return dto;

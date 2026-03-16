@@ -58,7 +58,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 Payer = dto.Payer,
                 PaymentType = dto.PaymentType,
                 RecurrenceRule = dto.RecurrenceRule,
-                Type = dto.Type,
+                Type = MapperHelpers.ParseStandingOrderType(dto.Type),
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt),
                 Labels = dto.Labels
                             .Select(MapperHelpers.MapLabel)

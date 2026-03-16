@@ -11,13 +11,13 @@ namespace Wallet.Api.Net.Dtos.Account
         public object? Data { get; set; }
 
         [JsonProperty("severity")]
-        public string? Severity { get; set; }
+        public string Severity { get; set; } = null!;
 
         [JsonProperty("text")]
-        public string? Text { get; set; }
+        public string Text { get; set; } = null!;
 
         [JsonProperty("type")]
-        public string? Type { get; set; }
+        public string Type { get; set; } = null!;
     }
 }
 

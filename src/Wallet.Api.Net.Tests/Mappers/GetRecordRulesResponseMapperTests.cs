@@ -51,7 +51,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 },
                 AgentHints = new List<Wallet.Api.Net.Dtos.Account.AgentHintDto>
                 {
-                    new() { Text = "hint" }
+                    new() { Severity = "info", Text = "hint", Type = "result.empty" }
                 }
             };
 

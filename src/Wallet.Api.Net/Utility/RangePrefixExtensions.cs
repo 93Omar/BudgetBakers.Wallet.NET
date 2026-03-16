@@ -16,7 +16,7 @@ namespace Wallet.Api.Net.Utility
                 RangePrefix.GreaterThanOrEqual => "gte",
                 RangePrefix.LessThan => "lt",
                 RangePrefix.LessThanOrEqual => "lte",
-                _ => throw new InvalidOperationException($"Unsupported TextPrefix value: {value}")
+                _ => throw new InvalidOperationException($"Unsupported {nameof(RangePrefix)} value: {value}")
             };
 
             return rangePrefix;

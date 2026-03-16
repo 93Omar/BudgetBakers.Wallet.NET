@@ -11,7 +11,7 @@ namespace Wallet.Api.Net.Utility
                 PeriodPrefix.Days => "days",
                 PeriodPrefix.Weeks => "weeks",
                 PeriodPrefix.Months => "months",
-                _ => throw new InvalidOperationException($"Unsupported PeriodPrefix value: {value}")
+                _ => throw new InvalidOperationException($"Unsupported {nameof(PeriodPrefix)} value: {value}")
             };
 
             return periodPrefix;

@@ -63,7 +63,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                         Data = hintData,
                         Severity = "info",
                         Text = "hint text",
-                        Type = "account"
+                        Type = "pagination.has_more"
                     }
                 }
             };
@@ -112,9 +112,9 @@ namespace Wallet.Api.Net.Tests.Mappers
             {
                 Assert.That(mappedHint.Action?.Url, Is.EqualTo(sourceHint.Action?.Url));
                 Assert.That(mappedHint.Data, Is.SameAs(sourceHint.Data));
-                Assert.That(mappedHint.Severity, Is.EqualTo(sourceHint.Severity));
+                Assert.That(mappedHint.Severity, Is.EqualTo(AgentHintSeverity.Info));
                 Assert.That(mappedHint.Text, Is.EqualTo(sourceHint.Text));
-                Assert.That(mappedHint.Type, Is.EqualTo(sourceHint.Type));
+                Assert.That(mappedHint.Type, Is.EqualTo(AgentHintType.PaginationHasMore));
             }
         }
 

@@ -18,16 +18,16 @@ namespace Wallet.Api.Net.Models
         /// <summary>
         /// Indicates the nature/importance of the hint.
         /// </summary>
-        public string? Severity { get; set; }
+        public AgentHintSeverity Severity { get; set; }
 
         /// <summary>
         /// Human/AI-readable description of the hint.
         /// </summary>
-        public string? Text { get; set; }
+        public string Text { get; set; } = null!;
 
         /// <summary>
         /// Hint category using dot-notation.
         /// </summary>
-        public string? Type { get; set; }
+        public AgentHintType Type { get; set; }
     }
 }

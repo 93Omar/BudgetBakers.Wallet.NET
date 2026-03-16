@@ -45,7 +45,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                         UpdatedAt = "2026-01-02 00:00:00"
                     }
                 },
-                AgentHints = new List<AgentHintDto> { new() { Text = "hint" } }
+                AgentHints = new List<AgentHintDto> { new() { Severity = "info", Text = "hint", Type = "result.empty" } }
             };
 
             GetGoalsResponse? result = mapper.Map(source);

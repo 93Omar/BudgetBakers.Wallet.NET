@@ -44,16 +44,16 @@ namespace Wallet.Api.Net.Tests.Mappers
                         Note = "note",
                         Payee = "store",
                         Payer = "io",
-                        PaymentType = "card",
+                        PaymentType = "debit_card",
                         Photos = new List<PhotoDto> { new() { CreatedAt = "2026-01-01 00:00:00", TemporaryUrl = "http://img" } },
                         Place = new PlaceDto { Id = "pl1", Name = "Milan", PlaceTypes = new List<int> { 1, 2 } },
                         RecordDate = "2026-01-15 00:00:00",
-                        RecordState = "booked",
+                        RecordState = "reconciled",
                         RecordType = "expense",
                         UpdatedAt = "2026-01-02 00:00:00"
                     }
                 },
-                AgentHints = new List<AgentHintDto> { new() { Text = "hint" } }
+                AgentHints = new List<AgentHintDto> { new() { Severity = "info", Text = "hint", Type = "result.empty" } }
             };
 
             GetRecordsByIdResponse? result = mapper.Map(source);
@@ -73,7 +73,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(mapped.Labels, Has.Count.EqualTo(1));
                 Assert.That(mapped.Photos, Has.Count.EqualTo(1));
                 Assert.That(mapped.Place?.Name, Is.EqualTo(source.Records[0].Place?.Name));
-                Assert.That(mapped.RecordType, Is.EqualTo(source.Records[0].RecordType));
+                Assert.That(mapped.RecordType, Is.EqualTo(RecordType.Expense));
             }
         }
 
