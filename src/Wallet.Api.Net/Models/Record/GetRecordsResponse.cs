@@ -22,8 +22,17 @@ namespace Wallet.Api.Net.Models.Record
         /// </summary>
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
+        /// <summary>
+        /// The effective date range filter applied to the query, as array of operator-prefixed timestamps.
+        /// </summary>
         public IList<string> RecordDateRange { get; set; } = Array.Empty<string>();
+
+
         public IList<Record> Records { get; set; } = Array.Empty<Record>();
+
+        /// <summary>
+        /// Array of hints for AI agents. Only present when agentHints=true query parameter is set.
+        /// </summary>
         public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
     }
 }

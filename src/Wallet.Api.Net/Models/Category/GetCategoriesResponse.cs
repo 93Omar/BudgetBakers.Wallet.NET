@@ -23,6 +23,10 @@ namespace Wallet.Api.Net.Models.Category
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
         public IList<Category> Categories { get; set; } = Array.Empty<Category>();
+
+        /// <summary>
+        /// Array of hints for AI agents. Only present when agentHints=true query parameter is set.
+        /// </summary>
         public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
     }
 }

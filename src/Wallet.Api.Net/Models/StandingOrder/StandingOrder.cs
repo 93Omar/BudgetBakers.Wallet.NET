@@ -19,7 +19,12 @@ namespace Wallet.Api.Net.Models.StandingOrder
         public string? Payee { get; set; }
         public string? Payer { get; set; }
         public string? PaymentType { get; set; }
+
+        /// <summary>
+        /// RRULE format.
+        /// </summary>
         public string? RecurrenceRule { get; set; }
+
         public string? Type { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

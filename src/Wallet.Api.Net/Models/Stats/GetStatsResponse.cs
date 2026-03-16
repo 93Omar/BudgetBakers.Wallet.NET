@@ -14,9 +14,24 @@ namespace Wallet.Api.Net.Models.Stats
         /// </summary>
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
+        /// <summary>
+        /// Time granularity of the usage entries.
+        /// </summary>
         public string? Granularity { get; set; }
+
+        /// <summary>
+        /// The requested period.
+        /// </summary>
         public string? Period { get; set; }
+
+        /// <summary>
+        /// Total API requests in the period.
+        /// </summary>
         public int Total { get; set; }
+
+        /// <summary>
+        /// Per-period request totals. Periods with zero usage are omitted.
+        /// </summary>
         public IList<StatsUsage> Usage { get; set; } = Array.Empty<StatsUsage>();
     }
 }

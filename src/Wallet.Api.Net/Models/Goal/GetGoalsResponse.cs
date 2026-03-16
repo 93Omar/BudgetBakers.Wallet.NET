@@ -23,6 +23,10 @@ namespace Wallet.Api.Net.Models.Goal
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
         public IList<Goal> Goals { get; set; } = Array.Empty<Goal>();
+
+        /// <summary>
+        /// Array of hints for AI agents. Only present when agentHints=true query parameter is set.
+        /// </summary>
         public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
     }
 }
