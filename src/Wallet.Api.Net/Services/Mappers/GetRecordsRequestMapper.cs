@@ -21,6 +21,7 @@ namespace Wallet.Api.Net.Services.Mappers
                 LabelId = source.LabelId,
                 Note = source.Note?.ToString(),
                 Payee = source.Payee?.ToString(),
+                Payer = source.Payer?.ToString(),
                 Amount = source.Amount,
                 CreatedAt = source.CreatedAt?.ToString(),
                 UpdatedAt = source.UpdatedAt?.ToString(),

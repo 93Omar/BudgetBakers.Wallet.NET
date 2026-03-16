@@ -32,6 +32,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 LabelId = "lab-1",
                 Note = new TextFilter { Prefix = TextPrefix.Contains, Value = "expense" },
                 Payee = new TextFilter { Prefix = TextPrefix.Equals, Value = "market" },
+                Payer = new TextFilter { Prefix = TextPrefix.Equals, Value = "john" },
                 Amount = "120",
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 3, 1) },
@@ -52,6 +53,7 @@ namespace Wallet.Api.Net.Tests.Mappers
                 Assert.That(result.LabelId, Is.EqualTo(source.LabelId));
                 Assert.That(result.Note, Is.EqualTo(source.Note!.ToString()));
                 Assert.That(result.Payee, Is.EqualTo(source.Payee!.ToString()));
+                Assert.That(result.Payer, Is.EqualTo(source.Payer!.ToString()));
                 Assert.That(result.Amount, Is.EqualTo(source.Amount));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
                 Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));

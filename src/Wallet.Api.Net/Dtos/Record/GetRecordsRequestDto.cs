@@ -34,6 +34,9 @@ namespace Wallet.Api.Net.Dtos.Record
         [JsonProperty("payee")]
         public string? Payee { get; set; }
 
+        [JsonProperty("payer")]
+        public string? Payer { get; set; }
+
         [JsonProperty("amount")]
         public string? Amount { get; set; }
 
