@@ -11,7 +11,7 @@
     {
       "id": "goal-1",
       "name": "Trip",
-      "targetAmount": "2500",
+      "targetAmount": { "currencyCode": "USD", "value": 2500 },
       "state": "open"
     }
   ]

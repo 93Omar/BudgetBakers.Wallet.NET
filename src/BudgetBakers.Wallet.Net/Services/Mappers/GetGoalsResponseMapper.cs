@@ -48,12 +48,20 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 DesiredDate = dto.DesiredDate,
                 IconName = dto.IconName,
-                InitialAmount = dto.InitialAmount,
+                InitialAmount = dto.InitialAmount is null ? null : new AmountWithCurrency
+                {
+                    CurrencyCode = dto.InitialAmount.CurrencyCode,
+                    Value = dto.InitialAmount.Value
+                },
                 Name = dto.Name,
                 Note = dto.Note,
                 State = dto.State,
                 StateUpdatedAt = dto.StateUpdatedAt,
-                TargetAmount = dto.TargetAmount,
+                TargetAmount = dto.TargetAmount is null ? null : new AmountWithCurrency
+                {
+                    CurrencyCode = dto.TargetAmount.CurrencyCode,
+                    Value = dto.TargetAmount.Value
+                },
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
 

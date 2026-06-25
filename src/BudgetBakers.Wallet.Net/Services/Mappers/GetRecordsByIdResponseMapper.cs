@@ -50,8 +50,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 },
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 Note = dto.Note,
-                Payee = dto.Payee,
-                Payer = dto.Payer,
+                CounterParty = dto.CounterParty,
                 PaymentType = MapperHelpers.ParsePaymentType(dto.PaymentType),
                 Photos = dto.Photos
                             .Select(MapperHelpers.MapRecordPhoto)

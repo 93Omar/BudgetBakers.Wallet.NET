@@ -16,8 +16,7 @@ namespace BudgetBakers.Wallet.Net.Models.StandingOrder
         public bool ManualPayment { get; set; }
         public string? Name { get; set; }
         public string? Note { get; set; }
-        public string? Payee { get; set; }
-        public string? Payer { get; set; }
+        public string? CounterParty { get; set; }
         public string? PaymentType { get; set; }
 
         /// <summary>

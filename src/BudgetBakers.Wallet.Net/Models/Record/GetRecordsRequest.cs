@@ -39,14 +39,10 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public TextFilter? Note { get; set; }
 
         /// <summary>
-        /// Filter expense records by payee.
+        /// Filter records by counter party (payee for expenses, payer for income).
+        /// Supports text prefix (e.g. "contains.Amazon").
         /// </summary>
-        public TextFilter? Payee { get; set; }
-
-        /// <summary>
-        /// Filter expense records by payer.
-        /// </summary>
-        public TextFilter? Payer { get; set; }
+        public TextFilter? CounterParty { get; set; }
 
         /// <summary>
         /// Filter by transaction amount.

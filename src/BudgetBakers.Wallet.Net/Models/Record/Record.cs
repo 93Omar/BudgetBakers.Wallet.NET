@@ -39,14 +39,9 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public string? Note { get; set; }
 
         /// <summary>
-        /// Payee name (for expense records).
+        /// Counter party name (payee for expenses, payer for income).
         /// </summary>
-        public string? Payee { get; set; }
-
-        /// <summary>
-        /// Payer name (for income records).
-        /// </summary>
-        public string? Payer { get; set; }
+        public string? CounterParty { get; set; }
 
         /// <summary>
         /// Payment method.

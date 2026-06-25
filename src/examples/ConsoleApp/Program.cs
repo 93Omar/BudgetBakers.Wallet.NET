@@ -50,22 +50,26 @@ namespace ConsoleApp
                 Offset = 0
             };
 
-            Result<GetAccountsResponse> result = await accountClient.GetAsync(getAccountsRequest);
+            Result<GetAccountsResponse> getAccountsResult = await accountClient.GetAsync(getAccountsRequest);
 
-            if (result.IsSuccess)
+            if (getAccountsResult.IsFailed)
             {
-                GetAccountsResponse response = result.Value;
-                logger.LogInformation("Accounts loaded successfully.");
+                LogErrors(logger, getAccountsResult.Errors);
+                await host.StopAsync();
             }
-            else
-            {
-                foreach (IError error in result.Errors)
-                {
-                    logger.LogError("Error loading accounts: {ErrorMessage}", error.Message);
-                }
-            }
+
+            GetAccountsResponse response = getAccountsResult.Value;
+            logger.LogInformation("Accounts loaded successfully.");
 
             await host.StopAsync();
+        }
+
+        private static void LogErrors(ILogger logger, IReadOnlyList<IError> errors)
+        {
+            foreach (IError error in errors)
+            {
+                logger.LogError("Error: {ErrorMessage}", error.Message);
+            }
         }
     }
 }

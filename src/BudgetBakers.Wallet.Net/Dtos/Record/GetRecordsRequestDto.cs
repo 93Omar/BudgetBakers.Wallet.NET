@@ -31,11 +31,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("note")]
         public string? Note { get; set; }
 
-        [JsonProperty("payee")]
-        public string? Payee { get; set; }
-
-        [JsonProperty("payer")]
-        public string? Payer { get; set; }
+        [JsonProperty("counterParty")]
+        public string? CounterParty { get; set; }
 
         [JsonProperty("amount")]
         public string? Amount { get; set; }

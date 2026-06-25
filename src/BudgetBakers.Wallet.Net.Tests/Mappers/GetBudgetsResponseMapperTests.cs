@@ -1,6 +1,5 @@
 using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Dtos.Budget;
-using BudgetBakers.Wallet.Net.Dtos.Label;
 using BudgetBakers.Wallet.Net.Models.Budget;
 using BudgetBakers.Wallet.Net.Services.Mappers;
 
@@ -42,10 +41,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         CreatedAt = "2026-01-01 00:00:00",
                         CurrencyCode = "EUR",
                         EndDate = "2026-12-31",
-                        Labels = new List<LabelDto>
-                        {
-                            new() { Id = Guid.NewGuid().ToString(), Name = "Essential", Color = "#FFFFFF", Archived = false, CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" }
-                        },
+                        LabelIds = new List<string> { Guid.NewGuid().ToString(), "not-a-guid" },
                         Name = "Budget annuale",
                         StartDate = "2026-01-01",
                         Type = "monthly",
@@ -76,7 +72,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mappedBudget.Amount, Is.EqualTo(source.Budgets[0].Amount));
                 Assert.That(mappedBudget.CurrencyCode, Is.EqualTo(source.Budgets[0].CurrencyCode));
                 Assert.That(mappedBudget.Name, Is.EqualTo(source.Budgets[0].Name));
-                Assert.That(mappedBudget.Labels, Has.Count.EqualTo(1));
+                Assert.That(mappedBudget.LabelIds, Has.Count.EqualTo(1));
                 Assert.That(result.AgentHints[0].Text, Is.EqualTo(source.AgentHints[0].Text));
             }
         }
@@ -95,7 +91,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         Id = "invalid-guid",
                         AccountIds = new List<string>(),
                         CategoryIds = new List<string> { "not-a-guid" },
-                        Labels = new List<LabelDto>()
+                        LabelIds = new List<string>()
                     }
                 },
                 AgentHints = new List<AgentHintDto>()
@@ -125,7 +121,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                     {
                         AccountIds = new List<string>(),
                         CategoryIds = new List<string>(),
-                        Labels = new List<LabelDto>()
+                        LabelIds = new List<string>()
                     }
                 },
                 AgentHints = new List<AgentHintDto>()
@@ -154,7 +150,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                     {
                         AccountIds = new List<string>(),
                         CategoryIds = new List<string>(),
-                        Labels = new List<LabelDto>()
+                        LabelIds = new List<string>()
                     }
                 },
                 AgentHints = new List<AgentHintDto>()

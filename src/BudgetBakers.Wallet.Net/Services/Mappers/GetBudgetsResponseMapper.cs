@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BudgetBakers.Wallet.Net.Dtos.Budget;
-using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Models.Budget;
-using BudgetBakers.Wallet.Net.Models.Label;
 using BudgetBakers.Wallet.Net.Utility;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Pagination;
@@ -54,10 +52,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 StartDate = dto.StartDate,
                 Type = dto.Type,
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt),
-                Labels = dto.Labels
-                            .Select(MapperHelpers.MapLabel)
-                            .OfType<Label>()
-                            .ToList()
+                LabelIds = MapGuidList(dto.LabelIds)
             };
 
             budget.AccountIds = MapGuidList(dto.AccountIds);

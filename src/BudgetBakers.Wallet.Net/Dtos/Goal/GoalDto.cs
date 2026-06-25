@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using BudgetBakers.Wallet.Net.Dtos;
 
 namespace BudgetBakers.Wallet.Net.Dtos.Goal
 {
@@ -20,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Goal
         public string? Id { get; set; }
 
         [JsonProperty("initialAmount")]
-        public string? InitialAmount { get; set; }
+        public AmountWithCurrencyDto? InitialAmount { get; set; }
 
         [JsonProperty("name")]
         public string? Name { get; set; }
@@ -35,7 +36,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Goal
         public string? StateUpdatedAt { get; set; }
 
         [JsonProperty("targetAmount")]
-        public string? TargetAmount { get; set; }
+        public AmountWithCurrencyDto? TargetAmount { get; set; }
 
         [JsonProperty("updatedAt")]
         public string? UpdatedAt { get; set; }

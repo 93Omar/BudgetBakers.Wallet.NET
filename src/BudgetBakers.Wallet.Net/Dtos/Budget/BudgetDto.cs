@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using BudgetBakers.Wallet.Net.Dtos.Label;
 
 namespace BudgetBakers.Wallet.Net.Dtos.Budget
 {
@@ -27,8 +26,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         [JsonProperty("id")]
         public string? Id { get; set; }
 
-        [JsonProperty("labels")]
-        public IList<LabelDto> Labels { get; set; } = Array.Empty<LabelDto>();
+        [JsonProperty("labelIds")]
+        public IList<string> LabelIds { get; set; } = Array.Empty<string>();
 
         [JsonProperty("name")]
         public string? Name { get; set; }

@@ -13,11 +13,8 @@
       "name": "Monthly Food",
       "amount": "300",
       "currencyCode": "EUR",
-      "labels": [
-        {
-          "id": "lab-1",
-          "name": "food"
-        }
+      "labelIds": [
+        "550e8400-e29b-41d4-a716-446655440000"
       ]
     }
   ]

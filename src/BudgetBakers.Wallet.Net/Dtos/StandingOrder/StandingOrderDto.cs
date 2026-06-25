@@ -38,11 +38,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         [JsonProperty("note")]
         public string? Note { get; set; }
 
-        [JsonProperty("payee")]
-        public string? Payee { get; set; }
-
-        [JsonProperty("payer")]
-        public string? Payer { get; set; }
+        [JsonProperty("counterParty")]
+        public string? CounterParty { get; set; }
 
         [JsonProperty("paymentType")]
         public string? PaymentType { get; set; }

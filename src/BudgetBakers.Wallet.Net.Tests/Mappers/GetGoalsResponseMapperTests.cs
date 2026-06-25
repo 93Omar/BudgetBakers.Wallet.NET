@@ -1,5 +1,7 @@
+using BudgetBakers.Wallet.Net.Dtos;
 using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Dtos.Goal;
+using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Goal;
 using BudgetBakers.Wallet.Net.Services.Mappers;
 
@@ -36,12 +38,12 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         CreatedAt = "2026-01-01 00:00:00",
                         DesiredDate = "2026-12-31",
                         IconName = "home",
-                        InitialAmount = "5000",
+                        InitialAmount = new AmountWithCurrencyDto { CurrencyCode = "USD", Value = 5000 },
                         Name = "House",
                         Note = "Down payment",
                         State = "active",
                         StateUpdatedAt = "2026-01-10",
-                        TargetAmount = "20000",
+                        TargetAmount = new AmountWithCurrencyDto { CurrencyCode = "USD", Value = 20000 },
                         UpdatedAt = "2026-01-02 00:00:00"
                     }
                 },
@@ -62,7 +64,10 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mapped.Id, Is.EqualTo(goalId));
                 Assert.That(mapped.Name, Is.EqualTo(source.Goals[0].Name));
                 Assert.That(mapped.Note, Is.EqualTo(source.Goals[0].Note));
-                Assert.That(mapped.TargetAmount, Is.EqualTo(source.Goals[0].TargetAmount));
+                Assert.That(mapped.TargetAmount?.Value, Is.EqualTo(source.Goals[0].TargetAmount?.Value));
+                Assert.That(mapped.TargetAmount?.CurrencyCode, Is.EqualTo(source.Goals[0].TargetAmount?.CurrencyCode));
+                Assert.That(mapped.InitialAmount?.Value, Is.EqualTo(source.Goals[0].InitialAmount?.Value));
+                Assert.That(mapped.InitialAmount?.CurrencyCode, Is.EqualTo(source.Goals[0].InitialAmount?.CurrencyCode));
             }
         }
 
