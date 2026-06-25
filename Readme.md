@@ -1,4 +1,4 @@
-# Wallet.Api.Net
+# BudgetBakers.Wallet.NET
 
 A .NET client library for the [BudgetBakers Wallet REST API](https://rest.budgetbakers.com/), targeting .NET 8, .NET 9, and .NET 10.
 
@@ -22,7 +22,7 @@ A .NET client library for the [BudgetBakers Wallet REST API](https://rest.budget
 All HTTP requests are authenticated with a Bearer token. You must provide a concrete implementation of `IAccessTokenProvider` that returns a valid access token:
 
 ```csharp
-using Wallet.Api.Net.Services;
+using BudgetBakers.Wallet.Net.Services;
 
 public class MyAccessTokenProvider : IAccessTokenProvider
 {
@@ -46,8 +46,8 @@ Use the `AddWalletClient<T>` extension method on `IServiceCollection` to registe
 #### Register all clients
 
 ```csharp
-using Wallet.Api.Net.Services;
-using Wallet.Api.Net.Utility;
+using BudgetBakers.Wallet.Net.Services;
+using BudgetBakers.Wallet.Net.Utility;
 
 services.AddSingleton<IAccessTokenProvider, MyAccessTokenProvider>();
 
@@ -62,9 +62,9 @@ services.AddWalletClients(client =>
 If you only need a subset of clients, register them individually:
 
 ```csharp
-using Wallet.Api.Net.Services;
-using Wallet.Api.Net.Services.Clients;
-using Wallet.Api.Net.Utility;
+using BudgetBakers.Wallet.Net.Services;
+using BudgetBakers.Wallet.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Utility;
 
 services.AddSingleton<IAccessTokenProvider, MyAccessTokenProvider>();
 
@@ -96,8 +96,8 @@ Inject the desired client and call `GetAsync`. Every method returns a `Result<T>
 
 ```csharp
 using FluentResults;
-using Wallet.Api.Net.Models.Account;
-using Wallet.Api.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Models.Account;
+using BudgetBakers.Wallet.Net.Services.Clients;
 
 public class MyService
 {
@@ -141,9 +141,9 @@ public class MyService
 If you prefer not to use a DI container, use `WalletClientFactory.CreateHttpClient` to obtain a pre-configured `HttpClient` with the Bearer token handler already attached, then pass it directly to any client constructor.
 
 ```csharp
-using Wallet.Api.Net.Services;
-using Wallet.Api.Net.Services.Clients;
-using Wallet.Api.Net.Utility;
+using BudgetBakers.Wallet.Net.Services;
+using BudgetBakers.Wallet.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Utility;
 
 IAccessTokenProvider tokenProvider = new MyAccessTokenProvider();
 

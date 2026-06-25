@@ -7,10 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using Wallet.Api.Net.Models.Account;
-using Wallet.Api.Net.Services;
-using Wallet.Api.Net.Services.Clients;
-using Wallet.Api.Net.Utility;
+using BudgetBakers.Wallet.Net.Models.Account;
+using BudgetBakers.Wallet.Net.Services;
+using BudgetBakers.Wallet.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Utility;
 
 namespace ConsoleApp
 {

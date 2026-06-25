@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Wallet.Api.Net.Services;
+using BudgetBakers.Wallet.Net.Services;
 
 namespace ConsoleApp.Services
 {

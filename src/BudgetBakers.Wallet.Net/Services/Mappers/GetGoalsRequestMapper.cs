@@ -1,0 +1,30 @@
+using BudgetBakers.Wallet.Net.Dtos.Goal;
+using BudgetBakers.Wallet.Net.Models.Goal;
+using BudgetBakers.Wallet.Net.Utility;
+
+namespace BudgetBakers.Wallet.Net.Services.Mappers
+{
+    internal class GetGoalsRequestMapper : IMapper<GetGoalsRequest, GetGoalsRequestDto>
+    {
+        public GetGoalsRequestDto? Map(GetGoalsRequest? source)
+        {
+            if (source is null)
+                return null;
+
+            GetGoalsRequestDto requestDto = new GetGoalsRequestDto()
+            {
+                Limit = source.Limit,
+                Offset = source.Offset,
+                AgentHints = source.AgentHints,
+                Id = MapperHelpers.JoinIds(source.Ids),
+                Name = source.Name?.ToString(),
+                Note = source.Note?.ToString(),
+                CreatedAt = source.CreatedAt?.ToString(),
+                UpdatedAt = source.UpdatedAt?.ToString()
+            };
+
+            return requestDto;
+        }
+    }
+}
+
