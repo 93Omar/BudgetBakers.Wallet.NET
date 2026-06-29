@@ -15,17 +15,12 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         /// <summary>
         /// Filter by ID.
         /// </summary>
-        public IList<string> Ids { get; set; } = Array.Empty<string>();
+        public IList<string> Ids { get; set; } = [];
 
         /// <summary>
         /// Filter by name.
         /// </summary>
         public TextFilter? Name { get; set; }
-
-        /// <summary>
-        /// Filter by bank account number.
-        /// </summary>
-        public TextFilter? BankAccountNumber { get; set; }
 
         /// <summary>
         /// Filter accounts by account type.
@@ -46,5 +41,20 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         /// Filter by last sync timestamp (when entity was last updated in the API database).
         /// </summary>
         public DateFilter? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Filter by archived status.
+        /// </summary>
+        public bool? Archived { get; set; }
+
+        /// <summary>
+        /// Filter accounts linked to a specific budget.
+        /// </summary>
+        public string? BudgetId { get; set; }
+
+        /// <summary>
+        /// Sort results by field.
+        /// </summary>
+        public TimestampSortBy? SortBy { get; set; }
     }
 }

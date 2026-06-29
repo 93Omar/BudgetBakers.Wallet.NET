@@ -6,6 +6,7 @@ using FluentResults;
 using BudgetBakers.Wallet.Net.Dtos.Goal;
 using BudgetBakers.Wallet.Net.Models.Goal;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Services.Executors;
 
 namespace BudgetBakers.Wallet.Net.Services.Clients
 {

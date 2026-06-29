@@ -22,6 +22,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("agentHints")]
         public bool AgentHints { get; set; }
 
+        [JsonProperty("withTotal")]
+        public bool WithTotal { get; set; }
+
         [JsonProperty("categoryId")]
         public string? CategoryId { get; set; }
 
@@ -45,6 +48,24 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
 
         [JsonProperty("sortBy")]
         public string? SortBy { get; set; }
+
+        [JsonProperty("id")]
+        public string? Id { get; set; }
+
+        [JsonProperty("recordType")]
+        public string? RecordType { get; set; }
+
+        [JsonProperty("paymentType")]
+        public string? PaymentType { get; set; }
+
+        [JsonProperty("recordState")]
+        public string? RecordState { get; set; }
+
+        [JsonProperty("source")]
+        public string? Source { get; set; }
+
+        [JsonProperty("convertTo")]
+        public string? ConvertTo { get; set; }
     }
 }
 

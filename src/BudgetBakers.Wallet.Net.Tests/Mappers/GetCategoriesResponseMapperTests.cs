@@ -21,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         public void Map_WhenSourceIsValid_MapsAllProperties()
         {
             var mapper = new GetCategoriesResponseMapper();
-            var categoryId = Guid.NewGuid();
+            var categoryId = Guid.NewGuid().ToString();
             var source = new GetCategoriesResponseDto
             {
                 Limit = 10,
@@ -37,11 +37,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         Color = "#123456",
                         CreatedAt = "2026-01-01 00:00:00",
                         CustomCategory = true,
-                        CustomColor = true,
                         CustomName = false,
                         Enabled = true,
-                        EnvelopeId = 5,
-                        IconName = "cart",
                         Name = "Shopping",
                         UpdatedAt = "2026-01-02 00:00:00"
                     }
@@ -63,7 +60,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mapped.Id, Is.EqualTo(categoryId));
                 Assert.That(mapped.Archived, Is.EqualTo(source.Categories[0].Archived));
                 Assert.That(mapped.Cardinality, Is.EqualTo(source.Categories[0].Cardinality));
-                Assert.That(mapped.EnvelopeId, Is.EqualTo(source.Categories[0].EnvelopeId));
                 Assert.That(mapped.Name, Is.EqualTo(source.Categories[0].Name));
             }
         }
@@ -88,7 +84,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(result!.Categories, Has.Count.EqualTo(1));
-                Assert.That(result.Categories[0].Id, Is.Null);
+                Assert.That(result.Categories[0].Id, Is.EqualTo("invalid-guid"));
             }
         }
     }

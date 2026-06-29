@@ -16,5 +16,10 @@ namespace BudgetBakers.Wallet.Net.Models.Pagination
         /// Number of items to skip (default: 0). Used for pagination.
         /// </summary>
         public required int Offset { get; set; }
+
+        /// <summary>
+        /// When true, includes a total count of matching items in the response pagination info.
+        /// </summary>
+        public bool WithTotal { get; set; } = false;
     }
 }

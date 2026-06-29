@@ -33,10 +33,13 @@ namespace BudgetBakers.Wallet.Net.Utility
             services.AddWalletClient<CategoryClient>(configureClient);
             services.AddWalletClient<LabelClient>(configureClient);
             services.AddWalletClient<BudgetClient>(configureClient);
+            services.AddWalletClient<DeleteClient>(configureClient);
             services.AddWalletClient<GoalClient>(configureClient);
             services.AddWalletClient<StandingOrderClient>(configureClient);
+            services.AddWalletClient<StandingOrderItemClient>(configureClient);
             services.AddWalletClient<RecordRuleClient>(configureClient);
             services.AddWalletClient<StatsClient>(configureClient);
+            services.AddWalletClient<ReferencesClient>(configureClient);
         }
 
         public static void AddWalletClients(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
@@ -46,10 +49,13 @@ namespace BudgetBakers.Wallet.Net.Utility
             services.AddWalletClient<CategoryClient>(configureClient);
             services.AddWalletClient<LabelClient>(configureClient);
             services.AddWalletClient<BudgetClient>(configureClient);
+            services.AddWalletClient<DeleteClient>(configureClient);
             services.AddWalletClient<GoalClient>(configureClient);
             services.AddWalletClient<StandingOrderClient>(configureClient);
+            services.AddWalletClient<StandingOrderItemClient>(configureClient);
             services.AddWalletClient<RecordRuleClient>(configureClient);
             services.AddWalletClient<StatsClient>(configureClient);
+            services.AddWalletClient<ReferencesClient>(configureClient);
         }
 
         private static void RegisterServices(IServiceCollection services)

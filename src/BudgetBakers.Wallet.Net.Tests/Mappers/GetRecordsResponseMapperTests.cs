@@ -24,9 +24,9 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         public void Map_WhenSourceIsValid_MapsAllProperties()
         {
             var mapper = new GetRecordsResponseMapper();
-            var recordId = Guid.NewGuid();
-            var categoryId = Guid.NewGuid();
-            var labelId = Guid.NewGuid();
+            var recordId = Guid.NewGuid().ToString();
+            var categoryId = Guid.NewGuid().ToString();
+            var labelId = Guid.NewGuid().ToString();
             var source = new GetRecordsResponseDto
             {
                 Limit = 3,
@@ -40,8 +40,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         Id = recordId.ToString(),
                         AccountId = "acc-1",
                         Amount = new BalanceDto { CurrencyCode = "EUR", Value = 10.5m },
-                        BaseAmount = new BalanceDto { CurrencyCode = "USD", Value = 11.5m },
-                        Category = new CategoryDto { Id = categoryId.ToString(), Name = "Food", Color = "#222222", EnvelopeId = 2 },
+                        Category = new CategoryDto { Id = categoryId.ToString(), Name = "Food", Color = "#222222" },
                         CreatedAt = "2026-01-01 00:00:00",
                         Labels = new List<LabelDto> { new() { Id = labelId.ToString(), Name = "L1", CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" } },
                         Note = "note",
@@ -73,7 +72,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mapped.Id, Is.EqualTo(recordId));
                 Assert.That(mapped.AccountId, Is.EqualTo(source.Records[0].AccountId));
                 Assert.That(mapped.Amount?.Value, Is.EqualTo(source.Records[0].Amount?.Value));
-                Assert.That(mapped.BaseAmount?.CurrencyCode, Is.EqualTo(source.Records[0].BaseAmount?.CurrencyCode));
                 Assert.That(mapped.Category?.Id, Is.EqualTo(categoryId));
                 Assert.That(mapped.Labels, Has.Count.EqualTo(1));
                 Assert.That(mapped.Photos, Has.Count.EqualTo(1));
@@ -107,7 +105,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(result!.Records, Has.Count.EqualTo(1));
-                Assert.That(result.Records[0].Id, Is.Null);
+                Assert.That(result.Records[0].Id, Is.EqualTo("invalid-guid"));
                 Assert.That(result.Records[0].Labels, Is.Empty);
             }
         }

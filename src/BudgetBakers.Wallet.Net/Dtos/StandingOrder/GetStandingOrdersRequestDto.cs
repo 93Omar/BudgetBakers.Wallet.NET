@@ -16,6 +16,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         [JsonProperty("agentHints")]
         public bool AgentHints { get; set; }
 
+        [JsonProperty("withTotal")]
+        public bool WithTotal { get; set; }
+
         [JsonProperty("id")]
         public string? Id { get; set; }
 
@@ -30,6 +33,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
 
         [JsonProperty("updatedAt")]
         public string? UpdatedAt { get; set; }
+
+        [JsonProperty("labelId")]
+        public string? LabelId { get; set; }
     }
 }
 

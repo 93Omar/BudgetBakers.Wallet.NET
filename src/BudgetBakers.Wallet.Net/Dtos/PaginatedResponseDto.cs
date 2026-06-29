@@ -15,6 +15,9 @@ namespace BudgetBakers.Wallet.Net.Dtos
 
         [JsonProperty("nextOffset")]
         public int NextOffset { get; set; }
+
+        [JsonProperty("total")]
+        public int? Total { get; set; }
     }
 }
 

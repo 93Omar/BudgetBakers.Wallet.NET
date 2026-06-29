@@ -32,7 +32,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 LabelId = "lab-1",
                 Note = new TextFilter { Prefix = TextPrefix.Contains, Value = "expense" },
                 CounterParty = new TextFilter { Prefix = TextPrefix.Equals, Value = "market" },
-                Amount = "120",
+                Amount = new NumberFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = 120.0 },
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 3, 1) },
                 SortBy = RecordSortBy.RecordDateDescending
@@ -52,7 +52,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.LabelId, Is.EqualTo(source.LabelId));
                 Assert.That(result.Note, Is.EqualTo(source.Note!.ToString()));
                 Assert.That(result.CounterParty, Is.EqualTo(source.CounterParty!.ToString()));
-                Assert.That(result.Amount, Is.EqualTo(source.Amount));
+                Assert.That(result.Amount, Is.EqualTo(source.Amount!.ToString()));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
                 Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
                 Assert.That(result.SortBy, Is.EqualTo("-recordDate"));

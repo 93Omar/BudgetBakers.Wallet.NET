@@ -22,7 +22,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         public void Map_WhenSourceIsValid_MapsAllProperties()
         {
             var mapper = new GetAccountsResponseMapper();
-            var accountId = Guid.NewGuid();
+            var accountId = Guid.NewGuid().ToString();
             var createdAt = "2026-01-02 03:04:05";
             var updatedAt = "2026-02-03 04:05:06";
             var hintData = new Dictionary<string, string> { ["source"] = "unit-test" };
@@ -44,7 +44,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         ExcludeFromStats = true,
                         Id = accountId.ToString(),
                         InitialBalance = new BalanceDto { CurrencyCode = "EUR", Value = 100.50m },
-                        InitialBaseBalance = new BalanceDto { CurrencyCode = "USD", Value = 120.70m },
                         Name = "Main card",
                         RecordStats = new RecordStatsDto
                         {
@@ -94,8 +93,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mappedAccount.Id, Is.EqualTo(accountId));
                 Assert.That(mappedAccount.InitialBalance?.CurrencyCode, Is.EqualTo(sourceAccount.InitialBalance?.CurrencyCode));
                 Assert.That(mappedAccount.InitialBalance?.Value, Is.EqualTo(sourceAccount.InitialBalance?.Value));
-                Assert.That(mappedAccount.InitialBaseBalance?.CurrencyCode, Is.EqualTo(sourceAccount.InitialBaseBalance?.CurrencyCode));
-                Assert.That(mappedAccount.InitialBaseBalance?.Value, Is.EqualTo(sourceAccount.InitialBaseBalance?.Value));
                 Assert.That(mappedAccount.Name, Is.EqualTo(sourceAccount.Name));
                 Assert.That(mappedAccount.RecordStats?.RecordCount, Is.EqualTo(sourceAccount.RecordStats?.RecordCount));
                 Assert.That(mappedAccount.RecordStats?.CreatedAt?.Min, Is.EqualTo(DateTime.Parse(sourceAccount.RecordStats!.CreatedAt!.Min!)));
@@ -143,7 +140,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(result!.Accounts, Has.Count.EqualTo(1));
-                Assert.That(result.Accounts[0].Id, Is.Null);
+                Assert.That(result.Accounts[0].Id, Is.EqualTo("invalid-guid"));
                 Assert.That(result.Accounts[0].AccountType, Is.Null);
             }
         }

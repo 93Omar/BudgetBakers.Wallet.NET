@@ -7,9 +7,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
     internal class GetAccountsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("accounts")]
-        public IList<AccountDto> Accounts { get; set; } = Array.Empty<AccountDto>();
+        public IList<AccountDto> Accounts { get; set; } = [];
 
         [JsonProperty("agentHints")]
-        public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
+        public IList<AgentHintDto> AgentHints { get; set; } = [];
     }
 }

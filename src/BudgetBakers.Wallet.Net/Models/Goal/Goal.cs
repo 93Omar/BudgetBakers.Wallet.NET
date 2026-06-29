@@ -7,9 +7,8 @@ namespace BudgetBakers.Wallet.Net.Models.Goal
     {
         public string? Color { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public string? DesiredDate { get; set; }
-        public string? IconName { get; set; }
-        public Guid? Id { get; set; }
+        public DateTime? DesiredDate { get; set; }
+        public string? Id { get; set; }
         public AmountWithCurrency? InitialAmount { get; set; }
         public string? Name { get; set; }
         public string? Note { get; set; }

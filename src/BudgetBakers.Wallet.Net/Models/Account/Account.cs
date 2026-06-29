@@ -13,6 +13,11 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         public string? BankAccountNumber { get; set; }
 
         /// <summary>
+        /// Computed account balance with credit card / overdraft corrections. Read-only.
+        /// </summary>
+        public AccountBalance? Balance { get; set; }
+
+        /// <summary>
         /// Hex color code.
         /// </summary>
         public string? Color { get; set; }
@@ -23,7 +28,7 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         /// <summary>
         /// Unique identifier.
         /// </summary>
-        public Guid? Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Account balance before any recorded transaction activity, in the account's original currency.
@@ -31,9 +36,14 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         public Balance? InitialBalance { get; set; }
 
         /// <summary>
-        /// initialBalance converted to the user's base currency, using the exchange rate at the time of account creation/update.
+        /// Whether this account is connected to a bank via automatic sync. Read-only.
         /// </summary>
-        public Balance? InitialBaseBalance { get; set; }
+        public bool IsBankSync { get; set; }
+
+        /// <summary>
+        /// Whether this account contains investment portfolio data. Read-only.
+        /// </summary>
+        public bool IsInvestmentAccount { get; set; }
 
         public string? Name { get; set; }
         public RecordStats? RecordStats { get; set; }

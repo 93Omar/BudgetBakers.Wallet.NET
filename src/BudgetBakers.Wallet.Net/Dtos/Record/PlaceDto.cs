@@ -21,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         public string? Name { get; set; }
 
         [JsonProperty("placeTypes")]
-        public IList<int> PlaceTypes { get; set; } = System.Array.Empty<int>();
+        public IList<int> PlaceTypes { get; set; } = [];
     }
 }
 

@@ -7,12 +7,12 @@ namespace BudgetBakers.Wallet.Net.Models.RecordRule
     {
         public Category.Category? Category { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public Guid? FromAccountId { get; set; }
-        public Guid? Id { get; set; }
-        public IList<string> Keywords { get; set; } = Array.Empty<string>();
-        public IList<Label.Label> Labels { get; set; } = Array.Empty<Label.Label>();
+        public string? FromAccountId { get; set; }
+        public string? Id { get; set; }
+        public IList<string> Keywords { get; set; } = [];
+        public IList<Label.Label> Labels { get; set; } = [];
         public string? Name { get; set; }
-        public Guid? ToAccountId { get; set; }
+        public string? ToAccountId { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
 }

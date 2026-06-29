@@ -22,7 +22,7 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         /// </summary>
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
-        public IList<Account> Accounts { get; set; } = Array.Empty<Account>();
-        public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
+        public IList<Account> Accounts { get; set; } = [];
+        public IList<AgentHint> AgentHints { get; set; } = [];
     }
 }

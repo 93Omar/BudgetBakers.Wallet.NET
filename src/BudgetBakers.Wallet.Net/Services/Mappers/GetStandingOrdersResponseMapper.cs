@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using BudgetBakers.Wallet.Net.Dtos.StandingOrder;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Label;
-using BudgetBakers.Wallet.Net.Models.StandingOrder;
 using BudgetBakers.Wallet.Net.Models.Pagination;
+using BudgetBakers.Wallet.Net.Models.StandingOrder;
 using BudgetBakers.Wallet.Net.Utility;
 
 namespace BudgetBakers.Wallet.Net.Services.Mappers
@@ -17,13 +15,14 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             if (source is null)
                 return null;
 
-            GetStandingOrdersResponse response = new GetStandingOrdersResponse()
+            GetStandingOrdersResponse response = new()
             {
                 Pagination = new PaginationInfo
                 {
                     Limit = source.Limit,
                     Offset = source.Offset,
-                    NextOffset = source.NextOffset
+                    NextOffset = source.NextOffset,
+                    Total = source.Total
                 },
                 StandingOrders = source.StandingOrders
                                     .Select(MapStandingOrder)
@@ -43,20 +42,25 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             if (dto is null)
                 return null;
 
-            var so = new StandingOrder
+            return new StandingOrder
             {
                 AccountId = dto.AccountId,
                 Amount = dto.Amount,
-                CategoryId = MapperHelpers.ParseGuid(dto.CategoryId),
+                CategoryId = dto.CategoryId,
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 CurrencyCode = dto.CurrencyCode,
+                DueDate = MapperHelpers.ParseDateTime(dto.DueDate),
+                DueDateNotificationEnabled = dto.DueDateNotificationEnabled,
                 GenerateFromDate = dto.GenerateFromDate,
+                Id = dto.Id,
                 ManualPayment = dto.ManualPayment,
                 Name = dto.Name,
                 Note = dto.Note,
                 CounterParty = dto.CounterParty,
                 PaymentType = dto.PaymentType,
                 RecurrenceRule = dto.RecurrenceRule,
+                Reminder = dto.Reminder,
+                ThreeDaysBeforeNotificationEnabled = dto.ThreeDaysBeforeNotificationEnabled,
                 Type = MapperHelpers.ParseStandingOrderType(dto.Type),
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt),
                 Labels = dto.Labels
@@ -64,12 +68,6 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                             .OfType<Label>()
                             .ToList()
             };
-
-            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
-                so.Id = id;
-
-            return so;
-        }       
+        }
     }
 }
-

@@ -27,7 +27,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Offset = 1,
                 AgentHints = true,
                 Ids = new List<string> { "so1", "so2" },
-                Name = "Rent",
+                Name = new TextFilter { Prefix = TextPrefix.Contains, Value = "Rent" },
                 CurrencyCode = "EUR",
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 1, 31) }
@@ -42,7 +42,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.AgentHints, Is.EqualTo(source.AgentHints));
                 Assert.That(result.Id, Is.EqualTo("so1,so2"));
-                Assert.That(result.Name, Is.EqualTo(source.Name));
+                Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
                 Assert.That(result.CurrencyCode, Is.EqualTo(source.CurrencyCode));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
                 Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));

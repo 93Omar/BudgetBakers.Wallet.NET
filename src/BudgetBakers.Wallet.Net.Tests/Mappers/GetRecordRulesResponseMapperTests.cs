@@ -22,9 +22,9 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         public void Map_WhenSourceIsValid_MapsAllProperties()
         {
             var mapper = new GetRecordRulesResponseMapper();
-            var ruleId = Guid.NewGuid();
-            var fromId = Guid.NewGuid();
-            var toId = Guid.NewGuid();
+            var ruleId = Guid.NewGuid().ToString();
+            var fromId = Guid.NewGuid().ToString();
+            var toId = Guid.NewGuid().ToString();
 
             var source = new GetRecordRulesResponseDto
             {
@@ -42,7 +42,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         CreatedAt = "2026-01-01 00:00:00",
                         UpdatedAt = "2026-01-02 00:00:00",
                         Keywords = new List<string> { "foo", "bar" },
-                        Category = new CategoryDto { Name = "Food", Color = "#111111", EnvelopeId = 9 },
+                        Category = new CategoryDto { Name = "Food", Color = "#111111" },
                         Labels = new List<LabelDto>
                         {
                             new() { Id = Guid.NewGuid().ToString(), Name = "Label", CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" }
@@ -101,7 +101,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(result!.RecordRules, Has.Count.EqualTo(1));
-                Assert.That(result.RecordRules[0].Id, Is.Null);
+                Assert.That(result.RecordRules[0].Id, Is.EqualTo("invalid-guid"));
             }
         }
     }

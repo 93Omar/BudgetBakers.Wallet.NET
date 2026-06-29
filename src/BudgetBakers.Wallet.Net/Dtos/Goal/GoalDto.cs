@@ -14,9 +14,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.Goal
         [JsonProperty("desiredDate")]
         public string? DesiredDate { get; set; }
 
-        [JsonProperty("iconName")]
-        public string? IconName { get; set; }
-
         [JsonProperty("id")]
         public string? Id { get; set; }
 

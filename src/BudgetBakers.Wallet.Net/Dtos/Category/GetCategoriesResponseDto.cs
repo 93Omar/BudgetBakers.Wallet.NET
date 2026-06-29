@@ -8,10 +8,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
     internal class GetCategoriesResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
-        public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
+        public IList<AgentHintDto> AgentHints { get; set; } = [];
 
         [JsonProperty("categories")]
-        public IList<CategoryDto> Categories { get; set; } = Array.Empty<CategoryDto>();
+        public IList<CategoryDto> Categories { get; set; } = [];
     }
 }
 

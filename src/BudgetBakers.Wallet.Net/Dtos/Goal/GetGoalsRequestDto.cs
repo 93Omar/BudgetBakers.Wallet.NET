@@ -16,6 +16,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Goal
         [JsonProperty("agentHints")]
         public bool AgentHints { get; set; }
 
+        [JsonProperty("withTotal")]
+        public bool WithTotal { get; set; }
+
         [JsonProperty("id")]
         public string? Id { get; set; }
 

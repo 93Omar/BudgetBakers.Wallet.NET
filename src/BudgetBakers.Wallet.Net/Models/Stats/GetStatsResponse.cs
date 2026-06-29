@@ -32,6 +32,6 @@ namespace BudgetBakers.Wallet.Net.Models.Stats
         /// <summary>
         /// Per-period request totals. Periods with zero usage are omitted.
         /// </summary>
-        public IList<StatsUsage> Usage { get; set; } = Array.Empty<StatsUsage>();
+        public IList<StatsUsage> Usage { get; set; } = [];
     }
 }

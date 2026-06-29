@@ -14,18 +14,18 @@ namespace BudgetBakers.Wallet.Net.Models.Category
 
         public DateTime? CreatedAt { get; set; }
         public bool CustomCategory { get; set; }
-        public bool CustomColor { get; set; }
         public bool CustomName { get; set; }
         public bool Enabled { get; set; }
-        public int? EnvelopeId { get; set; }
-        public string? IconName { get; set; }
-        public Guid? Id { get; set; }
+        public CategoryGroup? Group { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Category name
         /// </summary>
         public string? Name { get; set; }
 
+        public string? ParentId { get; set; }
+        public string? SystemId { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
 }
