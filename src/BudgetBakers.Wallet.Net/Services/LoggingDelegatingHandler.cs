@@ -17,11 +17,11 @@ namespace BudgetBakers.Wallet.Net.Services
                     await request.Content.LoadIntoBufferAsync();
 #endif
                     string requestBody = await request.Content.ReadAsStringAsync(cancellationToken);
-                    logger.LogTrace("Wallet API → {Method} {Uri} {Body}", request.Method, request.RequestUri, requestBody);
+                    logger.LogTrace("Wallet API --> {Method} {Uri}: {Body}", request.Method, request.RequestUri, requestBody);
                 }
                 else
                 {
-                    logger.LogTrace("Wallet API → {Method} {Uri}", request.Method, request.RequestUri);
+                    logger.LogTrace("Wallet API --> {Method} {Uri}", request.Method, request.RequestUri);
                 }
             }
 
@@ -35,7 +35,7 @@ namespace BudgetBakers.Wallet.Net.Services
                 await response.Content.LoadIntoBufferAsync();
 #endif
                 string responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
-                logger.LogTrace("Wallet API ← {StatusCode} {Body}", (int)response.StatusCode, responseBody);
+                logger.LogTrace("Wallet API <-- {StatusCode}: {Body}", (int)response.StatusCode, responseBody);
             }
 
             return response;

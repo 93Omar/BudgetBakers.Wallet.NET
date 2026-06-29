@@ -1,3 +1,9 @@
+using BudgetBakers.Wallet.Net.Models;
+using BudgetBakers.Wallet.Net.Models.Account;
+using BudgetBakers.Wallet.Net.Models.Record;
+using BudgetBakers.Wallet.Net.Services;
+using BudgetBakers.Wallet.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Utility;
 using ConsoleApp.Configuration;
 using ConsoleApp.Services;
 using FluentResults;
@@ -7,10 +13,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using BudgetBakers.Wallet.Net.Models.Account;
-using BudgetBakers.Wallet.Net.Services;
-using BudgetBakers.Wallet.Net.Services.Clients;
-using BudgetBakers.Wallet.Net.Utility;
 
 namespace ConsoleApp
 {
@@ -31,7 +33,7 @@ namespace ConsoleApp
 
                     services.AddSingleton<IAccessTokenProvider, OptionsAccessTokenProvider>();
 
-                    services.AddWalletClient<AccountClient>(client =>
+                    services.AddWalletClients(client =>
                     {
                         client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
                     });
@@ -43,9 +45,11 @@ namespace ConsoleApp
             logger.LogInformation("Starting application...");
 
             AccountClient accountClient = host.Services.GetRequiredService<AccountClient>();
+            RecordClient recordClient = host.Services.GetRequiredService<RecordClient>();
 
             GetAccountsRequest getAccountsRequest = new GetAccountsRequest()
             {
+                AccountType = AccountType.CurrentAccount,
                 Limit = 30,
                 Offset = 0
             };
@@ -58,8 +62,32 @@ namespace ConsoleApp
                 await host.StopAsync();
             }
 
-            GetAccountsResponse response = getAccountsResult.Value;
+            GetAccountsResponse accountsResponse = getAccountsResult.Value;
             logger.LogInformation("Accounts loaded successfully.");
+
+            GetRecordsRequest getRecordsRequest = new GetRecordsRequest()
+            {
+                AccountId = accountsResponse.Accounts.First().Id,
+                Limit = 50,
+                Offset = 0,
+                RecordDate = new DateFilter()
+                {
+                    Prefix = RangePrefix.GreaterThanOrEqual,
+                    Value = new DateTime(2026, 1, 1)
+                },
+                WithTotal = true
+            };
+
+            Result<GetRecordsResponse> getRecordsResponse = await recordClient.GetAsync(getRecordsRequest);
+
+            if (getRecordsResponse.IsFailed)
+            {
+                LogErrors(logger, getRecordsResponse.Errors);
+                await host.StopAsync();
+            }
+
+            GetRecordsResponse recordsResponse = getRecordsResponse.Value;
+            logger.LogInformation("Retrieved {number} records.", recordsResponse.Records.Count);
 
             await host.StopAsync();
         }
