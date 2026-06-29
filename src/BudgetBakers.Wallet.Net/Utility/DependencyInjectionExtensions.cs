@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 using BudgetBakers.Wallet.Net.Services;
@@ -14,7 +15,8 @@ namespace BudgetBakers.Wallet.Net.Utility
             RegisterServices(services);
 
             services.AddHttpClient<T>(configureClient)
-                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>();
+                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
+                    .AddHttpMessageHandler<LoggingDelegatingHandler>();
         }
 
         public static void AddWalletClient<T>(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
@@ -23,7 +25,8 @@ namespace BudgetBakers.Wallet.Net.Utility
             RegisterServices(services);
 
             services.AddHttpClient<T>(configureClient)
-                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>();
+                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
+                    .AddHttpMessageHandler<LoggingDelegatingHandler>();
         }
 
         public static void AddWalletClients(this IServiceCollection services, Action<HttpClient> configureClient)
@@ -61,6 +64,7 @@ namespace BudgetBakers.Wallet.Net.Utility
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<BearerTokenDelegatingHandler>();
+            services.AddTransient<LoggingDelegatingHandler>();
         }
     }
 }
