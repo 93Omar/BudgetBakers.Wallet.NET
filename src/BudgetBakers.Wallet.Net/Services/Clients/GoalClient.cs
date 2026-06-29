@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Text;
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.Goal;
 using BudgetBakers.Wallet.Net.Models.Goal;
 using BudgetBakers.Wallet.Net.Services.Mappers;
@@ -24,7 +25,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetGoalsResponse>> GetAsync(GetGoalsRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetGoalsRequest, GetGoalsRequestDto, GetGoalsResponseDto, GetGoalsResponse>(
                 _httpClient,
-                "/wallet/v1/api/goals",
+                ApiConstant.Endpoint.Goals,
                 request,
                 _getGoalsRequestMapper,
                 _getGoalsResponseMapper,

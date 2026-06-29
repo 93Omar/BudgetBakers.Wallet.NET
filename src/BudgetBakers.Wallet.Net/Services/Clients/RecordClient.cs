@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.Record;
 using BudgetBakers.Wallet.Net.Models.Record;
 using BudgetBakers.Wallet.Net.Services.Executors;
@@ -25,7 +26,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetRecordsResponse>> GetAsync(GetRecordsRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetRecordsRequest, GetRecordsRequestDto, GetRecordsResponseDto, GetRecordsResponse>(
                 _httpClient,
-                "/wallet/v1/api/records",
+                ApiConstant.Endpoint.Records,
                 request,
                 _getRecordsRequestMapper,
                 _getRecordsResponseMapper,
@@ -37,7 +38,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             return WalletApiWriteExecutor.ExecuteAsync<CreateRecordsRequest, List<CreateRecordItemDto>, CreateRecordsResponseDto, CreateRecordsResponse>(
                 _httpClient,
                 HttpMethod.Post,
-                "/wallet/v1/api/records",
+                ApiConstant.Endpoint.Records,
                 request!,
                 _createRecordsRequestMapper,
                 _createRecordsResponseMapper,
@@ -57,7 +58,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             return WalletApiWriteExecutor.ExecuteAsync<UpdateRecordsRequest, List<UpdateRecordItemDto>, UpdateRecordsResponseDto, UpdateRecordsResponse>(
                 _httpClient,
                 HttpMethod.Patch,
-                "/wallet/v1/api/records",
+                ApiConstant.Endpoint.Records,
                 request!,
                 _updateRecordsRequestMapper,
                 _updateRecordsResponseMapper,

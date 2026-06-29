@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace ConsoleApp
@@ -33,10 +32,7 @@ namespace ConsoleApp
 
                     services.AddSingleton<IAccessTokenProvider, OptionsAccessTokenProvider>();
 
-                    services.AddWalletClients(client =>
-                    {
-                        client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-                    });
+                    services.AddWalletClients();
                 })
                 .Build();
 

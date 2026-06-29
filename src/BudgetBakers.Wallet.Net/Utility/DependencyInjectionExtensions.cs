@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Services;
 using BudgetBakers.Wallet.Net.Services.Clients;
 
@@ -9,14 +10,18 @@ namespace BudgetBakers.Wallet.Net.Utility
 {
     public static class DependencyInjectionExtensions
     {
-        public static void AddWalletClient<T>(this IServiceCollection services, Action<HttpClient> configureClient)
+        public static void AddWalletClient<T>(this IServiceCollection services, Action<HttpClient>? configureClient = null)
             where T : class, IWalletClient
         {
             RegisterServices(services);
 
-            services.AddHttpClient<T>(configureClient)
-                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
-                    .AddHttpMessageHandler<LoggingDelegatingHandler>();
+            services.AddHttpClient<T>(client =>
+                     {
+                         client.BaseAddress = new Uri(ApiConstant.DefaultBaseAddress);
+                         configureClient?.Invoke(client);
+                     })
+                     .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
+                     .AddHttpMessageHandler<LoggingDelegatingHandler>();
         }
 
         public static void AddWalletClient<T>(this IServiceCollection services, Action<IServiceProvider, HttpClient> configureClient)
@@ -24,12 +29,16 @@ namespace BudgetBakers.Wallet.Net.Utility
         {
             RegisterServices(services);
 
-            services.AddHttpClient<T>(configureClient)
-                    .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
-                    .AddHttpMessageHandler<LoggingDelegatingHandler>();
+            services.AddHttpClient<T>((sp, client) =>
+                     {
+                         client.BaseAddress = new Uri(ApiConstant.DefaultBaseAddress);
+                         configureClient(sp, client);
+                     })
+                     .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
+                     .AddHttpMessageHandler<LoggingDelegatingHandler>();
         }
 
-        public static void AddWalletClients(this IServiceCollection services, Action<HttpClient> configureClient)
+        public static void AddWalletClients(this IServiceCollection services, Action<HttpClient>? configureClient = null)
         {
             services.AddWalletClient<AccountClient>(configureClient);
             services.AddWalletClient<RecordClient>(configureClient);

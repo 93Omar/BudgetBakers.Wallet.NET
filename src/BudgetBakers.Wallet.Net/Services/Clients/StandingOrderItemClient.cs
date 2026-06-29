@@ -1,4 +1,5 @@
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.StandingOrder;
 using BudgetBakers.Wallet.Net.Models.StandingOrder;
 using BudgetBakers.Wallet.Net.Services.Mappers;
@@ -20,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetStandingOrderItemsResponse>> GetAsync(GetStandingOrderItemsRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetStandingOrderItemsRequest, GetStandingOrderItemsRequestDto, GetStandingOrderItemsResponseDto, GetStandingOrderItemsResponse>(
                 _httpClient,
-                "/wallet/v1/api/standing-orders/items",
+                ApiConstant.Endpoint.StandingOrderItems,
                 request,
                 _requestMapper,
                 _responseMapper,

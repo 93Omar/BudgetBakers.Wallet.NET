@@ -1,4 +1,5 @@
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Models.Account;
 using BudgetBakers.Wallet.Net.Services.Executors;
@@ -24,7 +25,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetAccountsResponse>> GetAsync(GetAccountsRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetAccountsRequest, GetAccountsRequestDto, GetAccountsResponseDto, GetAccountsResponse>(
                 _httpClient,
-                "/wallet/v1/api/accounts",
+                ApiConstant.Endpoint.Accounts,
                 request,
                 _getAccountsRequestMapper,
                 _getAccountsResponseMapper,
@@ -34,7 +35,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             => WalletApiWriteExecutor.ExecuteAsync<CreateAccountRequest, CreateAccountRequestDto, CreateAccountResponseDto, CreateAccountResponse>(
                 _httpClient,
                 HttpMethod.Post,
-                "/wallet/v1/api/accounts",
+                ApiConstant.Endpoint.Accounts,
                 request,
                 _createAccountRequestMapper,
                 _createAccountResponseMapper,
@@ -44,7 +45,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             => WalletApiWriteExecutor.ExecuteAsync<UpdateAccountsRequest, List<UpdateAccountItemDto>, UpdateAccountsResponseDto, UpdateAccountsResponse>(
                 _httpClient,
                 HttpMethod.Patch,
-                "/wallet/v1/api/accounts",
+                ApiConstant.Endpoint.Accounts,
                 request,
                 _updateAccountsRequestMapper,
                 _updateAccountsResponseMapper,

@@ -1,4 +1,5 @@
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.References;
 using BudgetBakers.Wallet.Net.Models.References;
 using BudgetBakers.Wallet.Net.Services.Mappers;
@@ -21,7 +22,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetReferencesResponse>> GetAsync(GetReferencesRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetReferencesRequest, GetReferencesRequestDto, GetReferencesResponseDto, GetReferencesResponse>(
                 _httpClient,
-                $"/wallet/v1/api/{request?.EntityType.ToApiString()}/references",
+                string.Format(ApiConstant.Endpoint.ReferencesTemplate, request?.EntityType.ToApiString()),
                 request!,
                 _requestMapper,
                 _responseMapper,

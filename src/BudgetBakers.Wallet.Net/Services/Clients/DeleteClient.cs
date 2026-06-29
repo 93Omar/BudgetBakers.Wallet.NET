@@ -24,7 +24,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             if (request is null)
             {
                 Result<DeleteEntitiesResponse> nullRequestResult = Result.Fail<DeleteEntitiesResponse>(
-                    new Error(ApiConstant.Message.NullRequest).WithMetadata(ApiConstant.Metadata.Endpoint, "/wallet/v1/api/{type}"));
+                    new Error(ApiConstant.Message.NullRequest).WithMetadata(ApiConstant.Metadata.Endpoint, ApiConstant.Endpoint.DeleteTemplate));
 
                 return Task.FromResult(nullRequestResult);
             }
@@ -32,7 +32,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             return WalletApiWriteExecutor.ExecuteAsync<DeleteEntitiesRequest, DeleteEntitiesRequestDto, DeleteEntitiesResponseDto, DeleteEntitiesResponse>(
                 _httpClient,
                 HttpMethod.Delete,
-                $"/wallet/v1/api/{request.EntityType.ToApiString()}",
+                string.Format(ApiConstant.Endpoint.DeleteTemplate, request.EntityType.ToApiString()),
                 request,
                 _deleteEntitiesRequestMapper,
                 _deleteEntitiesResponseMapper,

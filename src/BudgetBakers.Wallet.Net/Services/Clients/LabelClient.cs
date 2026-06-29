@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.Label;
 using BudgetBakers.Wallet.Net.Models.Label;
 using BudgetBakers.Wallet.Net.Services.Executors;
@@ -25,7 +26,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetLabelsResponse>> GetAsync(GetLabelsRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetLabelsRequest, GetLabelsRequestDto, GetLabelsResponseDto, GetLabelsResponse>(
                 _httpClient,
-                "/wallet/v1/api/labels",
+                ApiConstant.Endpoint.Labels,
                 request,
                 _getLabelsRequestMapper,
                 _getLabelsResponseMapper,
@@ -35,7 +36,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             => WalletApiWriteExecutor.ExecuteAsync<CreateLabelRequest, CreateLabelRequestDto, CreateLabelResponseDto, CreateLabelResponse>(
                 _httpClient,
                 HttpMethod.Post,
-                "/wallet/v1/api/labels",
+                ApiConstant.Endpoint.Labels,
                 request,
                 _createLabelRequestMapper,
                 _createLabelResponseMapper,
@@ -47,7 +48,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             return WalletApiWriteExecutor.ExecuteAsync<UpdateLabelsRequest, List<UpdateLabelItemDto>, UpdateLabelsResponseDto, UpdateLabelsResponse>(
                 _httpClient,
                 HttpMethod.Patch,
-                "/wallet/v1/api/labels",
+                ApiConstant.Endpoint.Labels,
                 request!,
                 _updateLabelsRequestMapper,
                 _updateLabelsResponseMapper,

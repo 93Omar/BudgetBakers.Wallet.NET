@@ -43,6 +43,8 @@ The library automatically attaches the token as a `Bearer` authorization header 
 
 Use the `AddWalletClient<T>` extension method on `IServiceCollection` to register a single client, or `AddWalletClients` to register all available clients at once. You must also register your `IAccessTokenProvider` implementation.
 
+The library automatically uses `https://rest.budgetbakers.com/wallet/` as the default base address — no need to configure it manually. If you need to target a different environment (e.g. a sandbox), pass a `configureClient` action to override it.
+
 #### Register all clients
 
 ```csharp
@@ -51,10 +53,7 @@ using BudgetBakers.Wallet.Net.Utility;
 
 services.AddSingleton<IAccessTokenProvider, MyAccessTokenProvider>();
 
-services.AddWalletClients(client =>
-{
-    client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-});
+services.AddWalletClients();
 ```
 
 #### Register a single client
@@ -68,23 +67,23 @@ using BudgetBakers.Wallet.Net.Utility;
 
 services.AddSingleton<IAccessTokenProvider, MyAccessTokenProvider>();
 
-services.AddWalletClient<AccountClient>(client =>
-{
-    client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-});
-
-services.AddWalletClient<RecordClient>(client =>
-{
-    client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-});
+services.AddWalletClient<AccountClient>();
+services.AddWalletClient<RecordClient>();
 ```
 
-Both `AddWalletClients` and `AddWalletClient<T>` provide an overload that accepts `Action<IServiceProvider, HttpClient>` when you need access to the service provider during configuration:
+To override the base address (e.g. for a sandbox environment), use the `configureClient` overload. `AddWalletClients` and `AddWalletClient<T>` also accept `Action<IServiceProvider, HttpClient>` when access to the service provider is needed:
 
 ```csharp
+// Override the base address for all clients
+services.AddWalletClients(client =>
+{
+    client.BaseAddress = new Uri("https://sandbox.budgetbakers.com/wallet/");
+});
+
+// Or with access to the service provider
 services.AddWalletClients((serviceProvider, client) =>
 {
-    client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
+    client.BaseAddress = new Uri("https://sandbox.budgetbakers.com/wallet/");
 });
 ```
 
@@ -147,14 +146,20 @@ using BudgetBakers.Wallet.Net.Utility;
 
 IAccessTokenProvider tokenProvider = new MyAccessTokenProvider();
 
-HttpClient httpClient = WalletClientFactory.CreateHttpClient(tokenProvider, client =>
-{
-    client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-});
+HttpClient httpClient = WalletClientFactory.CreateHttpClient(tokenProvider);
 
 AccountClient accountClient = new AccountClient(httpClient);
 
 Result<GetAccountsResponse> result = await accountClient.GetAsync(new GetAccountsRequest { Limit = 20 });
+```
+
+The default base address (`https://rest.budgetbakers.com/wallet/`) is applied automatically. To target a different environment, pass an optional `configureClient` action:
+
+```csharp
+HttpClient httpClient = WalletClientFactory.CreateHttpClient(tokenProvider, client =>
+{
+    client.BaseAddress = new Uri("https://sandbox.budgetbakers.com/wallet/");
+});
 ```
 
 `WalletClientFactory.CreateHttpClient` internally constructs the `BearerTokenDelegatingHandler` (which is `internal` to the library) and wires it up with a standard `HttpClientHandler` as its inner handler, so no additional setup is required.
@@ -216,9 +221,6 @@ using IHost host = Host.CreateDefaultBuilder(args)
 
         services.AddSingleton<IAccessTokenProvider, OptionsAccessTokenProvider>();
 
-        services.AddWalletClient<AccountClient>(client =>
-        {
-            client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-        });
+        services.AddWalletClient<AccountClient>();
     })
     .Build();

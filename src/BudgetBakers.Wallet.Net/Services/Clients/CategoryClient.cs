@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.Category;
 using BudgetBakers.Wallet.Net.Models.Category;
 using BudgetBakers.Wallet.Net.Services.Executors;
@@ -25,7 +26,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetCategoriesResponse>> GetAsync(GetCategoriesRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetCategoriesRequest, GetCategoriesRequestDto, GetCategoriesResponseDto, GetCategoriesResponse>(
                 _httpClient,
-                "/wallet/v1/api/categories",
+                ApiConstant.Endpoint.Categories,
                 request,
                 _getCategoriesRequestMapper,
                 _getCategoriesResponseMapper,
@@ -35,7 +36,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             => WalletApiWriteExecutor.ExecuteAsync<CreateSubcategoryRequest, CreateSubcategoryRequestDto, CreateCategoryResponseDto, CreateCategoryResponse>(
                 _httpClient,
                 HttpMethod.Post,
-                "/wallet/v1/api/categories/custom",
+                ApiConstant.Endpoint.CategoriesCustom,
                 request,
                 _createSubcategoryRequestMapper,
                 _createCategoryResponseMapper,
@@ -47,7 +48,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
             return WalletApiWriteExecutor.ExecuteAsync<UpdateCategoriesRequest, List<UpdateCategoryItemDto>, UpdateCategoriesResponseDto, UpdateCategoriesResponse>(
                 _httpClient,
                 HttpMethod.Patch,
-                "/wallet/v1/api/categories",
+                ApiConstant.Endpoint.Categories,
                 request!,
                 _updateCategoriesRequestMapper,
                 _updateCategoriesResponseMapper,
