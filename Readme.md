@@ -168,6 +168,17 @@ HttpClient httpClient = WalletClientFactory.CreateHttpClient(tokenProvider, clie
 
 ---
 
+## ⚠️ Disclaimer: Write Operations (Create/Update Endpoints)
+
+Some endpoints exposed by the Wallet API create or modify data (e.g. creating records, updating accounts, etc.). When using clients that wrap these endpoints:
+
+- **Use them with extreme caution.** Write operations are irreversible from the client's perspective and can permanently alter or duplicate data in a user's Wallet account.
+- **Always verify behavior on a small, controlled scale first** (e.g. a single test record) before relying on the result in production code.
+- **Never implement batch create/update logic without prior verification.** Test the exact request payload and confirm the resulting behavior via the API response and/or the Wallet app before scaling up to bulk operations, since mistakes at batch scale are difficult or impossible to undo.
+- When in doubt, consult the [Wallet OpenAPI specification](https://rest.budgetbakers.com/wallet/openapi/ui) for the exact contract of the endpoint before integrating it.
+
+---
+
 ## Available Clients
 
 Each client corresponds to a resource group in the [Wallet OpenAPI specification](https://rest.budgetbakers.com/wallet/openapi/ui). The request and response models map directly to the parameters and schemas described there.
