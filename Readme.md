@@ -1,6 +1,6 @@
 # BudgetBakers.Wallet.NET
 
-A .NET client library for the [BudgetBakers Wallet REST API](https://rest.budgetbakers.com/), targeting .NET 8, .NET 9, and .NET 10.
+A .NET client library for the [BudgetBakers Wallet REST API](https://budgetbakers.com/en/products/wallet/integrations/rest-api/), targeting .NET 8, .NET 9, and .NET 10.
 
 > The available clients mirror the endpoints documented in the official Wallet API:
 > **[https://rest.budgetbakers.com/wallet/openapi/ui](https://rest.budgetbakers.com/wallet/openapi/ui)**
@@ -165,6 +165,17 @@ HttpClient httpClient = WalletClientFactory.CreateHttpClient(tokenProvider, clie
 `WalletClientFactory.CreateHttpClient` internally constructs the `BearerTokenDelegatingHandler` (which is `internal` to the library) and wires it up with a standard `HttpClientHandler` as its inner handler, so no additional setup is required.
 
 > **Note:** The returned `HttpClient` is owned by the caller. Dispose it when it is no longer needed, or reuse a single instance for the lifetime of your application.
+
+---
+
+## ⚠️ Disclaimer: Write Operations (Create/Update Endpoints)
+
+Some endpoints exposed by the Wallet API create or modify data (e.g. creating records, updating accounts, etc.). When using clients that wrap these endpoints:
+
+- **Use them with extreme caution.** Write operations are irreversible from the client's perspective and can permanently alter or duplicate data in a user's Wallet account.
+- **Always verify behavior on a small, controlled scale first** (e.g. a single test record) before relying on the result in production code.
+- **Never implement batch create/update logic without prior verification.** Test the exact request payload and confirm the resulting behavior via the API response and/or the Wallet app before scaling up to bulk operations, since mistakes at batch scale are difficult or impossible to undo.
+- When in doubt, consult the [Wallet OpenAPI specification](https://rest.budgetbakers.com/wallet/openapi/ui) for the exact contract of the endpoint before integrating it.
 
 ---
 

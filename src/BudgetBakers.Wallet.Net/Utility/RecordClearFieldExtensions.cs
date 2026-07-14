@@ -12,6 +12,7 @@ namespace BudgetBakers.Wallet.Net.Utility
             RecordClearField.Note => "note",
             RecordClearField.CounterParty => "counterParty",
             RecordClearField.Place => "place",
+            RecordClearField.Transfer => "transfer",
             _ => throw new InvalidOperationException($"Unsupported {nameof(RecordClearField)} value: {value}")
         };
     }

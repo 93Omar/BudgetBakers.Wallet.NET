@@ -6,6 +6,7 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         LabelIds = 1,
         Note = 2,
         CounterParty = 3,
-        Place = 4
+        Place = 4,
+        Transfer = 5
     }
 }

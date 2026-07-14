@@ -13,7 +13,7 @@ namespace BudgetBakers.Wallet.Net.Models.References
         public required ReferenceEntityType EntityType { get; set; }
 
         /// <summary>
-        /// IDs to check references for (max 10).
+        /// IDs to check references for (max 20).
         /// </summary>
         public IList<string> Ids { get; set; } = [];
     }

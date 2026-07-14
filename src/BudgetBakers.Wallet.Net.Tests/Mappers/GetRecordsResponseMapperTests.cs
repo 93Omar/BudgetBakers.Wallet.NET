@@ -51,6 +51,18 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         RecordDate = "2026-01-15 00:00:00",
                         RecordState = "reconciled",
                         RecordType = "expense",
+                        Transfer = new TransferOutputDto
+                        {
+                            Type = "paired",
+                            MirrorRecord = new MirrorRecordEmbedDto
+                            {
+                                AccountId = "acc-2",
+                                Amount = new AmountWithCurrencyDto { CurrencyCode = "EUR", Value = -10.5 },
+                                CounterParty = "store",
+                                Id = "mirror-id",
+                                Note = "mirror note"
+                            }
+                        },
                         UpdatedAt = "2026-01-02 00:00:00"
                     }
                 },
@@ -77,6 +89,9 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mapped.Photos, Has.Count.EqualTo(1));
                 Assert.That(mapped.Place?.Name, Is.EqualTo(source.Records[0].Place?.Name));
                 Assert.That(mapped.RecordType, Is.EqualTo(RecordType.Expense));
+                Assert.That(mapped.Transfer?.Type, Is.EqualTo(TransferType.Paired));
+                Assert.That(mapped.Transfer?.MirrorRecord?.Id, Is.EqualTo("mirror-id"));
+                Assert.That(mapped.Transfer?.MirrorRecord?.Amount?.Value, Is.EqualTo(-10.5));
             }
         }
 

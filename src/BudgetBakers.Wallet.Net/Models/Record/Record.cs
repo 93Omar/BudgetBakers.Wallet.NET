@@ -25,7 +25,7 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public RecordState? RecordState { get; set; }
         public RecordType? RecordType { get; set; }
         public string? Source { get; set; }
-        public TransferRecordEmbed? TransferRecord { get; set; }
+        public TransferOutput? Transfer { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
 }
