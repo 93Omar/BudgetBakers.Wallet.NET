@@ -7,6 +7,23 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>BudgetBakers.Wallet.Net</PackageId>
+    <Authors>93Omar</Authors>
+    <Description>Unofficial .NET wrapper for the BudgetBakers Wallet API</Description>
+    <PackageProjectUrl>https://github.com/93Omar/BudgetBakers.Wallet.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/93Omar/BudgetBakers.Wallet.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>budgetbakers;wallet;rest-api;client</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="FluentResults" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
