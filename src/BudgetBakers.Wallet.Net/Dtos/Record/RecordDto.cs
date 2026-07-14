@@ -62,8 +62,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("source")]
         public string? Source { get; set; }
 
-        [JsonProperty("transferRecord")]
-        public TransferRecordEmbedDto? TransferRecord { get; set; }
+        [JsonProperty("transfer")]
+        public TransferOutputDto? Transfer { get; set; }
 
         [JsonProperty("updatedAt")]
         public string? UpdatedAt { get; set; }

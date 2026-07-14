@@ -14,7 +14,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         public DateTime RecordDate { get; set; }
 
         [JsonProperty("paymentType")]
-        public required string PaymentType { get; set; }
+        public string? PaymentType { get; set; }
 
         [JsonProperty("categoryId")]
         public string? CategoryId { get; set; }
@@ -33,5 +33,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
 
         [JsonProperty("place")]
         public RecordPlaceInputDto? Place { get; set; }
+
+        [JsonProperty("transfer")]
+        public CreateRecordTransferInputDto? Transfer { get; set; }
     }
 }

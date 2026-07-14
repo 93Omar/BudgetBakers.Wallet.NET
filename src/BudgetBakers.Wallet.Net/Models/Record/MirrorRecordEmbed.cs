@@ -2,7 +2,7 @@ using BudgetBakers.Wallet.Net.Models;
 
 namespace BudgetBakers.Wallet.Net.Models.Record
 {
-    public class TransferRecordEmbed
+    public class MirrorRecordEmbed
     {
         public string? AccountId { get; set; }
         public AmountWithCurrency? Amount { get; set; }

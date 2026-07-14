@@ -8,5 +8,6 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public Record? Record { get; set; }
         public string? Error { get; set; }
         public string? ErrorType { get; set; }
+        public bool IsMirror { get; set; }
     }
 }

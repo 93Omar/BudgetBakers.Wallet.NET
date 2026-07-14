@@ -69,6 +69,12 @@ namespace BudgetBakers.Wallet.Net.Utility
             ["expense"] = StandingOrderType.Expense
         };
 
+        private static readonly Dictionary<string, TransferType> _transferTypeMap = new()
+        {
+            ["paired"] = TransferType.Paired,
+            ["unpaired"] = TransferType.Unpaired
+        };
+
         public static AgentHint? MapAgentHint(AgentHintDto? dto)
         {
             if (dto is null)
@@ -142,6 +148,17 @@ namespace BudgetBakers.Wallet.Net.Utility
                 return standingOrderType;
 
             throw new InvalidOperationException($"Unknown {nameof(StandingOrderType)} value: '{value}'");
+        }
+
+        public static TransferType? ParseTransferType(string? value)
+        {
+            if (value is null)
+                return null;
+
+            if (_transferTypeMap.TryGetValue(value, out TransferType transferType))
+                return transferType;
+
+            throw new InvalidOperationException($"Unknown {nameof(TransferType)} value: '{value}'");
         }
 
         public static DateTime? ParseDateTime(string? s)
@@ -325,18 +342,7 @@ namespace BudgetBakers.Wallet.Net.Utility
                 RecordState = ParseRecordState(dto.RecordState),
                 RecordType = ParseRecordType(dto.RecordType),
                 Source = dto.Source,
-                TransferRecord = dto.TransferRecord is null ? null : new TransferRecordEmbed
-                {
-                    AccountId = dto.TransferRecord.AccountId,
-                    Amount = dto.TransferRecord.Amount is null ? null : new AmountWithCurrency
-                    {
-                        CurrencyCode = dto.TransferRecord.Amount.CurrencyCode,
-                        Value = dto.TransferRecord.Amount.Value
-                    },
-                    CounterParty = dto.TransferRecord.CounterParty,
-                    Id = dto.TransferRecord.Id,
-                    Note = dto.TransferRecord.Note
-                },
+                Transfer = MapTransferOutput(dto.Transfer),
                 UpdatedAt = ParseDateTime(dto.UpdatedAt)
             };
 
@@ -344,6 +350,37 @@ namespace BudgetBakers.Wallet.Net.Utility
                 record.Labels = dto.Labels.Select(MapLabel).OfType<Label>().ToList();
 
             return record;
+        }
+
+        public static TransferOutput? MapTransferOutput(TransferOutputDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new TransferOutput
+            {
+                Type = ParseTransferType(dto.Type),
+                MirrorRecord = MapMirrorRecordEmbed(dto.MirrorRecord)
+            };
+        }
+
+        public static MirrorRecordEmbed? MapMirrorRecordEmbed(MirrorRecordEmbedDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new MirrorRecordEmbed
+            {
+                AccountId = dto.AccountId,
+                Amount = dto.Amount is null ? null : new AmountWithCurrency
+                {
+                    CurrencyCode = dto.Amount.CurrencyCode,
+                    Value = dto.Amount.Value
+                },
+                CounterParty = dto.CounterParty,
+                Id = dto.Id,
+                Note = dto.Note
+            };
         }
 
         public static RecordPhoto? MapRecordPhoto(PhotoDto? dto)

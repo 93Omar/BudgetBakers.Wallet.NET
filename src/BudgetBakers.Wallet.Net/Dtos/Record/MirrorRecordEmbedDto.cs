@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace BudgetBakers.Wallet.Net.Dtos.Record
 {
-    internal class TransferRecordEmbedDto
+    internal class MirrorRecordEmbedDto
     {
         [JsonProperty("accountId")]
         public string? AccountId { get; set; }
