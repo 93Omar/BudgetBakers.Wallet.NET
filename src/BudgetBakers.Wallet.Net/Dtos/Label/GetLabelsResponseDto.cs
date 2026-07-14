@@ -8,10 +8,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.Label
     internal class GetLabelsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
-        public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
+        public IList<AgentHintDto> AgentHints { get; set; } = [];
 
         [JsonProperty("labels")]
-        public IList<LabelDto> Labels { get; set; } = Array.Empty<LabelDto>();
+        public IList<LabelDto> Labels { get; set; } = [];
     }
 }
 

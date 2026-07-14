@@ -6,6 +6,8 @@ namespace BudgetBakers.Wallet.Net.Constants
 {
     internal static class ApiConstant
     {
+        internal const string DefaultBaseAddress = "https://rest.budgetbakers.com/wallet/";
+
         internal static class Message
         {
             internal const string NullRequest = "Request cannot be null.";
@@ -37,6 +39,23 @@ namespace BudgetBakers.Wallet.Net.Constants
         internal static class Separator
         {
             internal const string Ids = ",";
+        }
+
+        internal static class Endpoint
+        {
+            internal const string Accounts = "v1/api/accounts";
+            internal const string Budgets = "v1/api/budgets";
+            internal const string Categories = "v1/api/categories";
+            internal const string CategoriesCustom = "v1/api/categories/custom";
+            internal const string Goals = "v1/api/goals";
+            internal const string Labels = "v1/api/labels";
+            internal const string Records = "v1/api/records";
+            internal const string RecordRules = "v1/api/record-rules";
+            internal const string StandingOrders = "v1/api/standing-orders";
+            internal const string StandingOrderItems = "v1/api/standing-orders/items";
+            internal const string Stats = "v1/api/api-usage/stats";
+            internal const string DeleteTemplate = "v1/api/{0}";
+            internal const string ReferencesTemplate = "v1/api/{0}/references";
         }
     }
 }

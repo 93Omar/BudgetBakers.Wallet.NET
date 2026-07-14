@@ -16,6 +16,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
         [JsonProperty("agentHints")]
         public bool AgentHints { get; set; }
 
+        [JsonProperty("withTotal")]
+        public bool WithTotal { get; set; }
+
         [JsonProperty("id")]
         public string? Id { get; set; }
 
@@ -27,6 +30,18 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
 
         [JsonProperty("updatedAt")]
         public string? UpdatedAt { get; set; }
+
+        [JsonProperty("customCategory")]
+        public bool? CustomCategory { get; set; }
+
+        [JsonProperty("archived")]
+        public bool? Archived { get; set; }
+
+        [JsonProperty("budgetId")]
+        public string? BudgetId { get; set; }
+
+        [JsonProperty("sortBy")]
+        public string? SortBy { get; set; }
     }
 }
 

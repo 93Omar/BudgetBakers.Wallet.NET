@@ -16,10 +16,12 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
+                WithTotal = source.WithTotal,
                 Id = MapperHelpers.JoinIds(source.Ids),
                 Name = source.Name?.ToString(),
                 CreatedAt = source.CreatedAt?.ToString(),
-                UpdatedAt = source.UpdatedAt?.ToString()
+                UpdatedAt = source.UpdatedAt?.ToString(),
+                LabelId = source.LabelId
             };
 
             return requestDto;

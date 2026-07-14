@@ -21,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         public void Map_WhenSourceIsValid_MapsAllProperties()
         {
             var mapper = new GetLabelsResponseMapper();
-            var labelId = Guid.NewGuid();
+            var labelId = Guid.NewGuid().ToString();
             var source = new GetLabelsResponseDto
             {
                 Limit = 12,

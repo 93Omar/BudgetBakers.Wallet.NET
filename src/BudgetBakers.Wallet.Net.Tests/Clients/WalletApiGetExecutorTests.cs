@@ -3,6 +3,7 @@ using System.Text;
 using FluentResults;
 using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Services.Executors;
 using BudgetBakers.Wallet.Net.Tests.Infrastructure;
 
 namespace BudgetBakers.Wallet.Net.Tests.Clients
@@ -274,3 +275,4 @@ namespace BudgetBakers.Wallet.Net.Tests.Clients
         }
     }
 }
+

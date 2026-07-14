@@ -14,19 +14,25 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
 
             GetRecordsRequestDto dto = new GetRecordsRequestDto
             {
+                Id = MapperHelpers.JoinIds(source.Ids),
                 AccountId = source.AccountId,
                 RecordDate = source.RecordDate?.ToString(),
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
+                WithTotal = source.WithTotal,
                 CategoryId = source.CategoryId,
                 LabelId = source.LabelId,
                 Note = source.Note?.ToString(),
-                Payee = source.Payee?.ToString(),
-                Payer = source.Payer?.ToString(),
-                Amount = source.Amount,
+                CounterParty = source.CounterParty?.ToString(),
+                Amount = source.Amount?.ToString(),
                 CreatedAt = source.CreatedAt?.ToString(),
                 UpdatedAt = source.UpdatedAt?.ToString(),
+                RecordType = source.RecordType?.ToApiString(),
+                PaymentType = source.PaymentType?.ToApiString(),
+                RecordState = source.RecordState?.ToApiString(),
+                Source = source.Source,
+                ConvertTo = source.ConvertTo,
                 SortBy = source.SortBy?.ToApiString()
             };
 

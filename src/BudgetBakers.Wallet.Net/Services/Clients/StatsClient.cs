@@ -1,7 +1,9 @@
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.Stats;
 using BudgetBakers.Wallet.Net.Models.Stats;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Services.Executors;
 
 namespace BudgetBakers.Wallet.Net.Services.Clients
 {
@@ -19,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetStatsResponse>> GetAsync(GetStatsRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetStatsRequest, GetStatsRequestDto, GetStatsResponseDto, GetStatsResponse>(
                 _httpClient,
-                "/wallet/v1/api/api-usage/stats",
+                ApiConstant.Endpoint.Stats,
                 request,
                 _getStatsRequestMapper,
                 _getStatsResponseMapper,

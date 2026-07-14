@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using BudgetBakers.Wallet.Net.Dtos.Goal;
 using BudgetBakers.Wallet.Net.Models;
@@ -16,13 +14,14 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             if (source is null)
                 return null;
 
-            GetGoalsResponse response = new GetGoalsResponse()
+            GetGoalsResponse response = new()
             {
                 Pagination = new PaginationInfo
                 {
                     Limit = source.Limit,
                     Offset = source.Offset,
-                    NextOffset = source.NextOffset
+                    NextOffset = source.NextOffset,
+                    Total = source.Total
                 },
                 Goals = source.Goals
                             .Select(MapGoal)
@@ -42,26 +41,28 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             if (dto is null)
                 return null;
 
-            var goal = new Goal
+            return new Goal
             {
                 Color = dto.Color,
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
-                DesiredDate = dto.DesiredDate,
-                IconName = dto.IconName,
-                InitialAmount = dto.InitialAmount,
+                DesiredDate = MapperHelpers.ParseDateTime(dto.DesiredDate),
+                Id = dto.Id,
+                InitialAmount = dto.InitialAmount is null ? null : new AmountWithCurrency
+                {
+                    CurrencyCode = dto.InitialAmount.CurrencyCode,
+                    Value = dto.InitialAmount.Value
+                },
                 Name = dto.Name,
                 Note = dto.Note,
                 State = dto.State,
                 StateUpdatedAt = dto.StateUpdatedAt,
-                TargetAmount = dto.TargetAmount,
+                TargetAmount = dto.TargetAmount is null ? null : new AmountWithCurrency
+                {
+                    CurrencyCode = dto.TargetAmount.CurrencyCode,
+                    Value = dto.TargetAmount.Value
+                },
                 UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
             };
-
-            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
-                goal.Id = id;
-
-            return goal;
         }
     }
 }
-

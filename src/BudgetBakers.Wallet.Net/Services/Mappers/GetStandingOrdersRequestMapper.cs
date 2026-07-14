@@ -11,20 +11,21 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             if (source is null)
                 return null;
 
-            GetStandingOrdersRequestDto requestDto = new GetStandingOrdersRequestDto()
+            GetStandingOrdersRequestDto requestDto = new()
             {
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
+                WithTotal = source.WithTotal,
                 Id = MapperHelpers.JoinIds(source.Ids),
-                Name = source.Name,
+                Name = source.Name?.ToString(),
                 CurrencyCode = source.CurrencyCode,
                 CreatedAt = source.CreatedAt?.ToString(),
-                UpdatedAt = source.UpdatedAt?.ToString()
+                UpdatedAt = source.UpdatedAt?.ToString(),
+                LabelId = source.LabelId
             };
 
             return requestDto;
         }
     }
 }
-

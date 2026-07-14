@@ -16,6 +16,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
+                WithTotal = source.WithTotal,
                 Id = MapperHelpers.JoinIds(source.Ids),
                 Name = source.Name?.ToString(),
                 Note = source.Note?.ToString(),

@@ -15,7 +15,7 @@ namespace BudgetBakers.Wallet.Net.Models.RecordRule
         /// <summary>
         /// Filter by ID.
         /// </summary>
-        public IList<string> Ids { get; set; } = Array.Empty<string>();
+        public IList<string> Ids { get; set; } = [];
 
         /// <summary>
         /// Filter by name.
@@ -31,5 +31,10 @@ namespace BudgetBakers.Wallet.Net.Models.RecordRule
         /// Filter by last sync timestamp (when entity was last updated in the API database).
         /// </summary>
         public DateFilter? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Filter record rules that reference a specific label.
+        /// </summary>
+        public string? LabelId { get; set; }
     }
 }

@@ -10,6 +10,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         [JsonProperty("archived")]
         public bool Archived { get; set; }
 
+        [JsonProperty("balance")]
+        public AccountBalanceDto? Balance { get; set; }
+
         [JsonProperty("bankAccountNumber")]
         public string? BankAccountNumber { get; set; }
 
@@ -28,8 +31,11 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         [JsonProperty("initialBalance")]
         public BalanceDto? InitialBalance { get; set; }
 
-        [JsonProperty("initialBaseBalance")]
-        public BalanceDto? InitialBaseBalance { get; set; }
+        [JsonProperty("isBankSync")]
+        public bool IsBankSync { get; set; }
+
+        [JsonProperty("isInvestmentAccount")]
+        public bool IsInvestmentAccount { get; set; }
 
         [JsonProperty("name")]
         public string? Name { get; set; }

@@ -10,7 +10,7 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         Cash = 1,
         CurrentAccount = 2,
         CreditCard = 3,
-        SavinAccount = 4,
+        SavingAccount = 4,
         Bonus = 5,
         Insurance = 6,
         Investment = 7,

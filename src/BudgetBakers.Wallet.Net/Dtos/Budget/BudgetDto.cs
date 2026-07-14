@@ -1,19 +1,24 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using BudgetBakers.Wallet.Net.Dtos.Label;
+using Newtonsoft.Json;
 
 namespace BudgetBakers.Wallet.Net.Dtos.Budget
 {
     internal class BudgetDto
     {
         [JsonProperty("accountIds")]
-        public IList<string> AccountIds { get; set; } = Array.Empty<string>();
+        public IList<string> AccountIds { get; set; } = [];
 
-        [JsonProperty("amount")]
-        public string? Amount { get; set; }
+        [JsonProperty("limit")]
+        public double? Limit { get; set; }
+
+        [JsonProperty("closed")]
+        public bool? Closed { get; set; }
+
+        [JsonProperty("closedDate")]
+        public string? ClosedDate { get; set; }
 
         [JsonProperty("categoryIds")]
-        public IList<string> CategoryIds { get; set; } = Array.Empty<string>();
+        public IList<string> CategoryIds { get; set; } = [];
 
         [JsonProperty("createdAt")]
         public string? CreatedAt { get; set; }
@@ -27,11 +32,20 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         [JsonProperty("id")]
         public string? Id { get; set; }
 
-        [JsonProperty("labels")]
-        public IList<LabelDto> Labels { get; set; } = Array.Empty<LabelDto>();
+        [JsonProperty("labelIds")]
+        public IList<string> LabelIds { get; set; } = [];
+
+        [JsonProperty("limitOverrides")]
+        public IList<BudgetChangeEntryDto> LimitOverrides { get; set; } = [];
 
         [JsonProperty("name")]
         public string? Name { get; set; }
+
+        [JsonProperty("pastLimitOverrides")]
+        public IList<BudgetChangeEntryDto> PastLimitOverrides { get; set; } = [];
+
+        [JsonProperty("spending")]
+        public BudgetSpendingDto? Spending { get; set; }
 
         [JsonProperty("startDate")]
         public string? StartDate { get; set; }
@@ -43,4 +57,3 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public string? UpdatedAt { get; set; }
     }
 }
-

@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
 {
@@ -9,7 +9,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         public string? AccountId { get; set; }
 
         [JsonProperty("amount")]
-        public string? Amount { get; set; }
+        public double? Amount { get; set; }
 
         [JsonProperty("categoryId")]
         public string? CategoryId { get; set; }
@@ -20,6 +20,12 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         [JsonProperty("currencyCode")]
         public string? CurrencyCode { get; set; }
 
+        [JsonProperty("dueDate")]
+        public string? DueDate { get; set; }
+
+        [JsonProperty("dueDateNotificationEnabled")]
+        public bool DueDateNotificationEnabled { get; set; }
+
         [JsonProperty("generateFromDate")]
         public string? GenerateFromDate { get; set; }
 
@@ -27,7 +33,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         public string? Id { get; set; }
 
         [JsonProperty("labels")]
-        public IList<BudgetBakers.Wallet.Net.Dtos.Label.LabelDto> Labels { get; set; } = System.Array.Empty<BudgetBakers.Wallet.Net.Dtos.Label.LabelDto>();
+        public IList<BudgetBakers.Wallet.Net.Dtos.Label.LabelDto> Labels { get; set; } = [];
 
         [JsonProperty("manualPayment")]
         public bool ManualPayment { get; set; }
@@ -38,17 +44,20 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         [JsonProperty("note")]
         public string? Note { get; set; }
 
-        [JsonProperty("payee")]
-        public string? Payee { get; set; }
-
-        [JsonProperty("payer")]
-        public string? Payer { get; set; }
+        [JsonProperty("counterParty")]
+        public string? CounterParty { get; set; }
 
         [JsonProperty("paymentType")]
         public string? PaymentType { get; set; }
 
         [JsonProperty("recurrenceRule")]
         public string? RecurrenceRule { get; set; }
+
+        [JsonProperty("reminder")]
+        public string? Reminder { get; set; }
+
+        [JsonProperty("threeDaysBeforeNotificationEnabled")]
+        public bool ThreeDaysBeforeNotificationEnabled { get; set; }
 
         [JsonProperty("type")]
         public string? Type { get; set; }
@@ -57,4 +66,3 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         public string? UpdatedAt { get; set; }
     }
 }
-

@@ -20,10 +20,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.RecordRule
         public string? Id { get; set; }
 
         [JsonProperty("keywords")]
-        public IList<string> Keywords { get; set; } = System.Array.Empty<string>();
+        public IList<string> Keywords { get; set; } = [];
 
         [JsonProperty("labels")]
-        public IList<LabelDto> Labels { get; set; } = System.Array.Empty<LabelDto>();
+        public IList<LabelDto> Labels { get; set; } = [];
 
         [JsonProperty("name")]
         public string? Name { get; set; }

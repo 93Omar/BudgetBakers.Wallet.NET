@@ -8,10 +8,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
     internal class GetBudgetsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
-        public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
+        public IList<AgentHintDto> AgentHints { get; set; } = [];
 
         [JsonProperty("budgets")]
-        public IList<BudgetDto> Budgets { get; set; } = Array.Empty<BudgetDto>();
+        public IList<BudgetDto> Budgets { get; set; } = [];
     }
 }
 

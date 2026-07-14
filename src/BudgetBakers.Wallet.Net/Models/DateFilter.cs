@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 using BudgetBakers.Wallet.Net.Utility;
 
 namespace BudgetBakers.Wallet.Net.Models
@@ -12,9 +11,7 @@ namespace BudgetBakers.Wallet.Net.Models
 
         public override string ToString()
         {
-            string prefixString = Prefix.ToCustomString();
-
-            return $"{prefixString}.{Value}";
+            return $"{Prefix.ToCustomString()}.{Value.ToString("o", CultureInfo.InvariantCulture)}";
         }
     }
 }

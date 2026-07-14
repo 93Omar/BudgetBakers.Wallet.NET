@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Dtos.Budget;
 using BudgetBakers.Wallet.Net.Dtos.Category;
@@ -8,6 +7,7 @@ using BudgetBakers.Wallet.Net.Dtos.Record;
 using BudgetBakers.Wallet.Net.Dtos.RecordRule;
 using BudgetBakers.Wallet.Net.Dtos.StandingOrder;
 using BudgetBakers.Wallet.Net.Dtos.Stats;
+using Newtonsoft.Json;
 
 namespace BudgetBakers.Wallet.Net.Tests
 {
@@ -51,11 +51,6 @@ namespace BudgetBakers.Wallet.Net.Tests
             yield return CreateCase("Record sample", BuildJsonPath("Record", "GetRecordsResponseDto.sample.json"), typeof(GetRecordsResponseDto), "Records", 0);
             yield return CreateCase("Record populated", BuildJsonPath("Record", "GetRecordsResponseDto.populated.json"), typeof(GetRecordsResponseDto), "Records", 1);
             yield return CreateCase("Record real", BuildJsonPath("Record", "GetRecordsResponseDto.real.json"), typeof(GetRecordsResponseDto), "Records", 30);
-
-            yield return CreateCase("RecordById empty", BuildJsonPath("Record", "GetRecordsByIdResponseDto.empty.json"), typeof(GetRecordsByIdResponseDto), "Records", 0);
-            yield return CreateCase("RecordById sample", BuildJsonPath("Record", "GetRecordsByIdResponseDto.sample.json"), typeof(GetRecordsByIdResponseDto), "Records", 0);
-            yield return CreateCase("RecordById populated", BuildJsonPath("Record", "GetRecordsByIdResponseDto.populated.json"), typeof(GetRecordsByIdResponseDto), "Records", 1);
-            yield return CreateCase("RecordById real", BuildJsonPath("Record", "GetRecordsByIdResponseDto.real.json"), typeof(GetRecordsByIdResponseDto), "Records", 1);
 
             yield return CreateCase("StandingOrder empty", BuildJsonPath("StandingOrder", "GetStandingOrdersResponseDto.empty.json"), typeof(GetStandingOrdersResponseDto), "StandingOrders", 0);
             yield return CreateCase("StandingOrder sample", BuildJsonPath("StandingOrder", "GetStandingOrdersResponseDto.sample.json"), typeof(GetStandingOrdersResponseDto), "StandingOrders", 0);

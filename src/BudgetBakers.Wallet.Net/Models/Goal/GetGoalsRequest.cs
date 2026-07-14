@@ -15,7 +15,7 @@ namespace BudgetBakers.Wallet.Net.Models.Goal
         /// <summary>
         /// Filter by ID.
         /// </summary>
-        public IList<string> Ids { get; set; } = Array.Empty<string>();
+        public IList<string> Ids { get; set; } = [];
 
         /// <summary>
         /// Filter by name.

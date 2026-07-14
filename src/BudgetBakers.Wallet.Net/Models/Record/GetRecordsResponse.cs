@@ -25,14 +25,14 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         /// <summary>
         /// The effective date range filter applied to the query, as array of operator-prefixed timestamps.
         /// </summary>
-        public IList<string> RecordDateRange { get; set; } = Array.Empty<string>();
+        public IList<string> RecordDateRange { get; set; } = [];
 
 
-        public IList<Record> Records { get; set; } = Array.Empty<Record>();
+        public IList<Record> Records { get; set; } = [];
 
         /// <summary>
         /// Array of hints for AI agents. Only present when agentHints=true query parameter is set.
         /// </summary>
-        public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
+        public IList<AgentHint> AgentHints { get; set; } = [];
     }
 }

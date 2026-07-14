@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Text;
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.StandingOrder;
 using BudgetBakers.Wallet.Net.Models.StandingOrder;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Services.Executors;
 
 namespace BudgetBakers.Wallet.Net.Services.Clients
 {
@@ -23,7 +25,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetStandingOrdersResponse>> GetAsync(GetStandingOrdersRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetStandingOrdersRequest, GetStandingOrdersRequestDto, GetStandingOrdersResponseDto, GetStandingOrdersResponse>(
                 _httpClient,
-                "/wallet/v1/api/standing-orders",
+                ApiConstant.Endpoint.StandingOrders,
                 request,
                 _getStandingOrdersRequestMapper,
                 _getStandingOrdersResponseMapper,

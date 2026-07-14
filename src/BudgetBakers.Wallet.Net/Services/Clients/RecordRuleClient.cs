@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Text;
 using FluentResults;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Dtos.RecordRule;
 using BudgetBakers.Wallet.Net.Models.RecordRule;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Services.Executors;
 
 namespace BudgetBakers.Wallet.Net.Services.Clients
 {
@@ -23,7 +25,7 @@ namespace BudgetBakers.Wallet.Net.Services.Clients
         public Task<Result<GetRecordRulesResponse>> GetAsync(GetRecordRulesRequest request, CancellationToken ct = default)
             => WalletApiGetExecutor.ExecuteAsync<GetRecordRulesRequest, GetRecordRulesRequestDto, GetRecordRulesResponseDto, GetRecordRulesResponse>(
                 _httpClient,
-                "/wallet/v1/api/record-rules",
+                ApiConstant.Endpoint.RecordRules,
                 request,
                 _getRecordRulesRequestMapper,
                 _getRecordRulesResponseMapper,

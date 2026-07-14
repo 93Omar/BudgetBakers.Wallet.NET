@@ -8,10 +8,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.Goal
     internal class GetGoalsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
-        public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
+        public IList<AgentHintDto> AgentHints { get; set; } = [];
 
         [JsonProperty("goals")]
-        public IList<GoalDto> Goals { get; set; } = Array.Empty<GoalDto>();
+        public IList<GoalDto> Goals { get; set; } = [];
     }
 }
 

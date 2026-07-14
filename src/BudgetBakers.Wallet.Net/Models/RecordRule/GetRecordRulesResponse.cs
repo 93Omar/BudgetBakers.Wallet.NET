@@ -22,11 +22,11 @@ namespace BudgetBakers.Wallet.Net.Models.RecordRule
         /// </summary>
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
-        public IList<RecordRule> RecordRules { get; set; } = Array.Empty<RecordRule>();
+        public IList<RecordRule> RecordRules { get; set; } = [];
 
         /// <summary>
         /// Array of hints for AI agents. Only present when agentHints=true query parameter is set.
         /// </summary>
-        public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
+        public IList<AgentHint> AgentHints { get; set; } = [];
     }
 }

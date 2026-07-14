@@ -16,39 +16,10 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         [TestCase(null)]
         [TestCase("")]
         [TestCase(" ")]
-        public void ParseGuid_WhenInputIsNullOrWhitespace_ReturnsNull(string? value)
-        {
-            Guid? result = MapperHelpers.ParseGuid(value);
-
-            Assert.That(result, Is.Null);
-        }
-
-        [Test]
-        public void ParseGuid_WhenInputIsInvalid_ReturnsNull()
-        {
-            Guid? result = MapperHelpers.ParseGuid("not-a-guid");
-
-            Assert.That(result, Is.Null);
-        }
-
-        [Test]
-        public void ParseGuid_WhenInputIsValid_ReturnsGuid()
-        {
-            Guid expected = Guid.NewGuid();
-
-            Guid? result = MapperHelpers.ParseGuid(expected.ToString());
-
-            Assert.That(result, Is.EqualTo(expected));
-        }
-
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase(" ")]
         [TestCase("invalid-date")]
         public void ParseDateTime_WhenInputIsNullWhitespaceOrInvalid_ReturnsNull(string? value)
         {
             DateTime? result = MapperHelpers.ParseDateTime(value);
-
             Assert.That(result, Is.Null);
         }
 
@@ -56,7 +27,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseDateTime_WhenInputIsValid_ReturnsDateTime()
         {
             DateTime? result = MapperHelpers.ParseDateTime("2026-01-01 10:00:00");
-
             Assert.That(result, Is.Not.Null);
         }
 
@@ -64,9 +34,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void MapAgentHint_WhenDtoIsNull_ReturnsNull()
         {
             AgentHintDto? dto = null;
-
             AgentHint? result = MapperHelpers.MapAgentHint(dto);
-
             Assert.That(result, Is.Null);
         }
 
@@ -108,9 +76,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void MapBalance_WhenDtoIsNull_ReturnsNull()
         {
             BalanceDto? dto = null;
-
             Balance? result = MapperHelpers.MapBalance(dto);
-
             Assert.That(result, Is.Null);
         }
 
@@ -132,38 +98,18 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         }
 
         [Test]
-        public void MapLabel_WhenIdIsValid_SetsId()
+        public void MapLabel_WhenIdIsPresent_SetsId()
         {
-            Guid id = Guid.NewGuid();
-
-            Label? result = MapperHelpers.MapLabel(new LabelDto
-            {
-                Id = id.ToString(),
-                Name = "label"
-            });
-
+            const string id = "label-id";
+            Label? result = MapperHelpers.MapLabel(new LabelDto { Id = id, Name = "label" });
             Assert.That(result!.Id, Is.EqualTo(id));
-        }
-
-        [Test]
-        public void MapLabel_WhenIdIsInvalid_DoesNotSetId()
-        {
-            Label? result = MapperHelpers.MapLabel(new LabelDto
-            {
-                Id = "invalid-guid",
-                Name = "label"
-            });
-
-            Assert.That(result!.Id, Is.Null);
         }
 
         [Test]
         public void MapLabel_WhenDtoIsNull_ReturnsNull()
         {
             LabelDto? dto = null;
-
             Label? result = MapperHelpers.MapLabel(dto);
-
             Assert.That(result, Is.Null);
         }
 
@@ -171,9 +117,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void MapRecordPhoto_WhenDtoIsNull_ReturnsNull()
         {
             PhotoDto? dto = null;
-
             RecordPhoto? result = MapperHelpers.MapRecordPhoto(dto);
-
             Assert.That(result, Is.Null);
         }
 
@@ -181,21 +125,14 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void MapPlace_WhenDtoIsNull_ReturnsNull()
         {
             PlaceDto? dto = null;
-
             RecordPlace? result = MapperHelpers.MapPlace(dto);
-
             Assert.That(result, Is.Null);
         }
 
         [Test]
         public void MapPlace_WhenPlaceTypesIsNull_MapsEmptyList()
         {
-            var dto = new PlaceDto
-            {
-                Name = "Office",
-                PlaceTypes = null!
-            };
-
+            var dto = new PlaceDto { Name = "Office", PlaceTypes = null! };
             RecordPlace? result = MapperHelpers.MapPlace(dto);
 
             using (Assert.EnterMultipleScope())
@@ -210,9 +147,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void MapDateRange_WhenDtoIsNull_ReturnsNull()
         {
             DateRangeDto? dto = null;
-
             DateRange? result = MapperHelpers.MapDateRange(dto);
-
             Assert.That(result, Is.Null);
         }
 
@@ -220,9 +155,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void MapRecordStats_WhenDtoIsNull_ReturnsNull()
         {
             RecordStatsDto? dto = null;
-
             RecordStats? result = MapperHelpers.MapRecordStats(dto);
-
             Assert.That(result, Is.Null);
         }
 
@@ -251,7 +184,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void JoinIds_WhenInputIsNull_ReturnsNull()
         {
             string? result = MapperHelpers.JoinIds(null);
-
             Assert.That(result, Is.Null);
         }
 
@@ -259,7 +191,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void JoinIds_WhenInputIsEmpty_ReturnsNull()
         {
             string? result = MapperHelpers.JoinIds([]);
-
             Assert.That(result, Is.Null);
         }
 
@@ -267,7 +198,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void JoinIds_WhenInputContainsValues_UsesApiSeparator()
         {
             string? result = MapperHelpers.JoinIds(["id-1", "id-2"]);
-
             Assert.That(result, Is.EqualTo($"id-1{ApiConstant.Separator.Ids}id-2"));
         }
 
@@ -277,7 +207,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseAgentHintSeverity_WhenValueIsKnown_ReturnsExpectedSeverity(string value, AgentHintSeverity expected)
         {
             AgentHintSeverity result = MapperHelpers.ParseAgentHintSeverity(value);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -297,7 +226,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseAgentHintType_WhenValueIsKnown_ReturnsExpectedType(string value, AgentHintType expected)
         {
             AgentHintType result = MapperHelpers.ParseAgentHintType(value);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -318,7 +246,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParsePaymentType_WhenValueIsKnown_ReturnsExpectedPaymentType(string value, PaymentType expected)
         {
             PaymentType? result = MapperHelpers.ParsePaymentType(value);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -326,7 +253,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParsePaymentType_WhenValueIsNull_ReturnsNull()
         {
             PaymentType? result = MapperHelpers.ParsePaymentType(null);
-
             Assert.That(result, Is.Null);
         }
 
@@ -344,7 +270,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseRecordState_WhenValueIsKnown_ReturnsExpectedRecordState(string value, RecordState expected)
         {
             RecordState? result = MapperHelpers.ParseRecordState(value);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -352,7 +277,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseRecordState_WhenValueIsNull_ReturnsNull()
         {
             RecordState? result = MapperHelpers.ParseRecordState(null);
-
             Assert.That(result, Is.Null);
         }
 
@@ -367,7 +291,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseRecordType_WhenValueIsKnown_ReturnsExpectedRecordType(string value, RecordType expected)
         {
             RecordType? result = MapperHelpers.ParseRecordType(value);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -375,7 +298,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseRecordType_WhenValueIsNull_ReturnsNull()
         {
             RecordType? result = MapperHelpers.ParseRecordType(null);
-
             Assert.That(result, Is.Null);
         }
 
@@ -390,7 +312,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseStandingOrderType_WhenValueIsKnown_ReturnsExpectedStandingOrderType(string value, StandingOrderType expected)
         {
             StandingOrderType? result = MapperHelpers.ParseStandingOrderType(value);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -398,7 +319,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseStandingOrderType_WhenValueIsNull_ReturnsNull()
         {
             StandingOrderType? result = MapperHelpers.ParseStandingOrderType(null);
-
             Assert.That(result, Is.Null);
         }
 

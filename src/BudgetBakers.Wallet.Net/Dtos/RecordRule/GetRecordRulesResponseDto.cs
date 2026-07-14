@@ -8,10 +8,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.RecordRule
     internal class GetRecordRulesResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
-        public IList<BudgetBakers.Wallet.Net.Dtos.Account.AgentHintDto> AgentHints { get; set; } = Array.Empty<BudgetBakers.Wallet.Net.Dtos.Account.AgentHintDto>();
+        public IList<BudgetBakers.Wallet.Net.Dtos.Account.AgentHintDto> AgentHints { get; set; } = [];
 
         [JsonProperty("recordRules")]
-        public IList<RecordRuleDto> RecordRules { get; set; } = Array.Empty<RecordRuleDto>();
+        public IList<RecordRuleDto> RecordRules { get; set; } = [];
     }
 }
 

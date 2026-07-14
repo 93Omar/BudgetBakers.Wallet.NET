@@ -22,10 +22,11 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 {
                     Limit = source.Limit,
                     Offset = source.Offset,
-                    NextOffset = source.NextOffset
+                    NextOffset = source.NextOffset,
+                    Total = source.Total
                 },
                 Categories = source.Categories
-                                .Select(MapCategory)
+                                .Select(MapperHelpers.MapCategory)
                                 .OfType<Category>()
                                 .ToList(),
                 AgentHints = source.AgentHints
@@ -36,33 +37,5 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
 
             return response;
         }
-
-        private static Category? MapCategory(CategoryDto? dto)
-        {
-            if (dto is null)
-                return null;
-
-            var category = new Category
-            {
-                Archived = dto.Archived,
-                Cardinality = dto.Cardinality,
-                Color = dto.Color,
-                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
-                CustomCategory = dto.CustomCategory,
-                CustomColor = dto.CustomColor,
-                CustomName = dto.CustomName,
-                Enabled = dto.Enabled,
-                EnvelopeId = dto.EnvelopeId,
-                IconName = dto.IconName,
-                Name = dto.Name,
-                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
-            };
-
-            if (MapperHelpers.ParseGuid(dto.Id) is Guid id)
-                category.Id = id;
-
-            return category;
-        }
     }
 }
-

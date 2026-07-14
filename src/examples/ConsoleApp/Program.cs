@@ -1,3 +1,9 @@
+using BudgetBakers.Wallet.Net.Models;
+using BudgetBakers.Wallet.Net.Models.Account;
+using BudgetBakers.Wallet.Net.Models.Record;
+using BudgetBakers.Wallet.Net.Services;
+using BudgetBakers.Wallet.Net.Services.Clients;
+using BudgetBakers.Wallet.Net.Utility;
 using ConsoleApp.Configuration;
 using ConsoleApp.Services;
 using FluentResults;
@@ -5,12 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
-using BudgetBakers.Wallet.Net.Models.Account;
-using BudgetBakers.Wallet.Net.Services;
-using BudgetBakers.Wallet.Net.Services.Clients;
-using BudgetBakers.Wallet.Net.Utility;
 
 namespace ConsoleApp
 {
@@ -31,10 +32,7 @@ namespace ConsoleApp
 
                     services.AddSingleton<IAccessTokenProvider, OptionsAccessTokenProvider>();
 
-                    services.AddWalletClient<AccountClient>(client =>
-                    {
-                        client.BaseAddress = new Uri("https://rest.budgetbakers.com/");
-                    });
+                    services.AddWalletClients();
                 })
                 .Build();
 
@@ -43,29 +41,59 @@ namespace ConsoleApp
             logger.LogInformation("Starting application...");
 
             AccountClient accountClient = host.Services.GetRequiredService<AccountClient>();
+            RecordClient recordClient = host.Services.GetRequiredService<RecordClient>();
 
             GetAccountsRequest getAccountsRequest = new GetAccountsRequest()
             {
+                AccountType = AccountType.CurrentAccount,
                 Limit = 30,
                 Offset = 0
             };
 
-            Result<GetAccountsResponse> result = await accountClient.GetAsync(getAccountsRequest);
+            Result<GetAccountsResponse> getAccountsResult = await accountClient.GetAsync(getAccountsRequest);
 
-            if (result.IsSuccess)
+            if (getAccountsResult.IsFailed)
             {
-                GetAccountsResponse response = result.Value;
-                logger.LogInformation("Accounts loaded successfully.");
+                LogErrors(logger, getAccountsResult.Errors);
+                await host.StopAsync();
             }
-            else
+
+            GetAccountsResponse accountsResponse = getAccountsResult.Value;
+            logger.LogInformation("Accounts loaded successfully.");
+
+            GetRecordsRequest getRecordsRequest = new GetRecordsRequest()
             {
-                foreach (IError error in result.Errors)
+                AccountId = accountsResponse.Accounts.First().Id,
+                Limit = 50,
+                Offset = 0,
+                RecordDate = new DateFilter()
                 {
-                    logger.LogError("Error loading accounts: {ErrorMessage}", error.Message);
-                }
+                    Prefix = RangePrefix.GreaterThanOrEqual,
+                    Value = new DateTime(2026, 1, 1)
+                },
+                WithTotal = true
+            };
+
+            Result<GetRecordsResponse> getRecordsResponse = await recordClient.GetAsync(getRecordsRequest);
+
+            if (getRecordsResponse.IsFailed)
+            {
+                LogErrors(logger, getRecordsResponse.Errors);
+                await host.StopAsync();
             }
+
+            GetRecordsResponse recordsResponse = getRecordsResponse.Value;
+            logger.LogInformation("Retrieved {number} records.", recordsResponse.Records.Count);
 
             await host.StopAsync();
+        }
+
+        private static void LogErrors(ILogger logger, IReadOnlyList<IError> errors)
+        {
+            foreach (IError error in errors)
+            {
+                logger.LogError("Error: {ErrorMessage}", error.Message);
+            }
         }
     }
 }

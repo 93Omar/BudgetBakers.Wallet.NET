@@ -29,7 +29,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 AgentHints = true,
                 Ids = new List<string> { "id-1", "id-2" },
                 Name = new TextFilter { Prefix = TextPrefix.ContainsIgnoreCase, Value = "wallet" },
-                BankAccountNumber = new TextFilter { Prefix = TextPrefix.Equals, Value = "IT60X0542811101000000123456" },
                 AccountType = AccountType.CreditCard,
                 CurrencyCode = "EUR",
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 01, 02, 03, 04, 05) },
@@ -46,7 +45,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.AgentHints, Is.EqualTo(source.AgentHints));
                 Assert.That(result.Id, Is.EqualTo("id-1,id-2"));
                 Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
-                Assert.That(result.BankAccountNumber, Is.EqualTo(source.BankAccountNumber!.ToString()));
                 Assert.That(result.AccountType, Is.EqualTo(source.AccountType!.ToString()));
                 Assert.That(result.CurrencyCode, Is.EqualTo(source.CurrencyCode));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));

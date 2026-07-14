@@ -8,13 +8,13 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
     internal class GetRecordsResponseDto : PaginatedResponseDto
     {
         [JsonProperty("agentHints")]
-        public IList<AgentHintDto> AgentHints { get; set; } = Array.Empty<AgentHintDto>();
+        public IList<AgentHintDto> AgentHints { get; set; } = [];
 
         [JsonProperty("recordDateRange")]
-        public IList<string> RecordDateRange { get; set; } = Array.Empty<string>();
+        public IList<string> RecordDateRange { get; set; } = [];
 
         [JsonProperty("records")]
-        public IList<RecordDto> Records { get; set; } = Array.Empty<RecordDto>();
+        public IList<RecordDto> Records { get; set; } = [];
     }
 }
 

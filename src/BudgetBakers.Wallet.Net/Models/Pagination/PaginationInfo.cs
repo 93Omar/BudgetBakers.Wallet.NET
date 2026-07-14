@@ -16,5 +16,10 @@ namespace BudgetBakers.Wallet.Net.Models.Pagination
         /// Offset for next page (only present if more pages exist).
         /// </summary>
         public int NextOffset { get; set; }
+
+        /// <summary>
+        /// Total number of items matching the query filters. Only present when withTotal=true was set in the request.
+        /// </summary>
+        public int? Total { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace BudgetBakers.Wallet.Net.Models.Category
         /// <summary>
         /// Filter by ID.
         /// </summary>
-        public IList<string> Ids { get; set; } = Array.Empty<string>();
+        public IList<string> Ids { get; set; } = [];
 
         /// <summary>
         /// Filter by name.
@@ -31,5 +31,25 @@ namespace BudgetBakers.Wallet.Net.Models.Category
         /// Filter by last sync timestamp (when entity was last updated in the API database).
         /// </summary>
         public DateFilter? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Filter to only custom (user-created) categories when true, or only system categories when false.
+        /// </summary>
+        public bool? CustomCategory { get; set; }
+
+        /// <summary>
+        /// Filter by archived status.
+        /// </summary>
+        public bool? Archived { get; set; }
+
+        /// <summary>
+        /// Filter categories linked to a specific budget.
+        /// </summary>
+        public string? BudgetId { get; set; }
+
+        /// <summary>
+        /// Sort results by field.
+        /// </summary>
+        public TimestampSortBy? SortBy { get; set; }
     }
 }

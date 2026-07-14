@@ -16,6 +16,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Label
         [JsonProperty("agentHints")]
         public bool AgentHints { get; set; }
 
+        [JsonProperty("withTotal")]
+        public bool WithTotal { get; set; }
+
         [JsonProperty("id")]
         public string? Id { get; set; }
 
@@ -27,6 +30,24 @@ namespace BudgetBakers.Wallet.Net.Dtos.Label
 
         [JsonProperty("updatedAt")]
         public string? UpdatedAt { get; set; }
+
+        [JsonProperty("archived")]
+        public bool? Archived { get; set; }
+
+        [JsonProperty("recordId")]
+        public string? RecordId { get; set; }
+
+        [JsonProperty("budgetId")]
+        public string? BudgetId { get; set; }
+
+        [JsonProperty("standingOrderId")]
+        public string? StandingOrderId { get; set; }
+
+        [JsonProperty("recordRuleId")]
+        public string? RecordRuleId { get; set; }
+
+        [JsonProperty("sortBy")]
+        public string? SortBy { get; set; }
     }
 }
 

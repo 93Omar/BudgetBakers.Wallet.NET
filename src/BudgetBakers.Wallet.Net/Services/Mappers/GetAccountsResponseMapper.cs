@@ -24,10 +24,11 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 {
                     Limit = source.Limit,
                     Offset = source.Offset,
-                    NextOffset = source.NextOffset
+                    NextOffset = source.NextOffset,
+                    Total = source.Total
                 },
                 Accounts = source.Accounts
-                            .Select(MapAccount)
+                            .Select(MapperHelpers.MapAccount)
                             .OfType<Account>()
                             .ToList(),
                 AgentHints = source.AgentHints
@@ -38,32 +39,5 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
 
             return response;
         }
-
-        private static Account? MapAccount(AccountDto? dto)
-        {
-            if (dto is null)
-                return null;
-
-            var account = new Account
-            {
-                AccountType = dto.AccountType is null ? null : Enum.Parse<AccountType>(dto.AccountType),
-                Archived = dto.Archived,
-                BankAccountNumber = dto.BankAccountNumber,
-                Color = dto.Color,
-                CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
-                ExcludeFromStats = dto.ExcludeFromStats,
-                Name = dto.Name,
-                InitialBalance = MapperHelpers.MapBalance(dto.InitialBalance),
-                InitialBaseBalance = MapperHelpers.MapBalance(dto.InitialBaseBalance),
-                RecordStats = MapperHelpers.MapRecordStats(dto.RecordStats),
-                UpdatedAt = MapperHelpers.ParseDateTime(dto.UpdatedAt)
-            };
-
-            if (MapperHelpers.ParseGuid(dto.Id) is Guid guid)
-                account.Id = guid;
-
-            return account;
-        }      
     }
 }
-

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+
 namespace BudgetBakers.Wallet.Net.Dtos.Category
 {
     internal class CategoryDto
@@ -18,20 +19,14 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
         [JsonProperty("customCategory")]
         public bool CustomCategory { get; set; }
 
-        [JsonProperty("customColor")]
-        public bool CustomColor { get; set; }
-
         [JsonProperty("customName")]
         public bool CustomName { get; set; }
 
         [JsonProperty("enabled")]
         public bool Enabled { get; set; }
 
-        [JsonProperty("envelopeId")]
-        public int? EnvelopeId { get; set; }
-
-        [JsonProperty("iconName")]
-        public string? IconName { get; set; }
+        [JsonProperty("group")]
+        public CategoryGroupDto? Group { get; set; }
 
         [JsonProperty("id")]
         public string? Id { get; set; }
@@ -39,8 +34,13 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
         [JsonProperty("name")]
         public string? Name { get; set; }
 
+        [JsonProperty("parentId")]
+        public string? ParentId { get; set; }
+
+        [JsonProperty("systemId")]
+        public string? SystemId { get; set; }
+
         [JsonProperty("updatedAt")]
         public string? UpdatedAt { get; set; }
     }
 }
-

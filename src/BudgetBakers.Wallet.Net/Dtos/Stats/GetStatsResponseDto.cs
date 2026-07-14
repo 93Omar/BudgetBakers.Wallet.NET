@@ -14,6 +14,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.Stats
         public int Total { get; set; }
 
         [JsonProperty("usage")]
-        public IList<StatsUsageDto> Usage { get; set; } = Array.Empty<StatsUsageDto>();
+        public IList<StatsUsageDto> Usage { get; set; } = [];
     }
 }

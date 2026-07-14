@@ -1,20 +1,28 @@
 using System;
 using System.Net.Http;
+using BudgetBakers.Wallet.Net.Constants;
 using BudgetBakers.Wallet.Net.Services;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace BudgetBakers.Wallet.Net.Utility
 {
     public static class WalletClientFactory
     {
-        public static HttpClient CreateHttpClient(IAccessTokenProvider tokenProvider, Action<HttpClient> configureClient)
+        public static HttpClient CreateHttpClient(IAccessTokenProvider tokenProvider, Action<HttpClient>? configureClient = null)
         {
-            BearerTokenDelegatingHandler handler = new BearerTokenDelegatingHandler(tokenProvider)
+            HttpMessageHandler inner = new LoggingDelegatingHandler(NullLogger<LoggingDelegatingHandler>.Instance)
             {
                 InnerHandler = new HttpClientHandler()
             };
 
+            BearerTokenDelegatingHandler handler = new BearerTokenDelegatingHandler(tokenProvider)
+            {
+                InnerHandler = inner
+            };
+
             HttpClient client = new HttpClient(handler);
-            configureClient(client);
+            client.BaseAddress = new Uri(ApiConstant.DefaultBaseAddress);
+            configureClient?.Invoke(client);
 
             return client;
         }

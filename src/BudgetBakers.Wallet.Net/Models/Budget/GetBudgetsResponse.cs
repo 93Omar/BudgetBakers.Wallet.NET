@@ -25,9 +25,9 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         /// <summary>
         /// Array of hints for AI agents. Only present when agentHints=true query parameter is set.
         /// </summary>
-        public IList<AgentHint> AgentHints { get; set; } = Array.Empty<AgentHint>();
+        public IList<AgentHint> AgentHints { get; set; } = [];
 
 
-        public IList<Budget> Budgets { get; set; } = Array.Empty<Budget>();
+        public IList<Budget> Budgets { get; set; } = [];
     }
 }

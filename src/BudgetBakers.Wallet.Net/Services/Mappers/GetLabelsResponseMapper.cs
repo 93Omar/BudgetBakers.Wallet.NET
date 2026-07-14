@@ -22,7 +22,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 {
                     Limit = source.Limit,
                     Offset = source.Offset,
-                    NextOffset = source.NextOffset
+                    NextOffset = source.NextOffset,
+                    Total = source.Total
                 },
                 Labels = source.Labels
                             .Select(MapperHelpers.MapLabel)

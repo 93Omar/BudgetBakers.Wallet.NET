@@ -2,11 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BudgetBakers.Wallet.Net.Constants;
-using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Dtos;
+using BudgetBakers.Wallet.Net.Dtos.Account;
+using BudgetBakers.Wallet.Net.Dtos.Budget;
+using BudgetBakers.Wallet.Net.Dtos.Category;
 using BudgetBakers.Wallet.Net.Dtos.Label;
 using BudgetBakers.Wallet.Net.Dtos.Record;
 using BudgetBakers.Wallet.Net.Models;
+using BudgetBakers.Wallet.Net.Models.Account;
+using BudgetBakers.Wallet.Net.Models.Budget;
+using BudgetBakers.Wallet.Net.Models.Category;
 using BudgetBakers.Wallet.Net.Models.Label;
 using BudgetBakers.Wallet.Net.Models.Record;
 using BudgetBakers.Wallet.Net.Models.StandingOrder;
@@ -162,17 +167,6 @@ namespace BudgetBakers.Wallet.Net.Utility
             };
         }
 
-        public static Guid? ParseGuid(string? s)
-        {
-            if (string.IsNullOrWhiteSpace(s))
-                return null;
-
-            if (Guid.TryParse(s, out var g))
-                return g;
-
-            return null;
-        }
-
         public static string? JoinIds(IEnumerable<string>? ids)
         {
             if (ids is null)
@@ -188,19 +182,168 @@ namespace BudgetBakers.Wallet.Net.Utility
             if (dto is null)
                 return null;
 
-            var label = new Label
+            return new Label
             {
                 Archived = dto.Archived,
                 Color = dto.Color,
                 CreatedAt = ParseDateTime(dto.CreatedAt),
+                Id = dto.Id,
                 Name = dto.Name,
                 UpdatedAt = ParseDateTime(dto.UpdatedAt)
             };
+        }
 
-            if (ParseGuid(dto.Id) is Guid id)
-                label.Id = id;
+        public static Account? MapAccount(AccountDto? dto)
+        {
+            if (dto is null)
+                return null;
 
-            return label;
+            return new Account
+            {
+                AccountType = dto.AccountType is null ? null : Enum.Parse<AccountType>(dto.AccountType),
+                Archived = dto.Archived,
+                Balance = MapAccountBalance(dto.Balance),
+                BankAccountNumber = dto.BankAccountNumber,
+                Color = dto.Color,
+                CreatedAt = ParseDateTime(dto.CreatedAt),
+                ExcludeFromStats = dto.ExcludeFromStats,
+                Id = dto.Id,
+                IsBankSync = dto.IsBankSync,
+                IsInvestmentAccount = dto.IsInvestmentAccount,
+                Name = dto.Name,
+                InitialBalance = MapBalance(dto.InitialBalance),
+                RecordStats = MapRecordStats(dto.RecordStats),
+                UpdatedAt = ParseDateTime(dto.UpdatedAt)
+            };
+        }
+
+        public static AccountBalance? MapAccountBalance(AccountBalanceDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new AccountBalance
+            {
+                AvailableCredit = dto.AvailableCredit,
+                BalanceDisplayOption = dto.BalanceDisplayOption,
+                BalanceMode = dto.BalanceMode,
+                BalanceModeFormula = dto.BalanceModeFormula,
+                CreditBalance = dto.CreditBalance,
+                CreditLimit = dto.CreditLimit,
+                CurrencyCode = dto.CurrencyCode,
+                CurrentBalance = dto.CurrentBalance,
+                Error = dto.Error,
+                Formula = dto.Formula,
+                Initial = dto.Initial,
+                RawCurrentBalance = dto.RawCurrentBalance
+            };
+        }
+
+        public static Category? MapCategory(CategoryDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new Category
+            {
+                Archived = dto.Archived,
+                Cardinality = dto.Cardinality,
+                Color = dto.Color,
+                CreatedAt = ParseDateTime(dto.CreatedAt),
+                CustomCategory = dto.CustomCategory,
+                CustomName = dto.CustomName,
+                Enabled = dto.Enabled,
+                Group = dto.Group is null ? null : new CategoryGroup { Id = dto.Group.Id, Name = dto.Group.Name },
+                Id = dto.Id,
+                Name = dto.Name,
+                ParentId = dto.ParentId,
+                SystemId = dto.SystemId,
+                UpdatedAt = ParseDateTime(dto.UpdatedAt)
+            };
+        }
+
+        public static Budget? MapBudget(BudgetDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new Budget
+            {
+                Limit = dto.Limit,
+                Closed = dto.Closed,
+                ClosedDate = dto.ClosedDate,
+                CurrencyCode = dto.CurrencyCode,
+                CreatedAt = ParseDateTime(dto.CreatedAt),
+                EndDate = dto.EndDate,
+                Id = dto.Id,
+                Name = dto.Name,
+                StartDate = dto.StartDate,
+                Type = dto.Type,
+                UpdatedAt = ParseDateTime(dto.UpdatedAt),
+                AccountIds = dto.AccountIds?.ToList() ?? [],
+                CategoryIds = dto.CategoryIds?.ToList() ?? [],
+                LabelIds = dto.LabelIds?.ToList() ?? [],
+                LimitOverrides = dto.LimitOverrides.Select(MapBudgetChangeEntry).OfType<BudgetChangeEntry>().ToList(),
+                PastLimitOverrides = dto.PastLimitOverrides.Select(MapBudgetChangeEntry).OfType<BudgetChangeEntry>().ToList(),
+                Spending = MapBudgetSpending(dto.Spending)
+            };
+        }
+
+        public static Record? MapRecord(RecordDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            Record record = new()
+            {
+                AccountId = dto.AccountId,
+                AccountIsBankSync = dto.AccountIsBankSync,
+                AccountName = dto.AccountName,
+                Amount = MapBalance(dto.Amount),
+                Category = dto.Category is null ? null : new Category
+                {
+                    Id = dto.Category.Id,
+                    Name = dto.Category.Name,
+                    Color = dto.Category.Color
+                },
+                ConvertedAmount = dto.ConvertedAmount is null ? null : new ConvertedAmount
+                {
+                    ConversionPair = dto.ConvertedAmount.ConversionPair,
+                    CurrencyCode = dto.ConvertedAmount.CurrencyCode,
+                    Error = dto.ConvertedAmount.Error,
+                    Ratio = dto.ConvertedAmount.Ratio,
+                    Value = dto.ConvertedAmount.Value
+                },
+                CreatedAt = ParseDateTime(dto.CreatedAt),
+                Id = dto.Id,
+                Note = dto.Note,
+                CounterParty = dto.CounterParty,
+                PaymentType = ParsePaymentType(dto.PaymentType),
+                Photos = dto.Photos.Select(MapRecordPhoto).OfType<RecordPhoto>().ToList(),
+                Place = MapPlace(dto.Place),
+                RecordDate = ParseDateTime(dto.RecordDate),
+                RecordState = ParseRecordState(dto.RecordState),
+                RecordType = ParseRecordType(dto.RecordType),
+                Source = dto.Source,
+                TransferRecord = dto.TransferRecord is null ? null : new TransferRecordEmbed
+                {
+                    AccountId = dto.TransferRecord.AccountId,
+                    Amount = dto.TransferRecord.Amount is null ? null : new AmountWithCurrency
+                    {
+                        CurrencyCode = dto.TransferRecord.Amount.CurrencyCode,
+                        Value = dto.TransferRecord.Amount.Value
+                    },
+                    CounterParty = dto.TransferRecord.CounterParty,
+                    Id = dto.TransferRecord.Id,
+                    Note = dto.TransferRecord.Note
+                },
+                UpdatedAt = ParseDateTime(dto.UpdatedAt)
+            };
+
+            if (dto.Labels != null && dto.Labels.Any())
+                record.Labels = dto.Labels.Select(MapLabel).OfType<Label>().ToList();
+
+            return record;
         }
 
         public static RecordPhoto? MapRecordPhoto(PhotoDto? dto)
@@ -253,6 +396,89 @@ namespace BudgetBakers.Wallet.Net.Utility
                 CreatedAt = MapDateRange(dto.CreatedAt),
                 RecordCount = dto.RecordCount,
                 RecordDate = MapDateRange(dto.RecordDate)
+            };
+        }
+
+        public static BatchOperationSummary MapBatchOperationSummary(BatchOperationSummaryDto? dto)
+        {
+            if (dto is null)
+                return new BatchOperationSummary();
+
+            return new BatchOperationSummary
+            {
+                Total = dto.Total,
+                Succeeded = dto.Succeeded,
+                ClientErrors = dto.ClientErrors,
+                ServerErrors = dto.ServerErrors
+            };
+        }
+
+        public static BudgetChangeEntry? MapBudgetChangeEntry(BudgetChangeEntryDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new BudgetChangeEntry
+            {
+                CreatedAt = ParseDateTime(dto.CreatedAt),
+                Limit = dto.Limit,
+                Period = dto.Period,
+                PeriodStart = dto.PeriodStart
+            };
+        }
+
+        public static ExcludedBreakdown? MapExcludedBreakdown(ExcludedBreakdownDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new ExcludedBreakdown
+            {
+                ArchivedAccounts = dto.ArchivedAccounts,
+                Debts = dto.Debts,
+                IncomeCategories = dto.IncomeCategories,
+                Total = dto.Total,
+                TotalAmountSum = dto.TotalAmountSum,
+                Transfers = dto.Transfers,
+                UnknownCategories = dto.UnknownCategories
+            };
+        }
+
+        public static BudgetPeriodSpending? MapBudgetPeriodSpending(BudgetPeriodSpendingDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new BudgetPeriodSpending
+            {
+                ConvertedCurrencies = dto.ConvertedCurrencies?.ToList() ?? [],
+                Error = dto.Error,
+                Excluded = MapExcludedBreakdown(dto.Excluded),
+                Incomplete = dto.Incomplete,
+                Limit = dto.Limit,
+                Overspent = dto.Overspent,
+                Period = dto.Period,
+                PeriodEnd = dto.PeriodEnd,
+                PeriodStart = dto.PeriodStart,
+                Progress = dto.Progress,
+                RecordCount = dto.RecordCount,
+                Remaining = dto.Remaining,
+                Spent = dto.Spent,
+                TotalExpenses = dto.TotalExpenses,
+                TotalIncomes = dto.TotalIncomes
+            };
+        }
+
+        public static BudgetSpending? MapBudgetSpending(BudgetSpendingDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new BudgetSpending
+            {
+                ComputedAt = ParseDateTime(dto.ComputedAt),
+                Current = MapBudgetPeriodSpending(dto.Current),
+                Past = dto.Past.Select(MapBudgetPeriodSpending).OfType<BudgetPeriodSpending>().ToList()
             };
         }
     }
