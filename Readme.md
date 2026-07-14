@@ -1,6 +1,6 @@
 # BudgetBakers.Wallet.NET
 
-A .NET client library for the [BudgetBakers Wallet REST API](https://rest.budgetbakers.com/), targeting .NET 8, .NET 9, and .NET 10.
+A .NET client library for the [BudgetBakers Wallet REST API](https://budgetbakers.com/en/products/wallet/integrations/rest-api/), targeting .NET 8, .NET 9, and .NET 10.
 
 > The available clients mirror the endpoints documented in the official Wallet API:
 > **[https://rest.budgetbakers.com/wallet/openapi/ui](https://rest.budgetbakers.com/wallet/openapi/ui)**
