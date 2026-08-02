@@ -8,6 +8,11 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public Record? Record { get; set; }
         public string? Error { get; set; }
         public string? ErrorType { get; set; }
-        public bool IsMirror { get; set; }
+
+        /// <summary>
+        /// The auto-created B-side of a paired transfer, nested under the item that requested it. Null when the
+        /// item is not a paired transfer, or when mirror creation failed.
+        /// </summary>
+        public CreateRecordMirrorResult? Mirror { get; set; }
     }
 }

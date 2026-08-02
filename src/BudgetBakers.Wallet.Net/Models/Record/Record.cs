@@ -18,7 +18,6 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public IList<LabelModel>? Labels { get; set; } = [];
         public string? Note { get; set; }
         public string? CounterParty { get; set; }
-        public PaymentType? PaymentType { get; set; }
         public IList<RecordPhoto> Photos { get; set; } = [];
         public RecordPlace? Place { get; set; }
         public DateTime? RecordDate { get; set; }

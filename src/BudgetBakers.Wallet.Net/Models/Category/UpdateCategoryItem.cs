@@ -7,7 +7,7 @@ namespace BudgetBakers.Wallet.Net.Models.Category
         public required string Id { get; set; }
         public string? Name { get; set; }
         public EntityColor? Color { get; set; }
-        public string? Cardinality { get; set; }
+        public CategoryCardinality? Cardinality { get; set; }
         public bool? ResetName { get; set; }
     }
 }

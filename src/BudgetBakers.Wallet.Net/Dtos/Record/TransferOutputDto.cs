@@ -9,5 +9,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
 
         [JsonProperty("mirrorRecord")]
         public MirrorRecordEmbedDto? MirrorRecord { get; set; }
+
+        [JsonProperty("transferId")]
+        public string? TransferId { get; set; }
     }
 }

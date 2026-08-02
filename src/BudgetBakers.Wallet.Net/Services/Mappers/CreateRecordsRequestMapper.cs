@@ -21,7 +21,6 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                                  CurrencyCode = item.Amount.CurrencyCode
                              },
                              RecordDate = item.RecordDate,
-                             PaymentType = item.PaymentType?.ToApiString(),
                              CategoryId = item.CategoryId,
                              CounterParty = item.CounterParty,
                              Note = item.Note,

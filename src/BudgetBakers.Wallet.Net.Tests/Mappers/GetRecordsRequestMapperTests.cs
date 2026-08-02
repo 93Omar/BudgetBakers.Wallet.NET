@@ -23,7 +23,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             var mapper = new GetRecordsRequestMapper();
             var source = new GetRecordsRequest
             {
-                AccountId = "acc-1",
+                AccountIds = new List<string> { "acc-1", "acc-2" },
                 RecordDate = new DateFilter { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 3, 1) },
                 Limit = 5,
                 Offset = 2,
@@ -35,6 +35,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Amount = new NumberFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = 120.0 },
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 3, 1) },
+                IsTransfer = true,
+                TransferIds = new List<string> { "transfer-1", "transfer-2" },
                 SortBy = RecordSortBy.RecordDateDescending
             };
 
@@ -43,7 +45,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             Assert.That(result, Is.Not.Null);
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(result!.AccountId, Is.EqualTo(source.AccountId));
+                Assert.That(result!.AccountId, Is.EqualTo("acc-1,acc-2"));
                 Assert.That(result.RecordDate, Is.EqualTo(source.RecordDate!.ToString()));
                 Assert.That(result.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Offset, Is.EqualTo(source.Offset));
@@ -55,6 +57,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.Amount, Is.EqualTo(source.Amount!.ToString()));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
                 Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
+                Assert.That(result.IsTransfer, Is.EqualTo(source.IsTransfer));
+                Assert.That(result.TransferId, Is.EqualTo("transfer-1,transfer-2"));
                 Assert.That(result.SortBy, Is.EqualTo("-recordDate"));
             }
         }

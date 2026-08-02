@@ -21,7 +21,6 @@
       },
       "recordState": "cleared",
       "recordType": "expense",
-      "paymentType": "transfer",
       "createdAt": "2026-03-13T01:14:31Z",
       "updatedAt": "2026-03-13T02:45:17Z"
     }

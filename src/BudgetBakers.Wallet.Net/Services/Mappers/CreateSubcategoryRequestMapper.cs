@@ -16,7 +16,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Name = source.Name,
                 ParentId = source.ParentId,
                 Color = source.Color?.ToApiString(),
-                Cardinality = source.Cardinality
+                Cardinality = source.Cardinality?.ToApiString()
             };
         }
     }

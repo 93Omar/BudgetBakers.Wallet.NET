@@ -47,9 +47,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         [JsonProperty("counterParty")]
         public string? CounterParty { get; set; }
 
-        [JsonProperty("paymentType")]
-        public string? PaymentType { get; set; }
-
         [JsonProperty("recurrenceRule")]
         public string? RecurrenceRule { get; set; }
 

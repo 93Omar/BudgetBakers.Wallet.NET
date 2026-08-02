@@ -14,6 +14,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         [JsonProperty("excluded")]
         public ExcludedBreakdownDto? Excluded { get; set; }
 
+        [JsonProperty("effectiveLimit")]
+        public double? EffectiveLimit { get; set; }
+
         [JsonProperty("incomplete")]
         public bool? Incomplete { get; set; }
 

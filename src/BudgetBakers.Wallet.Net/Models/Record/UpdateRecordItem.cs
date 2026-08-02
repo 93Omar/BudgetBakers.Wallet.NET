@@ -6,7 +6,6 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public string? AccountId { get; set; }
         public RecordAmount? Amount { get; set; }
         public DateTime? RecordDate { get; set; }
-        public PaymentType? PaymentType { get; set; }
         public RecordState? RecordState { get; set; }
         public string? CategoryId { get; set; }
         public string? CounterParty { get; set; }

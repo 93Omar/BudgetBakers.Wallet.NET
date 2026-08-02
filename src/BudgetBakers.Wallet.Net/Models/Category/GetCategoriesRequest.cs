@@ -48,6 +48,14 @@ namespace BudgetBakers.Wallet.Net.Models.Category
         public string? BudgetId { get; set; }
 
         /// <summary>
+        /// Filter by the category's spending nature, matching the value shown in the response. A category with no
+        /// cardinality of its own inherits its base category's value, so filtering by an inherited value also
+        /// returns categories that merely inherit it. "None" returns categories explicitly set to none plus any
+        /// with no value to inherit.
+        /// </summary>
+        public CategoryCardinality? Cardinality { get; set; }
+
+        /// <summary>
         /// Sort results by field.
         /// </summary>
         public TimestampSortBy? SortBy { get; set; }

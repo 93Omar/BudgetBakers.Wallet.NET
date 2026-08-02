@@ -17,7 +17,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                              Id = item.Id,
                              Name = item.Name,
                              Color = item.Color?.ToApiString(),
-                             Cardinality = item.Cardinality,
+                             Cardinality = item.Cardinality?.ToApiString(),
                              ResetName = item.ResetName
                          })
                          .ToList();

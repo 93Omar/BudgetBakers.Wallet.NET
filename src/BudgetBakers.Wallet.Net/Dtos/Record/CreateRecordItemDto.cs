@@ -13,9 +13,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("recordDate")]
         public DateTime RecordDate { get; set; }
 
-        [JsonProperty("paymentType")]
-        public string? PaymentType { get; set; }
-
         [JsonProperty("categoryId")]
         public string? CategoryId { get; set; }
 

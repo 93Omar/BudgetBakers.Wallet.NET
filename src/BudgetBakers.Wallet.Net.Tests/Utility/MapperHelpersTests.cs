@@ -4,6 +4,7 @@ using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Dtos.Label;
 using BudgetBakers.Wallet.Net.Dtos.Record;
 using BudgetBakers.Wallet.Net.Models;
+using BudgetBakers.Wallet.Net.Models.Category;
 using BudgetBakers.Wallet.Net.Models.Label;
 using BudgetBakers.Wallet.Net.Models.Record;
 using BudgetBakers.Wallet.Net.Models.StandingOrder;
@@ -236,32 +237,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
             Assert.That(() => MapperHelpers.ParseAgentHintType(value), Throws.TypeOf<InvalidOperationException>());
         }
 
-        [TestCase("cash", PaymentType.Cash)]
-        [TestCase("debit_card", PaymentType.DebitCard)]
-        [TestCase("credit_card", PaymentType.CreditCard)]
-        [TestCase("transfer", PaymentType.Transfer)]
-        [TestCase("voucher", PaymentType.Voucher)]
-        [TestCase("mobile_payment", PaymentType.MobilePayment)]
-        [TestCase("web_payment", PaymentType.WebPayment)]
-        public void ParsePaymentType_WhenValueIsKnown_ReturnsExpectedPaymentType(string value, PaymentType expected)
-        {
-            PaymentType? result = MapperHelpers.ParsePaymentType(value);
-            Assert.That(result, Is.EqualTo(expected));
-        }
-
-        [Test]
-        public void ParsePaymentType_WhenValueIsNull_ReturnsNull()
-        {
-            PaymentType? result = MapperHelpers.ParsePaymentType(null);
-            Assert.That(result, Is.Null);
-        }
-
-        [Test]
-        public void ParsePaymentType_WhenValueIsUnknown_ThrowsInvalidOperationException()
-        {
-            Assert.That(() => MapperHelpers.ParsePaymentType("unknown"), Throws.TypeOf<InvalidOperationException>());
-        }
-
         [TestCase("reconciled", RecordState.Reconciled)]
         [TestCase("cleared", RecordState.Cleared)]
         [TestCase("uncleared", RecordState.Uncleared)]
@@ -326,6 +301,29 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseStandingOrderType_WhenValueIsUnknown_ThrowsInvalidOperationException()
         {
             Assert.That(() => MapperHelpers.ParseStandingOrderType("unknown"), Throws.TypeOf<InvalidOperationException>());
+        }
+
+        [TestCase("none", CategoryCardinality.None)]
+        [TestCase("must", CategoryCardinality.Must)]
+        [TestCase("need", CategoryCardinality.Need)]
+        [TestCase("want", CategoryCardinality.Want)]
+        public void ParseCategoryCardinality_WhenValueIsKnown_ReturnsExpectedCategoryCardinality(string value, CategoryCardinality expected)
+        {
+            CategoryCardinality? result = MapperHelpers.ParseCategoryCardinality(value);
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void ParseCategoryCardinality_WhenValueIsNull_ReturnsNull()
+        {
+            CategoryCardinality? result = MapperHelpers.ParseCategoryCardinality(null);
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void ParseCategoryCardinality_WhenValueIsUnknown_ThrowsInvalidOperationException()
+        {
+            Assert.That(() => MapperHelpers.ParseCategoryCardinality("unknown"), Throws.TypeOf<InvalidOperationException>());
         }
     }
 }

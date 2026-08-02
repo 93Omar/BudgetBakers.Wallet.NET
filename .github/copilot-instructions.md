@@ -100,10 +100,16 @@ Every client (`AccountClient`, `RecordClient`, etc.) follows the same structure:
 - **System.Text.Json** `[JsonPropertyName]` — used on **response DTOs** for `ReadFromJsonAsync` deserialization.
 
 ### Enum string mapping
-String-to-enum conversions use static `Dictionary<string, TEnum>` lookup tables in `MapperHelpers`. Unknown values **throw `InvalidOperationException`** — do not use `Enum.Parse` or ignore unknowns.
+- Whenever an API field/query-param has a fixed, known set of string values, model it as a **C# enum** in `Models/<Area>/` (never expose the raw string on public Models) — DTOs still expose the raw `string?` (see "Dual JSON library usage" below, DTOs never use enums).
+- Outbound (Model → DTO): add a `ToApiString()` extension method in `Utility/<EnumName>Extensions.cs` that maps each enum member to its API string; throw `InvalidOperationException` for unmapped/unsupported members (never fall back silently).
+- Inbound (DTO → Model): add a `Parse<EnumName>(string? value)` method to `MapperHelpers.cs`, backed by a `private static readonly Dictionary<string, TEnum>` lookup table (naming: `_<camelCaseEnumName>Map`). Return `null` for `null` input; **throw `InvalidOperationException`** for unknown values — never use `Enum.Parse` or ignore unknowns.
+- This pattern applies uniformly to request filters, write-request payload fields, and response fields alike — do not model the same domain concept (e.g. a "cardinality"/"type"/"state" value) as a string in some places and an enum in others.
 
-### IDs filter → comma-separated string
-When a request model has an `IList<string> Ids` filter, `MapperHelpers.JoinIds()` collapses it to a single comma-separated `id` query parameter (separator defined in `ApiConstant.Separator.Ids`).
+### List/multi-value filters → `IList<string>`, never a pre-joined comma-separated string
+- When an API query parameter accepts multiple comma-separated values (e.g. `id`, `accountId`, `transferId`), model the Model property as `IList<string>` (default `= []`), **not** as a `string?` that the caller must pre-join.
+- In the RequestMapper, use `MapperHelpers.JoinIds(source.XxxIds)` to collapse the list into the single comma-separated DTO string (separator defined in `ApiConstant.Separator.Ids`). The DTO property itself stays a plain `string?` — only Models use `IList<string>`.
+- XML doc summaries on these `IList<string>` properties must describe the filter semantics (what it matches, limits like "max 10") and must **not** mention "comma-separated" — that is purely a DTO/wire-format implementation detail, irrelevant to a `IList<string>`-typed public property.
+
 
 ### Response header mapping
 Responses implementing `IRateLimitResponse` or `IDataSynchronizationResponse` have their extra info populated from HTTP headers automatically by `ResponseHeaderMapper.Apply()`. No client-level code needed.

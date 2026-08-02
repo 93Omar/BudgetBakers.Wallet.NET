@@ -37,17 +37,6 @@ namespace BudgetBakers.Wallet.Net.Utility
             ["data.recency"] = AgentHintType.DataRecency
         };
 
-        private static readonly Dictionary<string, PaymentType> _paymentTypeMap = new()
-        {
-            ["cash"] = PaymentType.Cash,
-            ["debit_card"] = PaymentType.DebitCard,
-            ["credit_card"] = PaymentType.CreditCard,
-            ["transfer"] = PaymentType.Transfer,
-            ["voucher"] = PaymentType.Voucher,
-            ["mobile_payment"] = PaymentType.MobilePayment,
-            ["web_payment"] = PaymentType.WebPayment
-        };
-
         private static readonly Dictionary<string, RecordState> _recordStateMap = new()
         {
             ["reconciled"] = RecordState.Reconciled,
@@ -73,6 +62,14 @@ namespace BudgetBakers.Wallet.Net.Utility
         {
             ["paired"] = TransferType.Paired,
             ["unpaired"] = TransferType.Unpaired
+        };
+
+        private static readonly Dictionary<string, CategoryCardinality> _categoryCardinalityMap = new()
+        {
+            ["none"] = CategoryCardinality.None,
+            ["must"] = CategoryCardinality.Must,
+            ["need"] = CategoryCardinality.Need,
+            ["want"] = CategoryCardinality.Want
         };
 
         public static AgentHint? MapAgentHint(AgentHintDto? dto)
@@ -104,17 +101,6 @@ namespace BudgetBakers.Wallet.Net.Utility
                 return type;
 
             throw new InvalidOperationException($"Unknown {nameof(AgentHintType)} value: '{value}'");
-        }
-
-        public static PaymentType? ParsePaymentType(string? value)
-        {
-            if (value is null)
-                return null;
-
-            if (_paymentTypeMap.TryGetValue(value, out PaymentType paymentType))
-                return paymentType;
-
-            throw new InvalidOperationException($"Unknown {nameof(PaymentType)} value: '{value}'");
         }
 
         public static RecordState? ParseRecordState(string? value)
@@ -159,6 +145,17 @@ namespace BudgetBakers.Wallet.Net.Utility
                 return transferType;
 
             throw new InvalidOperationException($"Unknown {nameof(TransferType)} value: '{value}'");
+        }
+
+        public static CategoryCardinality? ParseCategoryCardinality(string? value)
+        {
+            if (value is null)
+                return null;
+
+            if (_categoryCardinalityMap.TryGetValue(value, out CategoryCardinality cardinality))
+                return cardinality;
+
+            throw new InvalidOperationException($"Unknown {nameof(CategoryCardinality)} value: '{value}'");
         }
 
         public static DateTime? ParseDateTime(string? s)
@@ -223,12 +220,12 @@ namespace BudgetBakers.Wallet.Net.Utility
                 BankAccountNumber = dto.BankAccountNumber,
                 Color = dto.Color,
                 CreatedAt = ParseDateTime(dto.CreatedAt),
+                CurrencyCode = dto.CurrencyCode,
                 ExcludeFromStats = dto.ExcludeFromStats,
                 Id = dto.Id,
                 IsBankSync = dto.IsBankSync,
                 IsInvestmentAccount = dto.IsInvestmentAccount,
                 Name = dto.Name,
-                InitialBalance = MapBalance(dto.InitialBalance),
                 RecordStats = MapRecordStats(dto.RecordStats),
                 UpdatedAt = ParseDateTime(dto.UpdatedAt)
             };
@@ -264,7 +261,7 @@ namespace BudgetBakers.Wallet.Net.Utility
             return new Category
             {
                 Archived = dto.Archived,
-                Cardinality = dto.Cardinality,
+                Cardinality = ParseCategoryCardinality(dto.Cardinality),
                 Color = dto.Color,
                 CreatedAt = ParseDateTime(dto.CreatedAt),
                 CustomCategory = dto.CustomCategory,
@@ -335,7 +332,6 @@ namespace BudgetBakers.Wallet.Net.Utility
                 Id = dto.Id,
                 Note = dto.Note,
                 CounterParty = dto.CounterParty,
-                PaymentType = ParsePaymentType(dto.PaymentType),
                 Photos = dto.Photos.Select(MapRecordPhoto).OfType<RecordPhoto>().ToList(),
                 Place = MapPlace(dto.Place),
                 RecordDate = ParseDateTime(dto.RecordDate),
@@ -360,7 +356,8 @@ namespace BudgetBakers.Wallet.Net.Utility
             return new TransferOutput
             {
                 Type = ParseTransferType(dto.Type),
-                MirrorRecord = MapMirrorRecordEmbed(dto.MirrorRecord)
+                MirrorRecord = MapMirrorRecordEmbed(dto.MirrorRecord),
+                TransferId = dto.TransferId
             };
         }
 
@@ -491,6 +488,7 @@ namespace BudgetBakers.Wallet.Net.Utility
                 ConvertedCurrencies = dto.ConvertedCurrencies?.ToList() ?? [],
                 Error = dto.Error,
                 Excluded = MapExcludedBreakdown(dto.Excluded),
+                EffectiveLimit = dto.EffectiveLimit,
                 Incomplete = dto.Incomplete,
                 Limit = dto.Limit,
                 Overspent = dto.Overspent,
@@ -516,6 +514,18 @@ namespace BudgetBakers.Wallet.Net.Utility
                 ComputedAt = ParseDateTime(dto.ComputedAt),
                 Current = MapBudgetPeriodSpending(dto.Current),
                 Past = dto.Past.Select(MapBudgetPeriodSpending).OfType<BudgetPeriodSpending>().ToList()
+            };
+        }
+
+        public static CreateRecordMirrorResult? MapCreateRecordMirrorResult(CreateRecordMirrorResultDto? dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new CreateRecordMirrorResult
+            {
+                Id = dto.Id,
+                Record = MapRecord(dto.Record)
             };
         }
     }

@@ -24,6 +24,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 CustomCategory = source.CustomCategory,
                 Archived = source.Archived,
                 BudgetId = source.BudgetId,
+                Cardinality = source.Cardinality?.ToApiString(),
                 SortBy = source.SortBy?.ToApiString()
             };
 

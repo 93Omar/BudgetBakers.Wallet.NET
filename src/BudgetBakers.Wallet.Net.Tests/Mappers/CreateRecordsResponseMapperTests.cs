@@ -18,7 +18,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         }
 
         [Test]
-        public void Map_WhenResultIsMirror_MapsIsMirrorFlag()
+        public void Map_WhenResultHasMirror_MapsMirrorRecord()
         {
             var mapper = new CreateRecordsResponseMapper();
             var source = new CreateRecordsResponseDto
@@ -30,14 +30,18 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         InputIndex = 0,
                         Id = "rec-a",
                         Success = true,
-                        IsMirror = false
+                        Mirror = null
                     },
                     new()
                     {
-                        InputIndex = 0,
+                        InputIndex = 1,
                         Id = "rec-b",
                         Success = true,
-                        IsMirror = true
+                        Mirror = new CreateRecordMirrorResultDto
+                        {
+                            Id = "rec-b-mirror",
+                            Record = new RecordDto { Id = "rec-b-mirror", AccountId = "acc-2" }
+                        }
                     }
                 },
                 Summary = new BatchOperationSummaryDto { Total = 2, Succeeded = 2, ClientErrors = 0, ServerErrors = 0 }
@@ -49,8 +53,11 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(result!.Results, Has.Count.EqualTo(2));
-                Assert.That(result.Results[0].IsMirror, Is.False);
-                Assert.That(result.Results[1].IsMirror, Is.True);
+                Assert.That(result.Results[0].Mirror, Is.Null);
+                Assert.That(result.Results[1].Mirror, Is.Not.Null);
+                Assert.That(result.Results[1].Mirror!.Id, Is.EqualTo("rec-b-mirror"));
+                Assert.That(result.Results[1].Mirror!.Record?.Id, Is.EqualTo("rec-b-mirror"));
+                Assert.That(result.Results[1].Mirror!.Record?.AccountId, Is.EqualTo("acc-2"));
             }
         }
     }

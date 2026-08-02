@@ -19,7 +19,6 @@ namespace BudgetBakers.Wallet.Net.Models.StandingOrder
         public string? Name { get; set; }
         public string? Note { get; set; }
         public string? CounterParty { get; set; }
-        public string? PaymentType { get; set; }
         public string? Reminder { get; set; }
         public string? RecurrenceRule { get; set; }
         public bool ThreeDaysBeforeNotificationEnabled { get; set; }

@@ -33,7 +33,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                     {
                         Id = categoryId.ToString(),
                         Archived = true,
-                        Cardinality = "many",
+                        Cardinality = "want",
                         Color = "#123456",
                         CreatedAt = "2026-01-01 00:00:00",
                         CustomCategory = true,
@@ -59,7 +59,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.AgentHints, Has.Count.EqualTo(1));
                 Assert.That(mapped.Id, Is.EqualTo(categoryId));
                 Assert.That(mapped.Archived, Is.EqualTo(source.Categories[0].Archived));
-                Assert.That(mapped.Cardinality, Is.EqualTo(source.Categories[0].Cardinality));
+                Assert.That(mapped.Cardinality, Is.EqualTo(CategoryCardinality.Want));
                 Assert.That(mapped.Name, Is.EqualTo(source.Categories[0].Name));
             }
         }

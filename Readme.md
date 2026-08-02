@@ -5,6 +5,18 @@ A .NET client library for the [BudgetBakers Wallet REST API](https://budgetbaker
 > The available clients mirror the endpoints documented in the official Wallet API:
 > **[https://rest.budgetbakers.com/wallet/openapi/ui](https://rest.budgetbakers.com/wallet/openapi/ui)**
 
+> ⚠️ **The upstream Wallet REST API is currently in beta.** As such, it is subject to frequent and potentially
+> breaking changes until it reaches a stable version. This library follows suit, and may release frequent,
+> potentially breaking updates to stay aligned with the upstream API. Pin a specific package version and review
+> release notes before upgrading.
+
+### API version alignment
+
+The [`openapi/`](./openapi) folder contains the official Wallet API OpenAPI specification files this library was
+built against, one per upstream API version (e.g. `1.5.0.json`). To check which upstream API version the current
+state of this repository is aligned with, look at the **highest version number** among the files in `openapi/` —
+that is the version of the Wallet REST API this library currently wraps.
+
 ## Supported Frameworks
 
 | Target Framework | Supported |

@@ -23,17 +23,19 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         public string? Color { get; set; }
 
         public DateTime? CreatedAt { get; set; }
+
+        /// <summary>
+        /// The account's currency (ISO 4217). Also repeated inside <see cref="Balance"/> so amounts are
+        /// self-describing — the two values are always identical. Empty string when the currency could not be resolved.
+        /// </summary>
+        public string? CurrencyCode { get; set; }
+
         public bool ExcludeFromStats { get; set; }
 
         /// <summary>
         /// Unique identifier.
         /// </summary>
         public string? Id { get; set; }
-
-        /// <summary>
-        /// Account balance before any recorded transaction activity, in the account's original currency.
-        /// </summary>
-        public Balance? InitialBalance { get; set; }
 
         /// <summary>
         /// Whether this account is connected to a bank via automatic sync. Read-only.

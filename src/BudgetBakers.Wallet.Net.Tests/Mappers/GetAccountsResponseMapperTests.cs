@@ -41,9 +41,9 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         BankAccountNumber = "1234567890",
                         Color = "#112233",
                         CreatedAt = createdAt,
+                        CurrencyCode = "EUR",
                         ExcludeFromStats = true,
                         Id = accountId.ToString(),
-                        InitialBalance = new BalanceDto { CurrencyCode = "EUR", Value = 100.50m },
                         Name = "Main card",
                         RecordStats = new RecordStatsDto
                         {
@@ -91,8 +91,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mappedAccount.CreatedAt, Is.EqualTo(DateTime.Parse(sourceAccount.CreatedAt!)));
                 Assert.That(mappedAccount.ExcludeFromStats, Is.EqualTo(sourceAccount.ExcludeFromStats));
                 Assert.That(mappedAccount.Id, Is.EqualTo(accountId));
-                Assert.That(mappedAccount.InitialBalance?.CurrencyCode, Is.EqualTo(sourceAccount.InitialBalance?.CurrencyCode));
-                Assert.That(mappedAccount.InitialBalance?.Value, Is.EqualTo(sourceAccount.InitialBalance?.Value));
+                Assert.That(mappedAccount.CurrencyCode, Is.EqualTo(sourceAccount.CurrencyCode));
                 Assert.That(mappedAccount.Name, Is.EqualTo(sourceAccount.Name));
                 Assert.That(mappedAccount.RecordStats?.RecordCount, Is.EqualTo(sourceAccount.RecordStats?.RecordCount));
                 Assert.That(mappedAccount.RecordStats?.CreatedAt?.Min, Is.EqualTo(DateTime.Parse(sourceAccount.RecordStats!.CreatedAt!.Min!)));
