@@ -7,6 +7,12 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public IList<string> ConvertedCurrencies { get; set; } = [];
         public string? Error { get; set; }
         public ExcludedBreakdown? Excluded { get; set; }
+
+        /// <summary>
+        /// The limit in force for this period (baseline limit or an applicable override). Read-only.
+        /// </summary>
+        public double? EffectiveLimit { get; set; }
+
         public bool? Incomplete { get; set; }
         public double? Limit { get; set; }
         public double? Overspent { get; set; }

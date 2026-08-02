@@ -55,8 +55,11 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("recordType")]
         public string? RecordType { get; set; }
 
-        [JsonProperty("paymentType")]
-        public string? PaymentType { get; set; }
+        [JsonProperty("isTransfer")]
+        public bool? IsTransfer { get; set; }
+
+        [JsonProperty("transferId")]
+        public string? TransferId { get; set; }
 
         [JsonProperty("recordState")]
         public string? RecordState { get; set; }

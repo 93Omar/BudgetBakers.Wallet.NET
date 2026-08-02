@@ -15,7 +15,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             GetRecordsRequestDto dto = new GetRecordsRequestDto
             {
                 Id = MapperHelpers.JoinIds(source.Ids),
-                AccountId = source.AccountId,
+                AccountId = MapperHelpers.JoinIds(source.AccountIds),
                 RecordDate = source.RecordDate?.ToString(),
                 Limit = source.Limit,
                 Offset = source.Offset,
@@ -29,7 +29,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 CreatedAt = source.CreatedAt?.ToString(),
                 UpdatedAt = source.UpdatedAt?.ToString(),
                 RecordType = source.RecordType?.ToApiString(),
-                PaymentType = source.PaymentType?.ToApiString(),
+                IsTransfer = source.IsTransfer,
+                TransferId = MapperHelpers.JoinIds(source.TransferIds),
                 RecordState = source.RecordState?.ToApiString(),
                 Source = source.Source,
                 ConvertTo = source.ConvertTo,

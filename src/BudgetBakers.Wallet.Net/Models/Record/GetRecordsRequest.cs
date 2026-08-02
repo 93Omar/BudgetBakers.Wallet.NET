@@ -12,9 +12,9 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public IList<string> Ids { get; set; } = [];
 
         /// <summary>
-        /// Filter by account ID (exact match). When omitted, returns records from all accounts.
+        /// Filter by account ID(s) (max 10). When omitted, returns records from all accounts.
         /// </summary>
-        public string? AccountId { get; set; }
+        public IList<string> AccountIds { get; set; } = [];
 
         /// <summary>
         /// Filter by transaction date.
@@ -63,14 +63,22 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public DateFilter? UpdatedAt { get; set; }
 
         /// <summary>
-        /// Filter by record type (income or expense).
+        /// Filter by record type. Matches on the amount sign (expense = amount &lt; 0, income = amount &gt; 0);
+        /// a legacy record with an amount of exactly 0 matches the type it was stored with.
         /// </summary>
         public RecordType? RecordType { get; set; }
 
         /// <summary>
-        /// Filter by payment type.
+        /// Filter by transfer state: true = only transfer records (paired or unpaired), false = only non-transfer
+        /// records, omit = all. Independent of <see cref="RecordType"/>.
         /// </summary>
-        public PaymentType? PaymentType { get; set; }
+        public bool? IsTransfer { get; set; }
+
+        /// <summary>
+        /// Filter by transfer identity/identities, as returned in transfer.transferId. Returns every record
+        /// sharing any of them: both legs of a pair, or the single record of an unpaired transfer.
+        /// </summary>
+        public IList<string> TransferIds { get; set; } = [];
 
         /// <summary>
         /// Filter by record state. Multiple values can be comma-separated.

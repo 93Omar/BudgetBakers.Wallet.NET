@@ -45,7 +45,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         Labels = new List<LabelDto> { new() { Id = labelId.ToString(), Name = "L1", CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" } },
                         Note = "note",
                         CounterParty = "store",
-                        PaymentType = "debit_card",
                         Photos = new List<PhotoDto> { new() { CreatedAt = "2026-01-01 00:00:00", TemporaryUrl = "http://img" } },
                         Place = new PlaceDto { Id = "pl1", Name = "Milan", PlaceTypes = new List<int> { 1, 2 } },
                         RecordDate = "2026-01-15 00:00:00",

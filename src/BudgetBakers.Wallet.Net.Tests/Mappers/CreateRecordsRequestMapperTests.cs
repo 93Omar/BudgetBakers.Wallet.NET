@@ -17,7 +17,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
         }
 
         [Test]
-        public void Map_WhenPaymentTypeIsNull_MapsNullPaymentType()
+        public void Map_WhenTransferIsProvided_MapsTransferFields()
         {
             var mapper = new CreateRecordsRequestMapper();
             var source = new CreateRecordsRequest
@@ -29,7 +29,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         AccountId = "acc-1",
                         Amount = new RecordAmount { Value = -10 },
                         RecordDate = DateTime.UtcNow,
-                        PaymentType = null,
                         Transfer = new CreateRecordTransferInput
                         {
                             PairingMode = TransferPairingMode.New,
@@ -46,7 +45,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             CreateRecordItemDto mapped = result![0];
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(mapped.PaymentType, Is.Null);
                 Assert.That(mapped.Transfer, Is.Not.Null);
                 Assert.That(mapped.Transfer!.PairingMode, Is.EqualTo("new"));
                 Assert.That(mapped.Transfer.AccountId, Is.EqualTo("acc-2"));
@@ -67,8 +65,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                     {
                         AccountId = "acc-1",
                         Amount = new RecordAmount { Value = -10 },
-                        RecordDate = DateTime.UtcNow,
-                        PaymentType = PaymentType.DebitCard
+                        RecordDate = DateTime.UtcNow
                     }
                 }
             };
@@ -77,11 +74,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
 
             Assert.That(result, Is.Not.Null);
             CreateRecordItemDto mapped = result![0];
-            using (Assert.EnterMultipleScope())
-            {
-                Assert.That(mapped.PaymentType, Is.EqualTo("debit_card"));
-                Assert.That(mapped.Transfer, Is.Null);
-            }
+            Assert.That(mapped.Transfer, Is.Null);
         }
     }
 }

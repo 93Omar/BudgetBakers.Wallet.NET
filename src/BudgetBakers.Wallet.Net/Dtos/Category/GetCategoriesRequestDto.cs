@@ -40,6 +40,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
         [JsonProperty("budgetId")]
         public string? BudgetId { get; set; }
 
+        [JsonProperty("cardinality")]
+        public string? Cardinality { get; set; }
+
         [JsonProperty("sortBy")]
         public string? SortBy { get; set; }
     }

@@ -63,7 +63,7 @@ namespace ConsoleApp
 
             GetRecordsRequest getRecordsRequest = new GetRecordsRequest()
             {
-                AccountId = accountsResponse.Accounts.First().Id,
+                AccountIds = [accountsResponse.Accounts.First().Id!],
                 Limit = 50,
                 Offset = 0,
                 RecordDate = new DateFilter()

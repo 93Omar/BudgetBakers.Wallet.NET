@@ -9,12 +9,9 @@
       "bankAccountNumber": "IT60X0542811101000000123456",
       "color": "#22AAFF",
       "createdAt": "2026-03-10 08:30:00",
+      "currencyCode": "EUR",
       "excludeFromStats": false,
       "id": "6dbce709-f6da-46fd-96a9-3ea715ec496f",
-      "initialBalance": {
-        "currencyCode": "EUR",
-        "value": 1500.25
-      },
       "initialBaseBalance": {
         "currencyCode": "EUR",
         "value": 1500.25

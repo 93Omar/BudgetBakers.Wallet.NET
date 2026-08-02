@@ -29,7 +29,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Ids = new List<string> { "c1", "c2" },
                 Name = new TextFilter { Prefix = TextPrefix.Equals, Value = "Food" },
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
-                UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 2, 1) }
+                UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 2, 1) },
+                Cardinality = CategoryCardinality.Need
             };
 
             GetCategoriesRequestDto? result = mapper.Map(source);
@@ -44,6 +45,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
                 Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
                 Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
+                Assert.That(result.Cardinality, Is.EqualTo("need"));
             }
         }
     }

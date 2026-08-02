@@ -22,14 +22,14 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         [JsonProperty("createdAt")]
         public string? CreatedAt { get; set; }
 
+        [JsonProperty("currencyCode")]
+        public string? CurrencyCode { get; set; }
+
         [JsonProperty("excludeFromStats")]
         public bool ExcludeFromStats { get; set; }
 
         [JsonProperty("id")]
         public string? Id { get; set; }
-
-        [JsonProperty("initialBalance")]
-        public BalanceDto? InitialBalance { get; set; }
 
         [JsonProperty("isBankSync")]
         public bool IsBankSync { get; set; }

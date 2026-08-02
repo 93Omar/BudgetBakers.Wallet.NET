@@ -4,5 +4,6 @@ namespace BudgetBakers.Wallet.Net.Models.Record
     {
         public TransferType? Type { get; set; }
         public MirrorRecordEmbed? MirrorRecord { get; set; }
+        public string? TransferId { get; set; }
     }
 }

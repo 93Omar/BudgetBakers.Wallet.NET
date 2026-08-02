@@ -5,7 +5,12 @@ namespace BudgetBakers.Wallet.Net.Models.Category
     public class Category
     {
         public bool Archived { get; set; }
-        public string? Cardinality { get; set; }
+
+        /// <summary>
+        /// The category's spending nature. A category with no cardinality of its own inherits its base
+        /// category's value.
+        /// </summary>
+        public CategoryCardinality? Cardinality { get; set; }
 
         /// <summary>
         /// Hex color code.

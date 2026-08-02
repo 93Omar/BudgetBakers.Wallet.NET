@@ -22,7 +22,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                                     Record = MapperHelpers.MapRecord(result.Record),
                                     Error = result.Error,
                                     ErrorType = result.ErrorType,
-                                    IsMirror = result.IsMirror
+                                    Mirror = MapperHelpers.MapCreateRecordMirrorResult(result.Mirror)
                                 })
                                 .ToList(),
                 Summary = MapperHelpers.MapBatchOperationSummary(source.Summary)

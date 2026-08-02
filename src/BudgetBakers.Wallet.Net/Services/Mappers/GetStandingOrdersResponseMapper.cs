@@ -57,7 +57,6 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Name = dto.Name,
                 Note = dto.Note,
                 CounterParty = dto.CounterParty,
-                PaymentType = dto.PaymentType,
                 RecurrenceRule = dto.RecurrenceRule,
                 Reminder = dto.Reminder,
                 ThreeDaysBeforeNotificationEnabled = dto.ThreeDaysBeforeNotificationEnabled,

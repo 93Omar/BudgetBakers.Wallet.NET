@@ -48,7 +48,6 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         Name = "Rent",
                         Note = "Monthly",
                         CounterParty = "Landlord",
-                        PaymentType = "bank_transfer",
                         RecurrenceRule = "FREQ=MONTHLY",
                         Reminder = "email",
                         ThreeDaysBeforeNotificationEnabled = true,

@@ -41,9 +41,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("counterParty")]
         public string? CounterParty { get; set; }
 
-        [JsonProperty("paymentType")]
-        public string? PaymentType { get; set; }
-
         [JsonProperty("photos")]
         public IList<PhotoDto> Photos { get; set; } = [];
 
