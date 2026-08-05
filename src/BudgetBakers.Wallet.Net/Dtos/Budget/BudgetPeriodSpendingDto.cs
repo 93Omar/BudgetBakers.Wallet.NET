@@ -15,16 +15,16 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public ExcludedBreakdownDto? Excluded { get; set; }
 
         [JsonProperty("effectiveLimit")]
-        public double? EffectiveLimit { get; set; }
+        public decimal? EffectiveLimit { get; set; }
 
         [JsonProperty("incomplete")]
         public bool? Incomplete { get; set; }
 
         [JsonProperty("limit")]
-        public double? Limit { get; set; }
+        public decimal? Limit { get; set; }
 
         [JsonProperty("overspent")]
-        public double? Overspent { get; set; }
+        public decimal? Overspent { get; set; }
 
         [JsonProperty("period")]
         public string? Period { get; set; }
@@ -42,15 +42,15 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public int? RecordCount { get; set; }
 
         [JsonProperty("remaining")]
-        public double? Remaining { get; set; }
+        public decimal? Remaining { get; set; }
 
         [JsonProperty("spent")]
-        public double? Spent { get; set; }
+        public decimal? Spent { get; set; }
 
         [JsonProperty("totalExpenses")]
-        public double? TotalExpenses { get; set; }
+        public decimal? TotalExpenses { get; set; }
 
         [JsonProperty("totalIncomes")]
-        public double? TotalIncomes { get; set; }
+        public decimal? TotalIncomes { get; set; }
     }
 }

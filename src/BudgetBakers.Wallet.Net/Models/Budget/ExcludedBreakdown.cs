@@ -6,7 +6,7 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public int? Debts { get; set; }
         public int? IncomeCategories { get; set; }
         public int? Total { get; set; }
-        public double? TotalAmountSum { get; set; }
+        public decimal? TotalAmountSum { get; set; }
         public int? Transfers { get; set; }
         public int? UnknownCategories { get; set; }
     }

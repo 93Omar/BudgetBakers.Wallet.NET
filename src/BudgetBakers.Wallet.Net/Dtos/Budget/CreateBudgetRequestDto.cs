@@ -14,7 +14,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public required string Type { get; set; }
 
         [JsonProperty("limit")]
-        public double Limit { get; set; }
+        public decimal Limit { get; set; }
 
         [JsonProperty("accountIds")]
         public IList<string>? AccountIds { get; set; }

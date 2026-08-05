@@ -6,7 +6,7 @@ namespace BudgetBakers.Wallet.Net.Models.StandingOrder
     public class StandingOrder
     {
         public string? AccountId { get; set; }
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
         public string? CategoryId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string? CurrencyCode { get; set; }

@@ -29,7 +29,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public IdsOperationDto? LabelIds { get; set; }
 
         [JsonProperty("resetLimit")]
-        public double? ResetLimit { get; set; }
+        public decimal? ResetLimit { get; set; }
 
         [JsonProperty("limitOverrides")]
         public IList<LimitOverrideDto>? LimitOverrides { get; set; }

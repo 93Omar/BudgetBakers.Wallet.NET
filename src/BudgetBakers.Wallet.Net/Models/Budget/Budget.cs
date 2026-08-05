@@ -13,7 +13,7 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public string? CurrencyCode { get; set; }
         public string? EndDate { get; set; }
         public string? Id { get; set; }
-        public double? Limit { get; set; }
+        public decimal? Limit { get; set; }
         public IList<BudgetChangeEntry> LimitOverrides { get; set; } = [];
         public IList<string> LabelIds { get; set; } = [];
         public string? Name { get; set; }

@@ -14,9 +14,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         public string? Error { get; set; }
 
         [JsonProperty("ratio")]
-        public double? Ratio { get; set; }
+        public decimal? Ratio { get; set; }
 
         [JsonProperty("value")]
-        public double? Value { get; set; }
+        public decimal? Value { get; set; }
     }
 }

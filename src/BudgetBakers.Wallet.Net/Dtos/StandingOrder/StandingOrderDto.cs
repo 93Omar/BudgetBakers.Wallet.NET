@@ -9,7 +9,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.StandingOrder
         public string? AccountId { get; set; }
 
         [JsonProperty("amount")]
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         [JsonProperty("categoryId")]
         public string? CategoryId { get; set; }

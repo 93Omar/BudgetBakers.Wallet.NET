@@ -20,7 +20,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         public bool? ExcludeFromStats { get; set; }
 
         [JsonProperty("initialBalance")]
-        public double? InitialBalance { get; set; }
+        public decimal? InitialBalance { get; set; }
 
         [JsonProperty("bankAccountNumber")]
         public string? BankAccountNumber { get; set; }

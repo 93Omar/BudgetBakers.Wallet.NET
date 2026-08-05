@@ -5,7 +5,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
     internal class AccountBalanceDto
     {
         [JsonProperty("availableCredit")]
-        public double? AvailableCredit { get; set; }
+        public decimal? AvailableCredit { get; set; }
 
         [JsonProperty("balanceDisplayOption")]
         public string? BalanceDisplayOption { get; set; }
@@ -17,16 +17,16 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         public string? BalanceModeFormula { get; set; }
 
         [JsonProperty("creditBalance")]
-        public double? CreditBalance { get; set; }
+        public decimal? CreditBalance { get; set; }
 
         [JsonProperty("creditLimit")]
-        public double? CreditLimit { get; set; }
+        public decimal? CreditLimit { get; set; }
 
         [JsonProperty("currencyCode")]
         public string? CurrencyCode { get; set; }
 
         [JsonProperty("currentBalance")]
-        public double? CurrentBalance { get; set; }
+        public decimal? CurrentBalance { get; set; }
 
         [JsonProperty("error")]
         public string? Error { get; set; }
@@ -35,9 +35,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         public string? Formula { get; set; }
 
         [JsonProperty("initial")]
-        public double? Initial { get; set; }
+        public decimal? Initial { get; set; }
 
         [JsonProperty("rawCurrentBalance")]
-        public double? RawCurrentBalance { get; set; }
+        public decimal? RawCurrentBalance { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public required string Name { get; set; }
         public required string CurrencyCode { get; set; }
         public required BudgetType Type { get; set; }
-        public required double Limit { get; set; }
+        public required decimal Limit { get; set; }
         public IList<string>? AccountIds { get; set; }
         public IList<string>? CategoryIds { get; set; }
         public IList<string>? LabelIds { get; set; }

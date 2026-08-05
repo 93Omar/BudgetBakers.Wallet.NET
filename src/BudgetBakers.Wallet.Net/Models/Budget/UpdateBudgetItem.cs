@@ -10,7 +10,7 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public IdsOperation? AccountIds { get; set; }
         public IdsOperation? CategoryIds { get; set; }
         public IdsOperation? LabelIds { get; set; }
-        public double? ResetLimit { get; set; }
+        public decimal? ResetLimit { get; set; }
         public IList<LimitOverride>? LimitOverrides { get; set; }
     }
 }

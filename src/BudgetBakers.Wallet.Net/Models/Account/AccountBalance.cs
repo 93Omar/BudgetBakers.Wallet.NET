@@ -6,7 +6,7 @@ namespace BudgetBakers.Wallet.Net.Models.Account
     /// </summary>
     public class AccountBalance
     {
-        public double? AvailableCredit { get; set; }
+        public decimal? AvailableCredit { get; set; }
         public string? BalanceDisplayOption { get; set; }
 
         /// <summary>
@@ -17,13 +17,13 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         public string? BalanceMode { get; set; }
 
         public string? BalanceModeFormula { get; set; }
-        public double? CreditBalance { get; set; }
-        public double? CreditLimit { get; set; }
+        public decimal? CreditBalance { get; set; }
+        public decimal? CreditLimit { get; set; }
         public string? CurrencyCode { get; set; }
-        public double? CurrentBalance { get; set; }
+        public decimal? CurrentBalance { get; set; }
         public string? Error { get; set; }
         public string? Formula { get; set; }
-        public double? Initial { get; set; }
-        public double? RawCurrentBalance { get; set; }
+        public decimal? Initial { get; set; }
+        public decimal? RawCurrentBalance { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 LabelId = "lab-1",
                 Note = new TextFilter { Prefix = TextPrefix.Contains, Value = "expense" },
                 CounterParty = new TextFilter { Prefix = TextPrefix.Equals, Value = "market" },
-                Amount = new NumberFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = 120.0 },
+                Amount = new NumberFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = 120.0m },
                 CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
                 UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 3, 1) },
                 IsTransfer = true,
