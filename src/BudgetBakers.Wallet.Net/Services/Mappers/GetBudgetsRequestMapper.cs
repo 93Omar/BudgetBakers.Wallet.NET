@@ -20,15 +20,15 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Id = MapperHelpers.JoinIds(source.Ids),
                 Name = source.Name?.ToString(),
                 CurrencyCode = source.CurrencyCode,
-                CreatedAt = source.CreatedAt?.ToString(),
-                UpdatedAt = source.UpdatedAt?.ToString(),
+                CreatedAt = MapperHelpers.JoinFilters(source.CreatedAt),
+                UpdatedAt = MapperHelpers.JoinFilters(source.UpdatedAt),
                 Closed = source.Closed,
                 Type = source.Type?.ToApiString(),
                 LabelId = source.LabelId,
                 AccountId = source.AccountId,
-                CategoryId = source.CategoryId,
-                StartDate = source.StartDate?.ToString(),
-                EndDate = source.EndDate?.ToString(),
+                CategoryId = MapperHelpers.JoinIds(source.CategoryIds),
+                StartDate = MapperHelpers.JoinFilters(source.StartDate),
+                EndDate = MapperHelpers.JoinFilters(source.EndDate),
                 Spending = source.Spending?.ToApiString()
             };
 

@@ -28,13 +28,14 @@ namespace BudgetBakers.Wallet.Net.Models.Goal
         public TextFilter? Note { get; set; }
 
         /// <summary>
-        /// Filter by creation timestamp.
+        /// Filter by creation timestamp. Up to 2 filters can be provided to combine bounds with AND logic.
         /// </summary>
-        public DateFilter? CreatedAt { get; set; }
+        public IList<DateFilter> CreatedAt { get; set; } = [];
 
         /// <summary>
-        /// Filter by last sync timestamp (when entity was last updated in the API database).
+        /// Filter by last sync timestamp (when entity was last updated in the API database). Up to 2 filters
+        /// can be provided to combine bounds with AND logic.
         /// </summary>
-        public DateFilter? UpdatedAt { get; set; }
+        public IList<DateFilter> UpdatedAt { get; set; } = [];
     }
 }

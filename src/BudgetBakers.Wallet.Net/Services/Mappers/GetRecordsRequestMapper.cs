@@ -1,3 +1,4 @@
+using System.Linq;
 using BudgetBakers.Wallet.Net.Dtos.Record;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Record;
@@ -16,23 +17,23 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             {
                 Id = MapperHelpers.JoinIds(source.Ids),
                 AccountId = MapperHelpers.JoinIds(source.AccountIds),
-                RecordDate = source.RecordDate?.ToString(),
+                RecordDate = MapperHelpers.JoinFilters(source.RecordDate),
                 Limit = source.Limit,
                 Offset = source.Offset,
                 AgentHints = source.AgentHints,
                 WithTotal = source.WithTotal,
-                CategoryId = source.CategoryId,
+                CategoryId = MapperHelpers.JoinIds(source.CategoryIds),
                 LabelId = source.LabelId,
                 Note = source.Note?.ToString(),
                 CounterParty = source.CounterParty?.ToString(),
-                Amount = source.Amount?.ToString(),
-                CreatedAt = source.CreatedAt?.ToString(),
-                UpdatedAt = source.UpdatedAt?.ToString(),
+                Amount = MapperHelpers.JoinFilters(source.Amount),
+                CreatedAt = MapperHelpers.JoinFilters(source.CreatedAt),
+                UpdatedAt = MapperHelpers.JoinFilters(source.UpdatedAt),
                 RecordType = source.RecordType?.ToApiString(),
                 IsTransfer = source.IsTransfer,
                 TransferId = MapperHelpers.JoinIds(source.TransferIds),
-                RecordState = source.RecordState?.ToApiString(),
-                Source = source.Source,
+                RecordState = MapperHelpers.JoinIds(source.RecordStates.Select(state => state.ToApiString())),
+                Source = MapperHelpers.JoinIds(source.Sources),
                 ConvertTo = source.ConvertTo,
                 SortBy = source.SortBy?.ToApiString()
             };

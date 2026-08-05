@@ -66,11 +66,11 @@ namespace ConsoleApp
                 AccountIds = [accountsResponse.Accounts.First().Id!],
                 Limit = 50,
                 Offset = 0,
-                RecordDate = new DateFilter()
-                {
-                    Prefix = RangePrefix.GreaterThanOrEqual,
-                    Value = new DateTime(2026, 1, 1)
-                },
+                RecordDate =
+                [
+                    new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
+                    new DateFilter { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) }
+                ],
                 WithTotal = true
             };
 

@@ -2,6 +2,7 @@ using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Account;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Utility;
 
 namespace BudgetBakers.Wallet.Net.Tests.Mappers
 {
@@ -31,8 +32,15 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Name = new TextFilter { Prefix = TextPrefix.ContainsIgnoreCase, Value = "wallet" },
                 AccountType = AccountType.CreditCard,
                 CurrencyCode = "EUR",
-                CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 01, 02, 03, 04, 05) },
-                UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 02, 03, 04, 05, 06) }
+                CreatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 01, 02, 03, 04, 05) },
+                    new() { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 06, 01) }
+                },
+                UpdatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 02, 03, 04, 05, 06) }
+                }
             };
 
             GetAccountsRequestDto? result = mapper.Map(source);
@@ -47,8 +55,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
                 Assert.That(result.AccountType, Is.EqualTo(source.AccountType!.ToString()));
                 Assert.That(result.CurrencyCode, Is.EqualTo(source.CurrencyCode));
-                Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
-                Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
+                Assert.That(result.CreatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.CreatedAt)));
+                Assert.That(result.UpdatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.UpdatedAt)));
             }
         }
     }

@@ -20,8 +20,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Id = MapperHelpers.JoinIds(source.Ids),
                 Name = source.Name?.ToString(),
                 Note = source.Note?.ToString(),
-                CreatedAt = source.CreatedAt?.ToString(),
-                UpdatedAt = source.UpdatedAt?.ToString()
+                CreatedAt = MapperHelpers.JoinFilters(source.CreatedAt),
+                UpdatedAt = MapperHelpers.JoinFilters(source.UpdatedAt)
             };
 
             return requestDto;

@@ -2,6 +2,7 @@ using BudgetBakers.Wallet.Net.Dtos.RecordRule;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.RecordRule;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Utility;
 
 namespace BudgetBakers.Wallet.Net.Tests.Mappers
 {
@@ -28,8 +29,14 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 AgentHints = true,
                 Ids = new List<string> { "r1", "r2" },
                 Name = new TextFilter { Prefix = TextPrefix.Equals, Value = "Rule" },
-                CreatedAt = new DateFilter { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 1) },
-                UpdatedAt = new DateFilter { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 2) }
+                CreatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 1) }
+                },
+                UpdatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 2) }
+                }
             };
 
             GetRecordRulesRequestDto? result = mapper.Map(source);
@@ -42,8 +49,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.AgentHints, Is.EqualTo(source.AgentHints));
                 Assert.That(result.Id, Is.EqualTo("r1,r2"));
                 Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
-                Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
-                Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
+                Assert.That(result.CreatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.CreatedAt)));
+                Assert.That(result.UpdatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.UpdatedAt)));
             }
         }
     }

@@ -18,10 +18,10 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 AgentHints = source.AgentHints,
                 WithTotal = source.WithTotal,
                 StandingOrderId = source.StandingOrderId,
-                OriginalDate = source.OriginalDate?.ToString(),
+                OriginalDate = MapperHelpers.JoinFilters(source.OriginalDate),
                 Dismissed = source.Dismissed,
                 RecordId = source.RecordId,
-                PaidDate = source.PaidDate?.ToString()
+                PaidDate = MapperHelpers.JoinFilters(source.PaidDate)
             };
         }
     }

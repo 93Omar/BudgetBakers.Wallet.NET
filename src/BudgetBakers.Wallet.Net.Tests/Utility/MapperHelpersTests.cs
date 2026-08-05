@@ -202,6 +202,41 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
             Assert.That(result, Is.EqualTo($"id-1{ApiConstant.Separator.Ids}id-2"));
         }
 
+        [Test]
+        public void JoinFilters_WhenInputIsNull_ReturnsNull()
+        {
+            string? result = MapperHelpers.JoinFilters<DateFilter>(null);
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void JoinFilters_WhenInputIsEmpty_ReturnsNull()
+        {
+            string? result = MapperHelpers.JoinFilters(Array.Empty<DateFilter>());
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void JoinFilters_WhenInputContainsSingleValue_ReturnsItsStringRepresentation()
+        {
+            DateFilter filter = new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) };
+
+            string? result = MapperHelpers.JoinFilters([filter]);
+
+            Assert.That(result, Is.EqualTo(filter.ToString()));
+        }
+
+        [Test]
+        public void JoinFilters_WhenInputContainsTwoValues_UsesApiSeparatorForRangeFiltering()
+        {
+            DateFilter lowerBound = new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) };
+            DateFilter upperBound = new() { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) };
+
+            string? result = MapperHelpers.JoinFilters([lowerBound, upperBound]);
+
+            Assert.That(result, Is.EqualTo($"{lowerBound}{ApiConstant.Separator.Filters}{upperBound}"));
+        }
+
         [TestCase("info", AgentHintSeverity.Info)]
         [TestCase("warning", AgentHintSeverity.Warning)]
         [TestCase("instruction", AgentHintSeverity.Instruction)]

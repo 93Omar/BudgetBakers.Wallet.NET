@@ -191,6 +191,23 @@ namespace BudgetBakers.Wallet.Net.Utility
                 : null;
         }
 
+        /// <summary>
+        /// Joins range/text filter values (e.g. <see cref="DateFilter"/>, <see cref="NumberFilter"/>,
+        /// <see cref="DateOnlyFilter"/>) into the comma-separated wire format accepted by the API, which
+        /// supports up to 2 conditions combined with AND logic (e.g. a lower and an upper bound).
+        /// </summary>
+        public static string? JoinFilters<T>(IEnumerable<T>? filters) where T : notnull
+        {
+            if (filters is null)
+                return null;
+
+            string[] values = filters.Select(filter => filter.ToString()!).ToArray();
+
+            return values.Length > 0
+                ? string.Join(ApiConstant.Separator.Filters, values)
+                : null;
+        }
+
         public static Label? MapLabel(LabelDto? dto)
         {
             if (dto is null)
