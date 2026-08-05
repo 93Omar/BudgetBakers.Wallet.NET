@@ -21,7 +21,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Clients
                       "limit": 10,
                       "offset": 0,
                       "nextOffset": 0,
-                      "recordDateRange": [],
+                      "appliedRecordDateFilters": [],
                       "records": [],
                       "agentHints": []
                     }

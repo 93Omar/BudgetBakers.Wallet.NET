@@ -72,6 +72,15 @@ namespace BudgetBakers.Wallet.Net.Utility
             ["want"] = CategoryCardinality.Want
         };
 
+        private static readonly Dictionary<string, RangePrefix> _rangePrefixMap = new()
+        {
+            ["eq"] = RangePrefix.Equals,
+            ["gt"] = RangePrefix.GreaterThan,
+            ["gte"] = RangePrefix.GreaterThanOrEqual,
+            ["lt"] = RangePrefix.LessThan,
+            ["lte"] = RangePrefix.LessThanOrEqual
+        };
+
         public static AgentHint? MapAgentHint(AgentHintDto? dto)
         {
             if (dto is null)
@@ -156,6 +165,51 @@ namespace BudgetBakers.Wallet.Net.Utility
                 return cardinality;
 
             throw new InvalidOperationException($"Unknown {nameof(CategoryCardinality)} value: '{value}'");
+        }
+
+        public static RangePrefix ParseRangePrefix(string value)
+        {
+            if (_rangePrefixMap.TryGetValue(value, out RangePrefix prefix))
+                return prefix;
+
+            throw new InvalidOperationException($"Unknown {nameof(RangePrefix)} value: '{value}'");
+        }
+
+        /// <summary>
+        /// Parses a single operator-prefixed range filter value (e.g. "gte.2026-02-22T00:00:00Z") as returned by
+        /// the API in fields such as <c>appliedRecordDateFilters</c> into a <see cref="DateFilter"/>.
+        /// </summary>
+        public static DateFilter? ParseDateFilter(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return null;
+
+            int separatorIndex = value.IndexOf('.');
+            if (separatorIndex < 0)
+                throw new InvalidOperationException($"Invalid {nameof(DateFilter)} value: '{value}'");
+
+            RangePrefix prefix = ParseRangePrefix(value[..separatorIndex]);
+            DateTime? dateValue = ParseDateTime(value[(separatorIndex + 1)..]);
+
+            if (dateValue is null)
+                throw new InvalidOperationException($"Invalid {nameof(DateFilter)} value: '{value}'");
+
+            return new DateFilter { Prefix = prefix, Value = dateValue.Value };
+        }
+
+        /// <summary>
+        /// Parses a collection of operator-prefixed range filter values (e.g. as returned in
+        /// <c>appliedRecordDateFilters</c>) into <see cref="DateFilter"/> instances.
+        /// </summary>
+        public static IList<DateFilter> ParseDateFilters(IEnumerable<string>? values)
+        {
+            if (values is null)
+                return [];
+
+            return values
+                .Select(ParseDateFilter)
+                .OfType<DateFilter>()
+                .ToList();
         }
 
         public static DateTime? ParseDateTime(string? s)

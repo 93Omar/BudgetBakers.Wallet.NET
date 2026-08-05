@@ -26,7 +26,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                     NextOffset = source.NextOffset,
                     Total = source.Total
                 },
-                RecordDateRange = source.RecordDateRange.ToList(),
+                AppliedRecordDateFilters = MapperHelpers.ParseDateFilters(source.AppliedRecordDateFilters),
                 Records = source.Records
                             .Select(MapperHelpers.MapRecord)
                             .OfType<Record>()

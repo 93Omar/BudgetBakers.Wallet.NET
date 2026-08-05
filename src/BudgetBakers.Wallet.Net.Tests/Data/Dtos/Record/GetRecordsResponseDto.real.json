@@ -23,7 +23,7 @@
   "limit": 30,
   "nextOffset": 30,
   "offset": 0,
-  "recordDateRange": [
+  "appliedRecordDateFilters": [
     "gte.2025-12-13T10:06:13Z",
     "lt.2026-03-14T10:06:13Z"
   ],

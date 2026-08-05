@@ -23,9 +23,11 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public DataSynchronizationInfo DataSynchronization { get; set; } = new DataSynchronizationInfo();
 
         /// <summary>
-        /// The effective date range filter applied to the query, as array of operator-prefixed timestamps.
+        /// The actual record date filter applied to this request, as parsed range filters (e.g. a lower and an
+        /// upper bound), including the implicit 3-month default window when no explicit filter was provided.
+        /// Empty when no date filter is applied (e.g. an ID-based lookup).
         /// </summary>
-        public IList<string> RecordDateRange { get; set; } = [];
+        public IList<DateFilter> AppliedRecordDateFilters { get; set; } = [];
 
 
         public IList<Record> Records { get; set; } = [];

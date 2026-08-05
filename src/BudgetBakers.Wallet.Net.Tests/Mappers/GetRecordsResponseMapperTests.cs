@@ -3,6 +3,7 @@ using BudgetBakers.Wallet.Net.Dtos.Account;
 using BudgetBakers.Wallet.Net.Dtos.Category;
 using BudgetBakers.Wallet.Net.Dtos.Label;
 using BudgetBakers.Wallet.Net.Dtos.Record;
+using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Record;
 using BudgetBakers.Wallet.Net.Services.Mappers;
 
@@ -32,7 +33,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Limit = 3,
                 Offset = 0,
                 NextOffset = 3,
-                RecordDateRange = new List<string> { "2026-01-01", "2026-01-31" },
+                AppliedRecordDateFilters = new List<string> { "gte.2026-01-01T00:00:00Z", "lt.2026-01-31T00:00:00Z" },
                 Records = new List<RecordDto>
                 {
                     new()
@@ -77,7 +78,11 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result!.Pagination.Limit, Is.EqualTo(source.Limit));
                 Assert.That(result.Pagination.Offset, Is.EqualTo(source.Offset));
                 Assert.That(result.Pagination.NextOffset, Is.EqualTo(source.NextOffset));
-                Assert.That(result.RecordDateRange, Is.EqualTo(source.RecordDateRange));
+                Assert.That(result.AppliedRecordDateFilters, Has.Count.EqualTo(2));
+                Assert.That(result.AppliedRecordDateFilters[0].Prefix, Is.EqualTo(RangePrefix.GreaterThanOrEqual));
+                Assert.That(result.AppliedRecordDateFilters[0].Value.ToUniversalTime(), Is.EqualTo(new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)));
+                Assert.That(result.AppliedRecordDateFilters[1].Prefix, Is.EqualTo(RangePrefix.LessThan));
+                Assert.That(result.AppliedRecordDateFilters[1].Value.ToUniversalTime(), Is.EqualTo(new DateTime(2026, 1, 31, 0, 0, 0, DateTimeKind.Utc)));
                 Assert.That(result.Records, Has.Count.EqualTo(1));
                 Assert.That(result.AgentHints, Has.Count.EqualTo(1));
                 Assert.That(mapped.Id, Is.EqualTo(recordId));
