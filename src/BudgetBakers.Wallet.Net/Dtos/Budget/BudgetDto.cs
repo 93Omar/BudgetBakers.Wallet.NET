@@ -9,7 +9,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public IList<string> AccountIds { get; set; } = [];
 
         [JsonProperty("limit")]
-        public double? Limit { get; set; }
+        public decimal? Limit { get; set; }
 
         [JsonProperty("closed")]
         public bool? Closed { get; set; }

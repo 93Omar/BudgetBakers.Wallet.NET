@@ -5,7 +5,7 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public string? ConversionPair { get; set; }
         public string? CurrencyCode { get; set; }
         public string? Error { get; set; }
-        public double? Ratio { get; set; }
-        public double? Value { get; set; }
+        public decimal? Ratio { get; set; }
+        public decimal? Value { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Account
         public required string CurrencyCode { get; set; }
 
         [JsonProperty("initialBalance")]
-        public double InitialBalance { get; set; }
+        public decimal InitialBalance { get; set; }
 
         [JsonProperty("color")]
         public string? Color { get; set; }

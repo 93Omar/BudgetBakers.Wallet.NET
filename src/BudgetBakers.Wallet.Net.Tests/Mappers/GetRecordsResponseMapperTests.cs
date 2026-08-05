@@ -56,7 +56,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                             MirrorRecord = new MirrorRecordEmbedDto
                             {
                                 AccountId = "acc-2",
-                                Amount = new AmountWithCurrencyDto { CurrencyCode = "EUR", Value = -10.5 },
+                                Amount = new AmountWithCurrencyDto { CurrencyCode = "EUR", Value = -10.5m },
                                 CounterParty = "store",
                                 Id = "mirror-id",
                                 Note = "mirror note"

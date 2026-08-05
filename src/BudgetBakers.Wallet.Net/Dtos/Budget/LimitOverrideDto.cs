@@ -8,7 +8,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public required string Period { get; set; }
 
         [JsonProperty("limit")]
-        public double? Limit { get; set; }
+        public decimal? Limit { get; set; }
 
         [JsonProperty("setBaseline")]
         public bool? SetBaseline { get; set; }

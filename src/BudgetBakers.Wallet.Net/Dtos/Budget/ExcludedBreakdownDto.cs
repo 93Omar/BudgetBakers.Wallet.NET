@@ -17,7 +17,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         public int? Total { get; set; }
 
         [JsonProperty("totalAmountSum")]
-        public double? TotalAmountSum { get; set; }
+        public decimal? TotalAmountSum { get; set; }
 
         [JsonProperty("transfers")]
         public int? Transfers { get; set; }

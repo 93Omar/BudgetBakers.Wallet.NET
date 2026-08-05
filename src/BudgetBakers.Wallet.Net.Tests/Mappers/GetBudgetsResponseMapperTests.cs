@@ -37,7 +37,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                     {
                         Id = budgetId,
                         AccountIds = new List<string> { accountId, "not-guid" },
-                        Limit = 100.00,
+                        Limit = 100.00m,
                         CategoryIds = new List<string> { categoryId },
                         CreatedAt = "2026-01-01 00:00:00",
                         CurrencyCode = "EUR",

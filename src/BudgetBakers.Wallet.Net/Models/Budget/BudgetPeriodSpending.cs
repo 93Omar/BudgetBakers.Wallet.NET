@@ -11,19 +11,19 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         /// <summary>
         /// The limit in force for this period (baseline limit or an applicable override). Read-only.
         /// </summary>
-        public double? EffectiveLimit { get; set; }
+        public decimal? EffectiveLimit { get; set; }
 
         public bool? Incomplete { get; set; }
-        public double? Limit { get; set; }
-        public double? Overspent { get; set; }
+        public decimal? Limit { get; set; }
+        public decimal? Overspent { get; set; }
         public string? Period { get; set; }
         public string? PeriodEnd { get; set; }
         public string? PeriodStart { get; set; }
         public double? Progress { get; set; }
         public int? RecordCount { get; set; }
-        public double? Remaining { get; set; }
-        public double? Spent { get; set; }
-        public double? TotalExpenses { get; set; }
-        public double? TotalIncomes { get; set; }
+        public decimal? Remaining { get; set; }
+        public decimal? Spent { get; set; }
+        public decimal? TotalExpenses { get; set; }
+        public decimal? TotalIncomes { get; set; }
     }
 }

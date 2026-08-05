@@ -9,7 +9,7 @@ namespace BudgetBakers.Wallet.Net.Models.Account
         public EntityColor? Color { get; set; }
         public bool? Archived { get; set; }
         public bool? ExcludeFromStats { get; set; }
-        public double? InitialBalance { get; set; }
+        public decimal? InitialBalance { get; set; }
         public string? BankAccountNumber { get; set; }
     }
 }
