@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BudgetBakers.Wallet.Net.Models.Pagination;
 
 namespace BudgetBakers.Wallet.Net.Models.StandingOrder
@@ -16,9 +17,9 @@ namespace BudgetBakers.Wallet.Net.Models.StandingOrder
         public string? StandingOrderId { get; set; }
 
         /// <summary>
-        /// Filter by original scheduled date. Requires range prefix.
+        /// Filter by original scheduled date. Up to 2 filters can be provided to combine bounds with AND logic.
         /// </summary>
-        public DateFilter? OriginalDate { get; set; }
+        public IList<DateFilter> OriginalDate { get; set; } = [];
 
         /// <summary>
         /// Filter by dismissed status.
@@ -31,8 +32,8 @@ namespace BudgetBakers.Wallet.Net.Models.StandingOrder
         public string? RecordId { get; set; }
 
         /// <summary>
-        /// Filter by paid date. Requires range prefix.
+        /// Filter by paid date. Up to 2 filters can be provided to combine bounds with AND logic.
         /// </summary>
-        public DateFilter? PaidDate { get; set; }
+        public IList<DateFilter> PaidDate { get; set; } = [];
     }
 }

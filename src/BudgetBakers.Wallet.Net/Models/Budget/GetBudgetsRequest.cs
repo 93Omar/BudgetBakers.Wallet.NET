@@ -13,11 +13,11 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public BudgetType? Type { get; set; }
         public string? LabelId { get; set; }
         public string? AccountId { get; set; }
-        public string? CategoryId { get; set; }
-        public DateOnlyFilter? StartDate { get; set; }
-        public DateOnlyFilter? EndDate { get; set; }
+        public IList<string> CategoryIds { get; set; } = [];
+        public IList<DateOnlyFilter> StartDate { get; set; } = [];
+        public IList<DateOnlyFilter> EndDate { get; set; } = [];
         public BudgetSpendingDepth? Spending { get; set; }
-        public DateFilter? CreatedAt { get; set; }
-        public DateFilter? UpdatedAt { get; set; }
+        public IList<DateFilter> CreatedAt { get; set; } = [];
+        public IList<DateFilter> UpdatedAt { get; set; } = [];
     }
 }

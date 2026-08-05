@@ -10,8 +10,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("agentHints")]
         public IList<AgentHintDto> AgentHints { get; set; } = [];
 
-        [JsonProperty("recordDateRange")]
-        public IList<string> RecordDateRange { get; set; } = [];
+        [JsonProperty("appliedRecordDateFilters")]
+        public IList<string> AppliedRecordDateFilters { get; set; } = [];
 
         [JsonProperty("records")]
         public IList<RecordDto> Records { get; set; } = [];

@@ -2,6 +2,7 @@ using BudgetBakers.Wallet.Net.Dtos.Category;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Category;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Utility;
 
 namespace BudgetBakers.Wallet.Net.Tests.Mappers
 {
@@ -28,8 +29,15 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 AgentHints = true,
                 Ids = new List<string> { "c1", "c2" },
                 Name = new TextFilter { Prefix = TextPrefix.Equals, Value = "Food" },
-                CreatedAt = new DateFilter { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
-                UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 2, 1) },
+                CreatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) }
+                },
+                UpdatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
+                    new() { Prefix = RangePrefix.LessThanOrEqual, Value = new DateTime(2026, 2, 1) }
+                },
                 Cardinality = CategoryCardinality.Need
             };
 
@@ -43,8 +51,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.AgentHints, Is.EqualTo(source.AgentHints));
                 Assert.That(result.Id, Is.EqualTo("c1,c2"));
                 Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
-                Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
-                Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
+                Assert.That(result.CreatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.CreatedAt)));
+                Assert.That(result.UpdatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.UpdatedAt)));
                 Assert.That(result.Cardinality, Is.EqualTo("need"));
             }
         }

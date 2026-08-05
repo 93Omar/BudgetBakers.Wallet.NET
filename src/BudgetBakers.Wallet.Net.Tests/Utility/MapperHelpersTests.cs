@@ -202,6 +202,41 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
             Assert.That(result, Is.EqualTo($"id-1{ApiConstant.Separator.Ids}id-2"));
         }
 
+        [Test]
+        public void JoinFilters_WhenInputIsNull_ReturnsNull()
+        {
+            string? result = MapperHelpers.JoinFilters<DateFilter>(null);
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void JoinFilters_WhenInputIsEmpty_ReturnsNull()
+        {
+            string? result = MapperHelpers.JoinFilters(Array.Empty<DateFilter>());
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void JoinFilters_WhenInputContainsSingleValue_ReturnsItsStringRepresentation()
+        {
+            DateFilter filter = new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) };
+
+            string? result = MapperHelpers.JoinFilters([filter]);
+
+            Assert.That(result, Is.EqualTo(filter.ToString()));
+        }
+
+        [Test]
+        public void JoinFilters_WhenInputContainsTwoValues_UsesApiSeparatorForRangeFiltering()
+        {
+            DateFilter lowerBound = new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) };
+            DateFilter upperBound = new() { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) };
+
+            string? result = MapperHelpers.JoinFilters([lowerBound, upperBound]);
+
+            Assert.That(result, Is.EqualTo($"{lowerBound}{ApiConstant.Separator.Filters}{upperBound}"));
+        }
+
         [TestCase("info", AgentHintSeverity.Info)]
         [TestCase("warning", AgentHintSeverity.Warning)]
         [TestCase("instruction", AgentHintSeverity.Instruction)]
@@ -324,6 +359,77 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         public void ParseCategoryCardinality_WhenValueIsUnknown_ThrowsInvalidOperationException()
         {
             Assert.That(() => MapperHelpers.ParseCategoryCardinality("unknown"), Throws.TypeOf<InvalidOperationException>());
+        }
+
+        [TestCase("eq", RangePrefix.Equals)]
+        [TestCase("gt", RangePrefix.GreaterThan)]
+        [TestCase("gte", RangePrefix.GreaterThanOrEqual)]
+        [TestCase("lt", RangePrefix.LessThan)]
+        [TestCase("lte", RangePrefix.LessThanOrEqual)]
+        public void ParseRangePrefix_WhenValueIsKnown_ReturnsExpectedRangePrefix(string value, RangePrefix expected)
+        {
+            RangePrefix result = MapperHelpers.ParseRangePrefix(value);
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void ParseRangePrefix_WhenValueIsUnknown_ThrowsInvalidOperationException()
+        {
+            Assert.That(() => MapperHelpers.ParseRangePrefix("unknown"), Throws.TypeOf<InvalidOperationException>());
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void ParseDateFilter_WhenInputIsNullOrWhitespace_ReturnsNull(string? value)
+        {
+            DateFilter? result = MapperHelpers.ParseDateFilter(value);
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void ParseDateFilter_WhenInputIsValid_ReturnsExpectedDateFilter()
+        {
+            DateFilter? result = MapperHelpers.ParseDateFilter("gte.2026-02-22T00:00:00Z");
+
+            Assert.That(result, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result!.Prefix, Is.EqualTo(RangePrefix.GreaterThanOrEqual));
+                Assert.That(result.Value.ToUniversalTime(), Is.EqualTo(new DateTime(2026, 2, 22, 0, 0, 0, DateTimeKind.Utc)));
+            }
+        }
+
+        [Test]
+        public void ParseDateFilter_WhenPrefixIsMissing_ThrowsInvalidOperationException()
+        {
+            Assert.That(() => MapperHelpers.ParseDateFilter("2026-02-22T00:00:00Z"), Throws.TypeOf<InvalidOperationException>());
+        }
+
+        [Test]
+        public void ParseDateFilter_WhenValueIsInvalidDate_ThrowsInvalidOperationException()
+        {
+            Assert.That(() => MapperHelpers.ParseDateFilter("gte.not-a-date"), Throws.TypeOf<InvalidOperationException>());
+        }
+
+        [Test]
+        public void ParseDateFilters_WhenInputIsNull_ReturnsEmptyList()
+        {
+            IList<DateFilter> result = MapperHelpers.ParseDateFilters(null);
+            Assert.That(result, Is.Empty);
+        }
+
+        [Test]
+        public void ParseDateFilters_WhenInputContainsValues_ReturnsParsedDateFilters()
+        {
+            IList<DateFilter> result = MapperHelpers.ParseDateFilters(["gte.2026-02-22T00:00:00Z", "lt.2026-05-23T00:00:00Z"]);
+
+            Assert.That(result, Has.Count.EqualTo(2));
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(result[0].Prefix, Is.EqualTo(RangePrefix.GreaterThanOrEqual));
+                Assert.That(result[1].Prefix, Is.EqualTo(RangePrefix.LessThan));
+            }
         }
     }
 }

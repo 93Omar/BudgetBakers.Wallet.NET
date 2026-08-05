@@ -39,6 +39,7 @@ namespace BudgetBakers.Wallet.Net.Constants
         internal static class Separator
         {
             internal const string Ids = ",";
+            internal const string Filters = ",";
         }
 
         internal static class Endpoint

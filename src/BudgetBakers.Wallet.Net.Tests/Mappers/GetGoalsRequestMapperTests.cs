@@ -2,6 +2,7 @@ using BudgetBakers.Wallet.Net.Dtos.Goal;
 using BudgetBakers.Wallet.Net.Models;
 using BudgetBakers.Wallet.Net.Models.Goal;
 using BudgetBakers.Wallet.Net.Services.Mappers;
+using BudgetBakers.Wallet.Net.Utility;
 
 namespace BudgetBakers.Wallet.Net.Tests.Mappers
 {
@@ -29,8 +30,15 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Ids = new List<string> { "g1", "g2" },
                 Name = new TextFilter { Prefix = TextPrefix.Contains, Value = "House" },
                 Note = new TextFilter { Prefix = TextPrefix.ContainsIgnoreCase, Value = "Mortgage" },
-                CreatedAt = new DateFilter { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 1) },
-                UpdatedAt = new DateFilter { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) }
+                CreatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.Equals, Value = new DateTime(2026, 1, 1) }
+                },
+                UpdatedAt = new List<DateFilter>
+                {
+                    new() { Prefix = RangePrefix.GreaterThanOrEqual, Value = new DateTime(2026, 1, 1) },
+                    new() { Prefix = RangePrefix.LessThan, Value = new DateTime(2026, 2, 1) }
+                }
             };
 
             GetGoalsRequestDto? result = mapper.Map(source);
@@ -44,8 +52,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(result.Id, Is.EqualTo("g1,g2"));
                 Assert.That(result.Name, Is.EqualTo(source.Name!.ToString()));
                 Assert.That(result.Note, Is.EqualTo(source.Note!.ToString()));
-                Assert.That(result.CreatedAt, Is.EqualTo(source.CreatedAt!.ToString()));
-                Assert.That(result.UpdatedAt, Is.EqualTo(source.UpdatedAt!.ToString()));
+                Assert.That(result.CreatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.CreatedAt)));
+                Assert.That(result.UpdatedAt, Is.EqualTo(MapperHelpers.JoinFilters(source.UpdatedAt)));
             }
         }
     }

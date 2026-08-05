@@ -21,8 +21,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Name = source.Name?.ToString(),
                 AccountType = source.AccountType?.ToString(),
                 CurrencyCode = source.CurrencyCode,
-                CreatedAt = source.CreatedAt?.ToString(),
-                UpdatedAt = source.UpdatedAt?.ToString(),
+                CreatedAt = MapperHelpers.JoinFilters(source.CreatedAt),
+                UpdatedAt = MapperHelpers.JoinFilters(source.UpdatedAt),
                 Archived = source.Archived,
                 BudgetId = source.BudgetId,
                 SortBy = source.SortBy?.ToApiString()
