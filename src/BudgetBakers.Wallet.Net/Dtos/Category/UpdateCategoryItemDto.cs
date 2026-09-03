@@ -16,7 +16,7 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
         [JsonProperty("cardinality")]
         public string? Cardinality { get; set; }
 
-        [JsonProperty("resetName")]
-        public bool? ResetName { get; set; }
+        [JsonProperty("reset")]
+        public IList<string>? Reset { get; set; }
     }
 }

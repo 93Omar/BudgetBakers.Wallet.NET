@@ -37,6 +37,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Category
         [JsonProperty("parentId")]
         public string? ParentId { get; set; }
 
+        [JsonProperty("parentName")]
+        public string? ParentName { get; set; }
+
         [JsonProperty("systemId")]
         public string? SystemId { get; set; }
 

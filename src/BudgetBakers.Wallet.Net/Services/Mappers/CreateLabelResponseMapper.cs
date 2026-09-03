@@ -15,6 +15,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             return new CreateLabelResponse
             {
                 Label = MapperHelpers.MapLabel(source.Label),
+                Summary = MapperHelpers.MapBatchOperationSummary(source.Summary),
                 AgentHints = source.AgentHints
                                    .Select(MapperHelpers.MapAgentHint)
                                    .OfType<AgentHint>()

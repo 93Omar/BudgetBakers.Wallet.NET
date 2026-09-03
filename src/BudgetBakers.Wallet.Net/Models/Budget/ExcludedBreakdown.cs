@@ -2,7 +2,6 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
 {
     public class ExcludedBreakdown
     {
-        public int? ArchivedAccounts { get; set; }
         public int? Debts { get; set; }
         public int? IncomeCategories { get; set; }
         public int? Total { get; set; }

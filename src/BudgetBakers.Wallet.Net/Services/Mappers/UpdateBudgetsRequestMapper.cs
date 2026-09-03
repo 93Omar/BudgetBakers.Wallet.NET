@@ -28,7 +28,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                              {
                                  Period = limitOverride.Period,
                                  Limit = limitOverride.Limit,
-                                 SetBaseline = limitOverride.SetBaseline
+                                 SetBaseline = limitOverride.SetBaseline,
+                                 PeriodCount = limitOverride.PeriodCount
                              }).ToList()
                          })
                          .ToList();

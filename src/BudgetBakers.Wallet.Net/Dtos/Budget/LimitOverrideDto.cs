@@ -12,5 +12,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
 
         [JsonProperty("setBaseline")]
         public bool? SetBaseline { get; set; }
+
+        [JsonProperty("periodCount")]
+        public int? PeriodCount { get; set; }
     }
 }

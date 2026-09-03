@@ -8,6 +8,11 @@ namespace BudgetBakers.Wallet.Net.Models.Category
         public string? Name { get; set; }
         public EntityColor? Color { get; set; }
         public CategoryCardinality? Cardinality { get; set; }
-        public bool? ResetName { get; set; }
+
+        /// <summary>
+        /// Fields to restore to the base (system) category default. A field cannot be both set and reset in the
+        /// same call.
+        /// </summary>
+        public IList<CategoryResetField>? Reset { get; set; }
     }
 }

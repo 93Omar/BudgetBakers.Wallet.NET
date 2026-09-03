@@ -4,9 +4,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
 {
     internal class ExcludedBreakdownDto
     {
-        [JsonProperty("archivedAccounts")]
-        public int? ArchivedAccounts { get; set; }
-
         [JsonProperty("debts")]
         public int? Debts { get; set; }
 

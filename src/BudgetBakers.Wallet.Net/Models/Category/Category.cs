@@ -30,6 +30,13 @@ namespace BudgetBakers.Wallet.Net.Models.Category
         public string? Name { get; set; }
 
         public string? ParentId { get; set; }
+
+        /// <summary>
+        /// Display name of the parent base category, exactly as GET /categories renders it. Present for custom
+        /// categories only.
+        /// </summary>
+        public string? ParentName { get; set; }
+
         public string? SystemId { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

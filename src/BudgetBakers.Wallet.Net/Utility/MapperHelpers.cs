@@ -342,6 +342,7 @@ namespace BudgetBakers.Wallet.Net.Utility
                 Id = dto.Id,
                 Name = dto.Name,
                 ParentId = dto.ParentId,
+                ParentName = dto.ParentName,
                 SystemId = dto.SystemId,
                 UpdatedAt = ParseDateTime(dto.UpdatedAt)
             };
@@ -514,7 +515,8 @@ namespace BudgetBakers.Wallet.Net.Utility
                 Total = dto.Total,
                 Succeeded = dto.Succeeded,
                 ClientErrors = dto.ClientErrors,
-                ServerErrors = dto.ServerErrors
+                ServerErrors = dto.ServerErrors,
+                DocumentsWritten = dto.DocumentsWritten
             };
         }
 
@@ -528,6 +530,7 @@ namespace BudgetBakers.Wallet.Net.Utility
                 CreatedAt = ParseDateTime(dto.CreatedAt),
                 Limit = dto.Limit,
                 Period = dto.Period,
+                PeriodCount = dto.PeriodCount,
                 PeriodStart = dto.PeriodStart
             };
         }
@@ -539,7 +542,6 @@ namespace BudgetBakers.Wallet.Net.Utility
 
             return new ExcludedBreakdown
             {
-                ArchivedAccounts = dto.ArchivedAccounts,
                 Debts = dto.Debts,
                 IncomeCategories = dto.IncomeCategories,
                 Total = dto.Total,
@@ -561,7 +563,6 @@ namespace BudgetBakers.Wallet.Net.Utility
                 Excluded = MapExcludedBreakdown(dto.Excluded),
                 EffectiveLimit = dto.EffectiveLimit,
                 Incomplete = dto.Incomplete,
-                Limit = dto.Limit,
                 Overspent = dto.Overspent,
                 Period = dto.Period,
                 PeriodEnd = dto.PeriodEnd,
@@ -585,18 +586,6 @@ namespace BudgetBakers.Wallet.Net.Utility
                 ComputedAt = ParseDateTime(dto.ComputedAt),
                 Current = MapBudgetPeriodSpending(dto.Current),
                 Past = dto.Past.Select(MapBudgetPeriodSpending).OfType<BudgetPeriodSpending>().ToList()
-            };
-        }
-
-        public static CreateRecordMirrorResult? MapCreateRecordMirrorResult(CreateRecordMirrorResultDto? dto)
-        {
-            if (dto is null)
-                return null;
-
-            return new CreateRecordMirrorResult
-            {
-                Id = dto.Id,
-                Record = MapRecord(dto.Record)
             };
         }
     }

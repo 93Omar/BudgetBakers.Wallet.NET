@@ -22,7 +22,10 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
         [JsonProperty("errorType")]
         public string? ErrorType { get; set; }
 
-        [JsonProperty("mirror")]
-        public CreateRecordMirrorResultDto? Mirror { get; set; }
+        [JsonProperty("fields")]
+        public IList<string>? Fields { get; set; }
+
+        [JsonProperty("createdMirrorRecordId")]
+        public string? CreatedMirrorRecordId { get; set; }
     }
 }

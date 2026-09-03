@@ -17,11 +17,13 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Results = source.Results
                                 .Select(result => new UpdateLabelResult
                                 {
+                                    InputIndex = result.InputIndex,
                                     Id = result.Id,
                                     Success = result.Success,
                                     Label = MapperHelpers.MapLabel(result.Label),
                                     Error = result.Error,
-                                    ErrorType = result.ErrorType
+                                    ErrorType = result.ErrorType,
+                                    Fields = result.Fields?.ToList() ?? []
                                 })
                                 .ToList(),
                 Summary = MapperHelpers.MapBatchOperationSummary(source.Summary),

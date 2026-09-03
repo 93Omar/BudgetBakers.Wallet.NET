@@ -22,7 +22,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                                     Record = MapperHelpers.MapRecord(result.Record),
                                     Error = result.Error,
                                     ErrorType = result.ErrorType,
-                                    Mirror = MapperHelpers.MapCreateRecordMirrorResult(result.Mirror)
+                                    Fields = result.Fields?.ToList() ?? [],
+                                    CreatedMirrorRecordId = result.CreatedMirrorRecordId
                                 })
                                 .ToList(),
                 Summary = MapperHelpers.MapBatchOperationSummary(source.Summary)

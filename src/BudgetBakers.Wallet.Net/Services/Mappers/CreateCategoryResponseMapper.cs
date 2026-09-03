@@ -15,6 +15,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             return new CreateCategoryResponse
             {
                 Category = MapperHelpers.MapCategory(source.Category),
+                Summary = MapperHelpers.MapBatchOperationSummary(source.Summary),
                 AgentHints = source.AgentHints
                                    .Select(MapperHelpers.MapAgentHint)
                                    .OfType<AgentHint>()

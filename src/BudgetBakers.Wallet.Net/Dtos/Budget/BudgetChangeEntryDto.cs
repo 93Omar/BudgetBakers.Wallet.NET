@@ -13,6 +13,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         [JsonProperty("period")]
         public string? Period { get; set; }
 
+        [JsonProperty("periodCount")]
+        public int? PeriodCount { get; set; }
+
         [JsonProperty("periodStart")]
         public string? PeriodStart { get; set; }
     }
