@@ -15,5 +15,8 @@ namespace BudgetBakers.Wallet.Net.Dtos
 
         [JsonProperty("serverErrors")]
         public int ServerErrors { get; set; }
+
+        [JsonProperty("documentsWritten")]
+        public int DocumentsWritten { get; set; }
     }
 }

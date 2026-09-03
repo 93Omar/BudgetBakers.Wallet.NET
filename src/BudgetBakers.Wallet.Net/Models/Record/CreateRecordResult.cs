@@ -10,9 +10,17 @@ namespace BudgetBakers.Wallet.Net.Models.Record
         public string? ErrorType { get; set; }
 
         /// <summary>
-        /// The auto-created B-side of a paired transfer, nested under the item that requested it. Null when the
-        /// item is not a paired transfer, or when mirror creation failed.
+        /// Input field names the error is attributable to; empty when the error belongs to the item as a whole.
         /// </summary>
-        public CreateRecordMirrorResult? Mirror { get; set; }
+        public IList<string> Fields { get; set; } = [];
+
+        /// <summary>
+        /// ID of the auto-created B-side of a paired transfer — present only when this call wrote that document
+        /// (pairingMode "new"). Null when the item is not a paired transfer, or when mirror creation failed
+        /// (best-effort — a transfer.mirror_failed agent hint reports that case and the item still counts as
+        /// succeeded). Survives returnData=false; the mirror's body is not returned — read
+        /// transfer.mirrorRecord on the source, or fetch by this id.
+        /// </summary>
+        public string? CreatedMirrorRecordId { get; set; }
     }
 }

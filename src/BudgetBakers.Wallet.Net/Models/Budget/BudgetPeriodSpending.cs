@@ -14,7 +14,6 @@ namespace BudgetBakers.Wallet.Net.Models.Budget
         public decimal? EffectiveLimit { get; set; }
 
         public bool? Incomplete { get; set; }
-        public decimal? Limit { get; set; }
         public decimal? Overspent { get; set; }
         public string? Period { get; set; }
         public string? PeriodEnd { get; set; }

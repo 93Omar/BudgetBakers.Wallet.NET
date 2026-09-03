@@ -8,6 +8,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         [JsonProperty("budget")]
         public BudgetDto? Budget { get; set; }
 
+        [JsonProperty("summary")]
+        public BatchOperationSummaryDto? Summary { get; set; }
+
         [JsonProperty("agentHints")]
         public IList<AgentHintDto> AgentHints { get; set; } = [];
     }

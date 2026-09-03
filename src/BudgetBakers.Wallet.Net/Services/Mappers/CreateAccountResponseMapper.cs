@@ -15,6 +15,7 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
             return new CreateAccountResponse
             {
                 Account = MapperHelpers.MapAccount(source.Account),
+                Summary = MapperHelpers.MapBatchOperationSummary(source.Summary),
                 AgentHints = source.AgentHints
                                    .Select(MapperHelpers.MapAgentHint)
                                    .OfType<AgentHint>()

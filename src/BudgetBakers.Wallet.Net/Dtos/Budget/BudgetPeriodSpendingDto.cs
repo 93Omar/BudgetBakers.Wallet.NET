@@ -20,9 +20,6 @@ namespace BudgetBakers.Wallet.Net.Dtos.Budget
         [JsonProperty("incomplete")]
         public bool? Incomplete { get; set; }
 
-        [JsonProperty("limit")]
-        public decimal? Limit { get; set; }
-
         [JsonProperty("overspent")]
         public decimal? Overspent { get; set; }
 

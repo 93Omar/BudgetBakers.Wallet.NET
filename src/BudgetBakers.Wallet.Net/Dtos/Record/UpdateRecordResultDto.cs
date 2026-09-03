@@ -4,6 +4,9 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
 {
     internal class UpdateRecordResultDto
     {
+        [JsonProperty("inputIndex")]
+        public int InputIndex { get; set; }
+
         [JsonProperty("id")]
         public string? Id { get; set; }
 
@@ -18,5 +21,8 @@ namespace BudgetBakers.Wallet.Net.Dtos.Record
 
         [JsonProperty("errorType")]
         public string? ErrorType { get; set; }
+
+        [JsonProperty("fields")]
+        public IList<string>? Fields { get; set; }
     }
 }
