@@ -14,6 +14,7 @@ namespace BudgetBakers.Wallet.Net.Utility
                 TextPrefix.Equals => "eq",
                 TextPrefix.Contains => "contains",
                 TextPrefix.ContainsIgnoreCase => "contains-i",
+                TextPrefix.EqualsIgnoreCase => "eq-i",
                 _ => throw new InvalidOperationException($"Unsupported {nameof(TextPrefix)} value: {value}")
             };
 

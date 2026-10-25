@@ -8,6 +8,7 @@ namespace BudgetBakers.Wallet.Net.Models
     {
         Equals = 0,
         Contains = 1,
-        ContainsIgnoreCase = 2
+        ContainsIgnoreCase = 2,
+        EqualsIgnoreCase = 3
     }
 }
