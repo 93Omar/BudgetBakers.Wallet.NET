@@ -261,3 +261,14 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddWalletClient<AccountClient>();
     })
     .Build();
+```
+
+---
+
+## Contact
+
+This is an unofficial, community-maintained library. For questions, bug reports, or feature requests, you can:
+
+- Read [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for build/test instructions and code conventions.
+- Open an [issue](https://github.com/93Omar/BudgetBakers.Wallet.NET/issues) on GitHub.
+- Send an email to **omar-93@outlook.it** (please use this channel for security reports rather than a public issue).
