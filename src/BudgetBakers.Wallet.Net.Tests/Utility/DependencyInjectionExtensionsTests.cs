@@ -55,6 +55,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
             {
                 Assert.That(client, Is.Not.Null);
                 Assert.That(client.HttpClient.BaseAddress, Is.EqualTo(new Uri("https://wallet.test/")));
+                Assert.That(client.HttpClient.DefaultRequestHeaders.UserAgent.ToString(),
+                    Is.EqualTo("BudgetBakers.Wallet.Net (+https://github.com/93Omar/BudgetBakers.Wallet.NET)"));
                 Assert.That(services.Any(descriptor =>
                     descriptor.ServiceType == typeof(BearerTokenDelegatingHandler)
                     && descriptor.Lifetime == ServiceLifetime.Transient), Is.True);
@@ -80,6 +82,8 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
             {
                 Assert.That(client, Is.Not.Null);
                 Assert.That(client.HttpClient.BaseAddress, Is.EqualTo(new Uri("https://wallet-from-sp.test/")));
+                Assert.That(client.HttpClient.DefaultRequestHeaders.UserAgent.ToString(),
+                    Is.EqualTo("BudgetBakers.Wallet.Net (+https://github.com/93Omar/BudgetBakers.Wallet.NET)"));
                 Assert.That(services.Any(descriptor =>
                     descriptor.ServiceType == typeof(BearerTokenDelegatingHandler)
                     && descriptor.Lifetime == ServiceLifetime.Transient), Is.True);

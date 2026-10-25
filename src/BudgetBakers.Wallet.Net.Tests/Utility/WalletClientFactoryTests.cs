@@ -53,6 +53,41 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
             }
         }
 
+        [Test]
+        public async Task CreateHttpClient_WhenRequestIsSent_SetsUserAgentIdentifyingTheWrapper()
+        {
+            TestAccessTokenProvider tokenProvider = new TestAccessTokenProvider("my-token");
+            HttpRequestMessage? capturedRequest = null;
+
+            using HttpClient client = WalletClientFactory.CreateHttpClient(tokenProvider);
+
+            ReplaceInnerHandler(client, new DelegateHttpMessageHandler((request, _) =>
+            {
+                capturedRequest = request;
+                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK));
+            }));
+
+            await client.GetAsync("/test");
+
+            Assert.That(capturedRequest, Is.Not.Null);
+            Assert.That(capturedRequest!.Headers.UserAgent.ToString(),
+                Is.EqualTo("BudgetBakers.Wallet.Net (+https://github.com/93Omar/BudgetBakers.Wallet.NET)"));
+        }
+
+        [Test]
+        public void CreateHttpClient_WhenConfigureClientSetsUserAgent_KeepsBothProductTokens()
+        {
+            TestAccessTokenProvider tokenProvider = new TestAccessTokenProvider("my-token");
+
+            using HttpClient client = WalletClientFactory.CreateHttpClient(tokenProvider, c =>
+            {
+                c.DefaultRequestHeaders.UserAgent.ParseAdd("MyApp/2.0");
+            });
+
+            Assert.That(client.DefaultRequestHeaders.UserAgent.ToString(),
+                Does.EndWith("MyApp/2.0"));
+        }
+
         private static void ReplaceInnerHandler(HttpClient client, HttpMessageHandler replacement)
         {
             FieldInfo? field = typeof(HttpMessageInvoker)

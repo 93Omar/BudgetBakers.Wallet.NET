@@ -8,6 +8,12 @@ namespace BudgetBakers.Wallet.Net.Constants
     {
         internal const string DefaultBaseAddress = "https://rest.budgetbakers.com/wallet/";
 
+        internal static class Client
+        {
+            internal const string Name = "BudgetBakers.Wallet.Net";
+            internal const string ProjectUrl = "https://github.com/93Omar/BudgetBakers.Wallet.NET";
+        }
+
         internal static class Message
         {
             internal const string NullRequest = "Request cannot be null.";

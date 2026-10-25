@@ -18,6 +18,7 @@ namespace BudgetBakers.Wallet.Net.Utility
             services.AddHttpClient<T>(client =>
                      {
                          client.BaseAddress = new Uri(ApiConstant.DefaultBaseAddress);
+                         WalletClientIdentification.ApplyUserAgent(client);
                          configureClient?.Invoke(client);
                      })
                      .AddHttpMessageHandler<BearerTokenDelegatingHandler>()
@@ -32,6 +33,7 @@ namespace BudgetBakers.Wallet.Net.Utility
             services.AddHttpClient<T>((sp, client) =>
                      {
                          client.BaseAddress = new Uri(ApiConstant.DefaultBaseAddress);
+                         WalletClientIdentification.ApplyUserAgent(client);
                          configureClient(sp, client);
                      })
                      .AddHttpMessageHandler<BearerTokenDelegatingHandler>()

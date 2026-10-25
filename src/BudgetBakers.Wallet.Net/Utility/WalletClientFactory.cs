@@ -22,6 +22,7 @@ namespace BudgetBakers.Wallet.Net.Utility
 
             HttpClient client = new HttpClient(handler);
             client.BaseAddress = new Uri(ApiConstant.DefaultBaseAddress);
+            WalletClientIdentification.ApplyUserAgent(client);
             configureClient?.Invoke(client);
 
             return client;
