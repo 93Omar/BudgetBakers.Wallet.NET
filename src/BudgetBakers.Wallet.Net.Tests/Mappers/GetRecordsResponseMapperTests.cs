@@ -27,6 +27,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             var mapper = new GetRecordsResponseMapper();
             var recordId = Guid.NewGuid().ToString();
             var categoryId = Guid.NewGuid().ToString();
+            var parentCategoryId = Guid.NewGuid().ToString();
             var labelId = Guid.NewGuid().ToString();
             var source = new GetRecordsResponseDto
             {
@@ -41,7 +42,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         Id = recordId.ToString(),
                         AccountId = "acc-1",
                         Amount = new BalanceDto { CurrencyCode = "EUR", Value = 10.5m },
-                        Category = new CategoryDto { Id = categoryId.ToString(), Name = "Food", Color = "#222222" },
+                        Category = new CategoryDto { Id = categoryId.ToString(), Name = "Food", Color = "#222222", ParentId = parentCategoryId },
                         CreatedAt = "2026-01-01 00:00:00",
                         Labels = new List<LabelDto> { new() { Id = labelId.ToString(), Name = "L1", CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" } },
                         Note = "note",
@@ -89,6 +90,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mapped.AccountId, Is.EqualTo(source.Records[0].AccountId));
                 Assert.That(mapped.Amount?.Value, Is.EqualTo(source.Records[0].Amount?.Value));
                 Assert.That(mapped.Category?.Id, Is.EqualTo(categoryId));
+                Assert.That(mapped.Category?.ParentId, Is.EqualTo(parentCategoryId));
                 Assert.That(mapped.Labels, Has.Count.EqualTo(1));
                 Assert.That(mapped.Photos, Has.Count.EqualTo(1));
                 Assert.That(mapped.Place?.Name, Is.EqualTo(source.Records[0].Place?.Name));

@@ -48,7 +48,8 @@ namespace BudgetBakers.Wallet.Net.Services.Mappers
                 Category = dto.Category is null ? null : new Category
                 {
                     Color = dto.Category.Color,
-                    Name = dto.Category.Name
+                    Name = dto.Category.Name,
+                    ParentId = dto.Category.ParentId
                 },
                 CreatedAt = MapperHelpers.ParseDateTime(dto.CreatedAt),
                 Name = dto.Name,

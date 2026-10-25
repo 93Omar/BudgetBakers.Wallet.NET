@@ -390,7 +390,8 @@ namespace BudgetBakers.Wallet.Net.Utility
                 {
                     Id = dto.Category.Id,
                     Name = dto.Category.Name,
-                    Color = dto.Category.Color
+                    Color = dto.Category.Color,
+                    ParentId = dto.Category.ParentId
                 },
                 ConvertedAmount = dto.ConvertedAmount is null ? null : new ConvertedAmount
                 {

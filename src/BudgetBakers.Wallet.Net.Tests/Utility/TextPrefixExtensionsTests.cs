@@ -8,6 +8,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Utility
         [TestCase(TextPrefix.Equals, "eq")]
         [TestCase(TextPrefix.Contains, "contains")]
         [TestCase(TextPrefix.ContainsIgnoreCase, "contains-i")]
+        [TestCase(TextPrefix.EqualsIgnoreCase, "eq-i")]
         public void ToCustomString_WhenValueIsSupported_ReturnsExpectedString(TextPrefix value, string expected)
         {
             string result = value.ToCustomString();

@@ -25,6 +25,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
             var ruleId = Guid.NewGuid().ToString();
             var fromId = Guid.NewGuid().ToString();
             var toId = Guid.NewGuid().ToString();
+            var parentCategoryId = Guid.NewGuid().ToString();
 
             var source = new GetRecordRulesResponseDto
             {
@@ -42,7 +43,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                         CreatedAt = "2026-01-01 00:00:00",
                         UpdatedAt = "2026-01-02 00:00:00",
                         Keywords = new List<string> { "foo", "bar" },
-                        Category = new CategoryDto { Name = "Food", Color = "#111111" },
+                        Category = new CategoryDto { Name = "Food", Color = "#111111", ParentId = parentCategoryId },
                         Labels = new List<LabelDto>
                         {
                             new() { Id = Guid.NewGuid().ToString(), Name = "Label", CreatedAt = "2026-01-01", UpdatedAt = "2026-01-02" }
@@ -72,6 +73,7 @@ namespace BudgetBakers.Wallet.Net.Tests.Mappers
                 Assert.That(mapped.Name, Is.EqualTo(source.RecordRules[0].Name));
                 Assert.That(mapped.Keywords, Is.EquivalentTo(source.RecordRules[0].Keywords));
                 Assert.That(mapped.Category?.Name, Is.EqualTo(source.RecordRules[0].Category?.Name));
+                Assert.That(mapped.Category?.ParentId, Is.EqualTo(parentCategoryId));
                 Assert.That(mapped.Labels, Has.Count.EqualTo(1));
             }
         }
